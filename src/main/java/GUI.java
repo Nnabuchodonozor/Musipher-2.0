@@ -6,15 +6,21 @@ import java.awt.event.ActionListener;
 
 public class GUI implements ActionListener {
     int sizeOfWindow = 600;
+    SemanticUtils semanticUtils = new SemanticUtils();
+    streamCipher streamCipher = new streamCipher();
     JButton enc1, dec1, key1, enc2, dec2, key2, enc3, dec3, key3, enc4, dec4, key4;
     JMenuItem m11, m12, m13, m14;
     JMenuItem m21, m22, m23, m24;
     JMenuItem m31, m32, m33, m34;
     JMenuItem m41, m42, m43, m44;
+    JTextField ta1;
     JFrame frame1;
     JFrame frame2;
     JFrame frame3;
     JFrame frame4;
+    JFileChooser fileChooser = new JFileChooser();
+    String filename;
+
     public GUI() {
         //Creating the Frame
         frame1 = new JFrame("Musipher 2.0 Textual Composer");
@@ -104,16 +110,16 @@ public class GUI implements ActionListener {
 
 
         JPanel p1 = new JPanel();
-         enc1 = new JButton("Encrypt Text to MIDI");
+        enc1 = new JButton("Encrypt Text to MIDI");
         enc1.addActionListener(this);
 
-         dec1 = new JButton("Decrypt MIDI to Text");
+        dec1 = new JButton("Decrypt MIDI to Text");
         dec1.addActionListener(this);
 
-         key1 = new JButton("Generate Key");
+        key1 = new JButton("Generate Key");
         key1.addActionListener(this);
 
-        JTextField ta1 = new JTextField(16);
+        ta1 = new JTextField(16);
         p1.add(enc1);
         p1.add(dec1);
         p1.add(key1);
@@ -122,7 +128,7 @@ public class GUI implements ActionListener {
 
 
         JPanel p2 = new JPanel();
-         enc2 = new JButton("Encrypt File to MIDI");
+        enc2 = new JButton("Encrypt File to MIDI");
         enc2.addActionListener(this);
         JButton dec2 = new JButton("Decrypt MIDI to File");
         dec2.addActionListener(this);
@@ -135,11 +141,11 @@ public class GUI implements ActionListener {
 
 
         JPanel p3 = new JPanel();
-         enc3 = new JButton("Hide Text in mp3");
+        enc3 = new JButton("Hide Text in mp3");
         enc3.addActionListener(this);
-         dec3 = new JButton("Decrypt Text from mp3");
+        dec3 = new JButton("Decrypt Text from mp3");
         dec3.addActionListener(this);
-         key3 = new JButton("Choose mp3");
+        key3 = new JButton("Choose mp3");
         key3.addActionListener(this);
 
         JTextField ta3 = new JTextField(16);
@@ -150,11 +156,11 @@ public class GUI implements ActionListener {
         frame3.getContentPane().add(BorderLayout.WEST, ta3);
 
         JPanel p4 = new JPanel();
-         enc4 = new JButton("Hide File in mp3");
+        enc4 = new JButton("Hide File in mp3");
         enc4.addActionListener(this);
-         dec4 = new JButton("Decrypt File from mp3");
+        dec4 = new JButton("Decrypt File from mp3");
         dec4.addActionListener(this);
-         key4 = new JButton("Choose mp3");
+        key4 = new JButton("Choose mp3");
         key4.addActionListener(this);
         p4.add(enc4);
         p4.add(dec4);
@@ -175,70 +181,87 @@ public class GUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        int response;
         if (e.getSource() == m22 || e.getSource() == m42 || e.getSource() == m32 || e.getSource() == m12) {
             frame1.setVisible(false);
             frame3.setVisible(false);
             frame4.setVisible(false);
             frame2.setVisible(true);
-        }else if(e.getSource() == m11 || e.getSource() == m41 || e.getSource() == m31 || e.getSource() == m21){
+        } else if (e.getSource() == m11 || e.getSource() == m41 || e.getSource() == m31 || e.getSource() == m21) {
             frame1.setVisible(true);
             frame3.setVisible(false);
             frame4.setVisible(false);
             frame2.setVisible(false);
-        }else if(e.getSource() == m33 || e.getSource() == m13 || e.getSource() == m23 || e.getSource() == m43){
+        } else if (e.getSource() == m33 || e.getSource() == m13 || e.getSource() == m23 || e.getSource() == m43) {
             frame1.setVisible(false);
             frame3.setVisible(true);
             frame4.setVisible(false);
             frame2.setVisible(false);
-        }else if(e.getSource() == m14 || e.getSource() == m24 || e.getSource() == m34 || e.getSource() == m44){
+        } else if (e.getSource() == m14 || e.getSource() == m24 || e.getSource() == m34 || e.getSource() == m44) {
             frame1.setVisible(false);
             frame3.setVisible(false);
             frame4.setVisible(true);
             frame2.setVisible(false);
         }
 
-        if (e.getSource() == enc1){
+        if (e.getSource() == enc1) {
             // Encrypt text when generated key
-        }
-        else if(e.getSource() == dec1){
+            semanticUtils.encryptMIDIFromText(this.ta1.getText());
+
+        } else if (e.getSource() == dec1) {
+
             // Choose file to decrypt, write key to decrypt and decrypt
-        }
-        else if(e.getSource() == key1){
-            // Generate key
 
-        }
-        else if(e.getSource() == enc2){
-            // Choose file and encrypt when already generated key
-        }
-        else if(e.getSource() == dec2){
-            // Choose file to decrypt and write key and decrypt
-        }
-        else if(e.getSource() == key2){
-            // Generate key
-        }
-        else if(e.getSource() == enc3){
-            // Hide text when mp3 chosen file
-        }
-        else if(e.getSource() == dec3){
-            // Choose mp3 file and decrypt it
-        }
-        else if(e.getSource() == key3){
-            // Choose mp3 file which will later
-        }
-        else if(e.getSource() == enc4){
-            // Choose file for encryption and encrypt when mp3 is chosen
-        }
-        else if(e.getSource() == dec4){
-            // Choose mp3 file and then decrypt it
-        }
-        else if(e.getSource() == key4){
-            // Choose mp3 file that will be used for steganography
-        }
+            response = fileChooser.showOpenDialog(null);
+            if (response == JFileChooser.APPROVE_OPTION) {
+                filename = fileChooser.getSelectedFile().getAbsolutePath();
+                String key = JOptionPane.showInputDialog("Insert character representation of Stream Cipher Key");
+                semanticUtils.decryptMIDIToText(filename, key);
+            }
+            } else if (e.getSource() == key1) {
+                String seedAndIV = streamCipher.generateStreamCipherKeyAndIV();
+                JOptionPane.showMessageDialog(frame1,"Seed and IV for encryption, please copy and store them \n"+ seedAndIV);
+                // Generate key
+
+            } else if (e.getSource() == enc2) {
+
+                // Choose file and encrypt when already generated key
+                response = fileChooser.showOpenDialog(null);
+                semanticUtils.encryptMIDIFromFile();
+
+                if (response == JFileChooser.APPROVE_OPTION) {
+                    filename = fileChooser.getSelectedFile().getAbsolutePath();
+
+                } else if (e.getSource() == dec2) {
+
+                    // Choose file to decrypt and write key and decrypt
+
+                    response = fileChooser.showOpenDialog(null);
+                    if (response == JFileChooser.APPROVE_OPTION) {
+                        filename = fileChooser.getSelectedFile().getAbsolutePath();
+
+                    } else if (e.getSource() == key2) {
+                        // Generate key
+                    } else if (e.getSource() == enc3) {
+                        // Hide text when mp3 chosen file
+                    } else if (e.getSource() == dec3) {
+                        // Choose mp3 file and decrypt it
+                    } else if (e.getSource() == key3) {
+                        // Choose mp3 file which will later
+                    } else if (e.getSource() == enc4) {
+                        // Choose file for encryption and encrypt when mp3 is chosen
+                    } else if (e.getSource() == dec4) {
+                        // Choose mp3 file and then decrypt it
+                    } else if (e.getSource() == key4) {
+                        // Choose mp3 file that will be used for steganography
+                    }
 
 
+                }
+
+
+            }
+        }
     }
-
-
-}
 
 
