@@ -1,5 +1,6 @@
+package main;
+
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,7 +8,7 @@ import java.awt.event.ActionListener;
 public class GUI implements ActionListener {
     int sizeOfWindow = 600;
     SemanticUtils semanticUtils = new SemanticUtils();
-    streamCipher streamCipher = new streamCipher();
+    StreamCipher streamCipher = new StreamCipher();
     JButton enc1, dec1, key1, enc2, dec2, key2, enc3, dec3, key3, enc4, dec4, key4;
     JMenuItem m11, m12, m13, m14;
     JMenuItem m21, m22, m23, m24;
@@ -20,6 +21,7 @@ public class GUI implements ActionListener {
     JFrame frame4;
     JFileChooser fileChooser = new JFileChooser();
     String filename;
+    boolean keyGeneratedInThisIteration = false;
 
     public GUI() {
         //Creating the Frame
@@ -206,6 +208,7 @@ public class GUI implements ActionListener {
 
         if (e.getSource() == enc1) {
             // Encrypt text when generated key
+           // if()
             semanticUtils.encryptMIDIFromText(this.ta1.getText());
 
         } else if (e.getSource() == dec1) {
@@ -219,8 +222,9 @@ public class GUI implements ActionListener {
                 semanticUtils.decryptMIDIToText(filename, key);
             }
             } else if (e.getSource() == key1) {
-                String seedAndIV = streamCipher.generateStreamCipherKeyAndIV();
-                JOptionPane.showMessageDialog(frame1,"Seed and IV for encryption, please copy and store them \n"+ seedAndIV);
+            /// todo
+//                String seedAndIV = streamCipher.generateStreamCipherKeyAndIV();
+//                JOptionPane.showMessageDialog(frame1,"Seed and IV for encryption, please copy and store them \n"+ seedAndIV);
                 // Generate key
 
             } else if (e.getSource() == enc2) {
