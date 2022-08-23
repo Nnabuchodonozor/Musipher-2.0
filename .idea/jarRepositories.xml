@@ -2,9 +2,39 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
+      <option name="id" value="pt-elements-releases" />
+      <option name="name" value="pt-elements-releases" />
+      <option name="url" value="https://artifactory.frequentis.frq:443/artifactory/pt-elements-releases" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="snapshots" />
+      <option name="name" value="repo" />
+      <option name="url" value="http://artifactory.frequentis.frq:8081/artifactory/repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="mvncentral" />
+      <option name="name" value="mvncentral" />
+      <option name="url" value="http://repo.maven.apache.org/maven2/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central-snapshots" />
+      <option name="name" value="repo" />
+      <option name="url" value="http://artifactory.frequentis.frq:8081/artifactory/repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="central" />
+      <option name="name" value="repo" />
+      <option name="url" value="http://artifactory.frequentis.frq:8081/artifactory/repo" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="artifactory.frequentis.frq" />
+      <option name="name" value="artifactory.frequentis.frq" />
+      <option name="url" value="http://artifactory.frequentis.frq:8081/artifactory/repo" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="central" />
@@ -12,9 +42,19 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="central-statusboard" />
+      <option name="name" value="repo" />
+      <option name="url" value="http://artifactory.frequentis.frq:8081/artifactory/virtstatusboard/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="pt-elements-snapshots" />
+      <option name="name" value="pt-elements-snapshots" />
+      <option name="url" value="https://artifactory.frequentis.frq:443/artifactory/pt-elements-snapshots/" />
     </remote-repository>
   </component>
 </project>
