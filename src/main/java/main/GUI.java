@@ -209,8 +209,8 @@ public class GUI implements ActionListener {
         if (e.getSource() == enc1) {
             // Encrypt text when generated key
            // if()
-            semanticUtils.encryptMIDIFromText(this.ta1.getText());
-
+//            semanticUtils.encryptMIDIFromText(this.ta1.getText());
+            semanticUtils.encryptMIDIFromText("");
         } else if (e.getSource() == dec1) {
 
             // Choose file to decrypt, write key to decrypt and decrypt
@@ -226,6 +226,8 @@ public class GUI implements ActionListener {
 //                String seedAndIV = streamCipher.generateStreamCipherKeyAndIV();
 //                JOptionPane.showMessageDialog(frame1,"Seed and IV for encryption, please copy and store them \n"+ seedAndIV);
                 // Generate key
+            String keyAndIV= semanticUtils.generateStreamCipherKeyAndIV();
+            JOptionPane.showMessageDialog(null, keyAndIV);
 
             } else if (e.getSource() == enc2) {
 

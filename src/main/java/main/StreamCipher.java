@@ -1,5 +1,7 @@
 package main;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import javax.crypto.Cipher;
@@ -13,15 +15,14 @@ public class StreamCipher {
     public StreamCipher() {
     }
 
-    public byte[] encrypt(String rawIV, String seed, String cleartext) throws Exception {
-        byte[] iv = rawIV.getBytes();
+    public byte[] encrypt(byte[] iv, String seed, byte[] cleartext) throws Exception {
+
         byte[] rawKey = getRawKey(seed.getBytes());
-        return  encrypt(iv,rawKey, cleartext.getBytes());
+        return  encrypt(iv,rawKey, cleartext);
 
     }
 
-    public String decrypt(String rawIV, String seed, byte[] enc) throws Exception {
-        byte[] iv = rawIV.getBytes();
+    public String decrypt(byte[] iv, String seed, byte[] enc) throws Exception {
         byte[] rawKey = getRawKey(seed.getBytes());
 
         byte[] result = decrypt(iv,rawKey, enc);
@@ -36,6 +37,9 @@ public class StreamCipher {
         kgen.init(128, sr); // 192 and 256 bits may not be available
         SecretKey skey = kgen.generateKey();
         byte[] raw = skey.getEncoded();
+        FileOutputStream fos = new FileOutputStream(new File("encryptionKey"));
+        fos.write(raw);
+
         return raw;
     }
 
