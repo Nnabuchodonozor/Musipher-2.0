@@ -22,11 +22,10 @@ public class StreamCipher {
 
     }
 
-    public String decrypt(byte[] iv, String seed, byte[] enc) throws Exception {
-        byte[] rawKey = getRawKey(seed.getBytes());
-
+    public byte[] decrypt(byte[] rawkey, byte[] enc) throws Exception {
+        
         byte[] result = decrypt(iv,rawKey, enc);
-        return new String(result);
+        return result;
     }
 
 

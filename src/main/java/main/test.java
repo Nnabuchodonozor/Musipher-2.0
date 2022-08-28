@@ -54,14 +54,7 @@ public class test {
 
         SemanticUtils semanticUtils = new SemanticUtils();
         semanticUtils.encryptMIDIFromText("A");
-        semanticUtils.encryptMIDIFromText("AB");
-        semanticUtils.encryptMIDIFromText("ABC");
-        semanticUtils.encryptMIDIFromText("ABCD");
-        semanticUtils.encryptMIDIFromText("ABCDE");
-        semanticUtils.encryptMIDIFromText("ABCDEF");
-        semanticUtils.encryptMIDIFromText("ABCDEFG");
-        semanticUtils.encryptMIDIFromText("ABCDEFGH");
-        semanticUtils.encryptMIDIFromText("ABCDEFGHI");
+
 
 
     }

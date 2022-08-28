@@ -218,8 +218,14 @@ public class GUI implements ActionListener {
             response = fileChooser.showOpenDialog(null);
             if (response == JFileChooser.APPROVE_OPTION) {
                 filename = fileChooser.getSelectedFile().getAbsolutePath();
-                String key = JOptionPane.showInputDialog("Insert character representation of Stream Cipher Key");
-                semanticUtils.decryptMIDIToText(filename, key);
+//                String key = JOptionPane.showInputDialog("Insert character representation of Stream Cipher Key");
+                String keyPath = "";
+                response = fileChooser.showOpenDialog(null);
+                if(response == JFileChooser.APPROVE_OPTION){
+                    keyPath = fileChooser.getSelectedFile().getAbsolutePath();
+                }
+
+                semanticUtils.decryptMIDIToText(filename, keyPath);
             }
             } else if (e.getSource() == key1) {
             /// todo
