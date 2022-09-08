@@ -183,97 +183,105 @@ public class GUI implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int response;
-        if (e.getSource() == m22 || e.getSource() == m42 || e.getSource() == m32 || e.getSource() == m12) {
-            frame1.setVisible(false);
-            frame3.setVisible(false);
-            frame4.setVisible(false);
-            frame2.setVisible(true);
-        } else if (e.getSource() == m11 || e.getSource() == m41 || e.getSource() == m31 || e.getSource() == m21) {
-            frame1.setVisible(true);
-            frame3.setVisible(false);
-            frame4.setVisible(false);
-            frame2.setVisible(false);
-        } else if (e.getSource() == m33 || e.getSource() == m13 || e.getSource() == m23 || e.getSource() == m43) {
-            frame1.setVisible(false);
-            frame3.setVisible(true);
-            frame4.setVisible(false);
-            frame2.setVisible(false);
-        } else if (e.getSource() == m14 || e.getSource() == m24 || e.getSource() == m34 || e.getSource() == m44) {
-            frame1.setVisible(false);
-            frame3.setVisible(false);
-            frame4.setVisible(true);
-            frame2.setVisible(false);
-        }
+        try {
 
-        if (e.getSource() == enc1) {
-            // Encrypt text when generated key
-           // if()
-//            semanticUtils.encryptMIDIFromText(this.ta1.getText());
-            semanticUtils.encryptToMIDIFromText("");
-        } else if (e.getSource() == dec1) {
 
-            // Choose file to decrypt, write key to decrypt and decrypt
-
-            response = fileChooser.showOpenDialog(null);
-            if (response == JFileChooser.APPROVE_OPTION) {
-                filename = fileChooser.getSelectedFile().getAbsolutePath();
-//                String key = JOptionPane.showInputDialog("Insert character representation of Stream Cipher Key");
-                String keyPath = "";
-                response = fileChooser.showOpenDialog(null);
-                if(response == JFileChooser.APPROVE_OPTION){
-                    keyPath = fileChooser.getSelectedFile().getAbsolutePath();
-                }
-
-                semanticUtils.decryptFromMIDIToText(filename, keyPath);
+            int response;
+            if (e.getSource() == m22 || e.getSource() == m42 || e.getSource() == m32 || e.getSource() == m12) {
+                frame1.setVisible(false);
+                frame3.setVisible(false);
+                frame4.setVisible(false);
+                frame2.setVisible(true);
+            } else if (e.getSource() == m11 || e.getSource() == m41 || e.getSource() == m31 || e.getSource() == m21) {
+                frame1.setVisible(true);
+                frame3.setVisible(false);
+                frame4.setVisible(false);
+                frame2.setVisible(false);
+            } else if (e.getSource() == m33 || e.getSource() == m13 || e.getSource() == m23 || e.getSource() == m43) {
+                frame1.setVisible(false);
+                frame3.setVisible(true);
+                frame4.setVisible(false);
+                frame2.setVisible(false);
+            } else if (e.getSource() == m14 || e.getSource() == m24 || e.getSource() == m34 || e.getSource() == m44) {
+                frame1.setVisible(false);
+                frame3.setVisible(false);
+                frame4.setVisible(true);
+                frame2.setVisible(false);
             }
+
+            if (e.getSource() == enc1) {
+                // Encrypt text when generated key
+                // if()
+//            semanticUtils.encryptMIDIFromText(this.ta1.getText());
+                semanticUtils.encryptToMIDIFromText("");
+            } else if (e.getSource() == dec1) {
+
+                // Choose file to decrypt, write key to decrypt and decrypt
+
+                response = fileChooser.showOpenDialog(null);
+                if (response == JFileChooser.APPROVE_OPTION) {
+                    filename = fileChooser.getSelectedFile().getAbsolutePath();
+//                String key = JOptionPane.showInputDialog("Insert character representation of Stream Cipher Key");
+                    String keyPath = "";
+                    response = fileChooser.showOpenDialog(null);
+                    if (response == JFileChooser.APPROVE_OPTION) {
+                        keyPath = fileChooser.getSelectedFile().getAbsolutePath();
+                    }
+
+                    semanticUtils.decryptFromMIDIToText(filename, keyPath);
+                }
             } else if (e.getSource() == key1) {
-            /// todo
+                /// todo
 //                String seedAndIV = streamCipher.generateStreamCipherKeyAndIV();
 //                JOptionPane.showMessageDialog(frame1,"Seed and IV for encryption, please copy and store them \n"+ seedAndIV);
                 // Generate key
-            String keyAndIV= semanticUtils.generateStreamCipherKeyAndIV();
-            JOptionPane.showMessageDialog(null, keyAndIV);
+                String keyAndIV = semanticUtils.generateStreamCipherKeyAndIV();
+                JOptionPane.showMessageDialog(null, keyAndIV);
 
             } else if (e.getSource() == enc2) {
 
                 // Choose file and encrypt when already generated key
                 response = fileChooser.showOpenDialog(null);
-                semanticUtils.encryptMIDIFromFile();
-
+                filename = "";
                 if (response == JFileChooser.APPROVE_OPTION) {
                     filename = fileChooser.getSelectedFile().getAbsolutePath();
-
-                } else if (e.getSource() == dec2) {
-
-                    // Choose file to decrypt and write key and decrypt
-
-                    response = fileChooser.showOpenDialog(null);
-                    if (response == JFileChooser.APPROVE_OPTION) {
-                        filename = fileChooser.getSelectedFile().getAbsolutePath();
-
-                    } else if (e.getSource() == key2) {
-                        // Generate key
-                    } else if (e.getSource() == enc3) {
-                        // Hide text when mp3 chosen file
-                    } else if (e.getSource() == dec3) {
-                        // Choose mp3 file and decrypt it
-                    } else if (e.getSource() == key3) {
-                        // Choose mp3 file which will later
-                    } else if (e.getSource() == enc4) {
-                        // Choose file for encryption and encrypt when mp3 is chosen
-                    } else if (e.getSource() == dec4) {
-                        // Choose mp3 file and then decrypt it
-                    } else if (e.getSource() == key4) {
-                        // Choose mp3 file that will be used for steganography
-                    }
-
-
                 }
+                semanticUtils.encryptToMIDIFromFile(filename);
+            } else if (e.getSource() == dec2) {
 
+                // Choose file to decrypt and write key and decrypt
 
+                response = fileChooser.showOpenDialog(null);
+                if (response == JFileChooser.APPROVE_OPTION) {
+                    filename = fileChooser.getSelectedFile().getAbsolutePath();
+                }
+            } else if (e.getSource() == key2) {
+                // Generate key
+                String keyAndIV = semanticUtils.generateStreamCipherKeyAndIV();
+                JOptionPane.showMessageDialog(null, keyAndIV);
+
+            } else if (e.getSource() == enc3) {
+                // Hide text when mp3 chosen file
+            } else if (e.getSource() == dec3) {
+                // Choose mp3 file and decrypt it
+            } else if (e.getSource() == key3) {
+                // Choose mp3 file which will later
+            } else if (e.getSource() == enc4) {
+                // Choose file for encryption and encrypt when mp3 is chosen
+            } else if (e.getSource() == dec4) {
+                // Choose mp3 file and then decrypt it
+            } else if (e.getSource() == key4) {
+                // Choose mp3 file that will be used for steganography
             }
+
+        }catch (Exception exception){
+            JOptionPane.showMessageDialog(null,exception.getMessage());
         }
     }
+
+
+}
+
+
 
 

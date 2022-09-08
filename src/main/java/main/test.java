@@ -9,10 +9,13 @@ import java.security.SecureRandom;
 
 public class test {
     public static void main(String[] args) {
-        
-        SemanticUtils semanticUtils = new SemanticUtils();
-        semanticUtils.encryptToMIDIFromText("A");
-        semanticUtils.decryptFromMIDIToText("encryptedBytes","encryptionKey");
+        try {
+            SemanticUtils semanticUtils = new SemanticUtils();
+            semanticUtils.encryptToMIDIFromFile("image.jpg");
+            semanticUtils.decryptFromMIDIToFile("encryptedBytes","encryptionKey");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
 
     }
