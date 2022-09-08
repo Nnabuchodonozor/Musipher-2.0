@@ -1,4 +1,5 @@
 package main;
+import javax.crypto.KeyGenerator;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.ByteBuffer;
@@ -45,9 +46,9 @@ public class SemanticUtils {
         base32Map.put("7","11111");
 
     }
+
 //ascii => base32 => byte array [open] => byte array[encrypted] => strinput => MIDI => strinput =>
-    public void encryptMIDIFromText(String text){
-        text="abacus";
+    public void encryptToMIDIFromText(String text){
         iVString = "fkdgflfdsfvdeirt".getBytes();
         seed = "some seed";
 
@@ -57,30 +58,31 @@ public class SemanticUtils {
         try {
             byte[] enc = streamCipher.encrypt(iVString,seed,openText);
             FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
+            fos.write(iVString);
             fos.write(enc);
+            fos.close();
         }catch (Exception e){
             System.out.println(e.getLocalizedMessage());
         }
     }
 
-
-
-
-    public void decryptMIDIToText(String fileName, String cipherKey){
-        File f1 = new File(fileName);
-        File f2 = new File(cipherKey);
+    public void decryptFromMIDIToText(String encryptedPath, String keyPath){
+        File f1 = new File(encryptedPath);
+        File f2 = new File(keyPath);
         try {
-            byte[] cypheredBytes = Files.readAllBytes(f1.toPath());
+            byte[] cypheredBytesWithIV = Files.readAllBytes(f1.toPath());
+            byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,0,16);
+            byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,16,cypheredBytesWithIV.length);
             byte[] keyBytes = Files.readAllBytes(f2.toPath());
-            byte[] decryptedBytes = streamCipher.decrypt(keyBytes,cypheredBytes);
+            byte[] decryptedBytes = streamCipher.decrypt(iVBytes, keyBytes,cypheredBytes);
             String base32String = this.turnByteToBase32(decryptedBytes);
-            System.out.println(turnBase32ToAscii(base32String));
+            System.out.println("decyphered " + turnBase32ToAscii(base32String));
         }catch (Exception e){
             e.printStackTrace();
         }
     }
+
     public void encryptMIDIFromFile(){}
-    public void decryptMIDIToFile(){}
 
     public String generateStreamCipherKeyAndIV(){
         seed="";

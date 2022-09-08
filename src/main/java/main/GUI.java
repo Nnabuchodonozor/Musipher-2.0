@@ -210,7 +210,7 @@ public class GUI implements ActionListener {
             // Encrypt text when generated key
            // if()
 //            semanticUtils.encryptMIDIFromText(this.ta1.getText());
-            semanticUtils.encryptMIDIFromText("");
+            semanticUtils.encryptToMIDIFromText("");
         } else if (e.getSource() == dec1) {
 
             // Choose file to decrypt, write key to decrypt and decrypt
@@ -225,7 +225,7 @@ public class GUI implements ActionListener {
                     keyPath = fileChooser.getSelectedFile().getAbsolutePath();
                 }
 
-                semanticUtils.decryptMIDIToText(filename, keyPath);
+                semanticUtils.decryptFromMIDIToText(filename, keyPath);
             }
             } else if (e.getSource() == key1) {
             /// todo

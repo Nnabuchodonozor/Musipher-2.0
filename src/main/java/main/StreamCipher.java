@@ -22,12 +22,6 @@ public class StreamCipher {
 
     }
 
-    public byte[] decrypt(byte[] rawkey, byte[] enc) throws Exception {
-        
-        byte[] result = decrypt(iv,rawKey, enc);
-        return result;
-    }
-
 
     private static byte[] getRawKey(byte[] seed) throws Exception {
         KeyGenerator kgen = KeyGenerator.getInstance("AES");
@@ -53,7 +47,7 @@ public class StreamCipher {
         return encrypted;
     }
 
-    private static byte[] decrypt(byte[] iv ,byte[] raw, byte[] encrypted) throws Exception {
+    public static byte[] decrypt(byte[] iv ,byte[] raw, byte[] encrypted) throws Exception {
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");
