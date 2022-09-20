@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.*;
 
 public class SemanticUtils {
     Map<String, String> base32Map = new HashMap<String, String>();
     StreamCipher streamCipher = new StreamCipher();
+    MidiUtils midiUtils = new MidiUtils();
     byte[] iVString=null;
     String seed="";
     public SemanticUtils() {
@@ -50,20 +53,22 @@ public class SemanticUtils {
     }
 
 //ascii => base32 => byte array [open] => byte array[encrypted] => strinput => MIDI => strinput =>
-    public void encryptToMIDIFromText(String text) throws Exception{
+    public void encryptToMIDIFromText(String text, String seed) throws Exception{
         iVString = "fkdgflfdsfvdeirt".getBytes();
-        seed = "some seed";
+        generateTrueRandomIV();
 
         //ascii text => base 32 alphabet string => byte array => encrypted byte array => MIDI
         String base32String = turnAsciiToBase32(text.toLowerCase(Locale.ROOT));
         byte[] openText = turnBase32ToByte(base32String);
 
             byte[] enc = streamCipher.encrypt(iVString,seed,openText);
-            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
-            fos.write(iVString);
-            fos.write(enc);
-            fos.close();
-            }
+
+//            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
+//            fos.write(iVString);
+//            fos.write(enc);
+//            fos.close();
+
+    }
 
     public void decryptFromMIDIToText(String encryptedPath, String keyPath){
         File f1 = new File(encryptedPath);
@@ -116,24 +121,12 @@ public class SemanticUtils {
         fos.close();
     }
 
-    public String generateStreamCipherKeyAndIV(){
-        seed="";
-
-        int lengthOfSeed = (int) ((Math.random() * (20 - 10)) + 10);
-
-        for(int i = 0; i < lengthOfSeed; i++) {
-            int seedLetter = (int) ((Math.random() * (25 - 0)) + 0);
-            int lowerCaseRandom = (int) ((Math.random() * (1 - 0)) + 0);
-            if(lowerCaseRandom==0){
-                seed = seed + (char) (seedLetter+65);
-            }else {
-                seed = seed + (char) (seedLetter+97);
-            }
-        }
+    public String generateTrueRandomIV()throws NoSuchAlgorithmException {
         byte[] b = new byte[16];
-        new Random().nextBytes(b);
+        SecureRandom random = SecureRandom.getInstance( "SHA1PRNG" );
+        random.nextBytes( b );
         iVString = b;
-        return "You have generated seed and IV for key generation, key will be stored in root folder \n" + seed + " " + iVString;
+        return "";
     }
 
 

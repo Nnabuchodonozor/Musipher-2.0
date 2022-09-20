@@ -1,5 +1,6 @@
 package main;
 
+
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.Cipher;
@@ -13,7 +14,7 @@ import java.security.SecureRandom;
 public class test {
     public static void main(String[] args) {
         try {
-//            SemanticUtils semanticUtils = new SemanticUtils();
+            SemanticUtils semanticUtils = new SemanticUtils();
 //            semanticUtils.encryptToMIDIFromFile("image.jpg");
 //            semanticUtils.decryptFromMIDIToFile("encryptedBytes","encryptionKey");
 
@@ -28,10 +29,11 @@ public class test {
 //            fos.flush();
 //            fos.close();
 
-            byte my_byte = 3;
-            int pos = 0;
-//            my_byte = my_byte | (1 << );
-            System.out.println(my_byte);
+      String openText = "this is sacred message";
+      //I need to provide a seed
+            String seed = "seed";
+            //iv should generate by itself
+            semanticUtils.encryptToMIDIFromText(openText, seed);
 
 
 
