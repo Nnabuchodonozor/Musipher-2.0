@@ -21,16 +21,38 @@ public class MidiUtils {
     }
 
     public byte[] decomposeMIDI(String path) throws InvalidMidiDataException, IOException {
-        Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+        Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File(path));
+        String strInput = decodeMusic(mainPattern);
         return null;
     }
 
+    private String decodeMusic(Pattern mainPattern){
+        return "1010010101010110";
+    }
+
     private String createBinaryString(byte[] encryptedData){
-            String base32String ="";
+            String binaryString ="";
             for(int i = 0; i < encryptedData.length; i++) {
-                base32String += Integer.toBinaryString((encryptedData[i] & 0xFF) + 0x100).substring(1);
+                binaryString += Integer.toBinaryString((encryptedData[i] & 0xFF) + 0x100).substring(1);
             }
-            return base32String;
+            return binaryString;
+    }
+
+    private byte[] parseBinaryString(String strInput){
+        byte[] bts = new byte[(strInput.length() / 8)+1];
+        int openBytesCounter = 0;
+        while (strInput.length()%8!=0){
+            strInput+="0";
+        }
+
+        while(strInput.length()!=0){
+            Integer tempinteger = Integer.parseInt(strInput.substring(0,8), 2);
+            byte b = tempinteger.byteValue();
+            strInput=strInput.substring(8);
+            bts[openBytesCounter]=b;
+            openBytesCounter++;
+        }
+        return bts;
     }
 
     private Pattern createMusic(String strInput){

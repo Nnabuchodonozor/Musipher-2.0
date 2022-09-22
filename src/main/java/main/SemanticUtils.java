@@ -53,6 +53,12 @@ public class SemanticUtils {
     }
 
 //ascii => base32 => byte array [open] => byte array[encrypted] => strinput => MIDI => strinput =>
+    /**
+     * Returns a salted PBKDF2 hash of the password.
+     *
+     * @param   text    the password to hash
+     * @return              a salted PBKDF2 hash of the password
+     */
     public void encryptToMIDIFromText(String text, String seed) throws Exception{
         iVString = "fkdgflfdsfvdeirt".getBytes();
         generateTrueRandomIV();
@@ -62,6 +68,7 @@ public class SemanticUtils {
         byte[] openText = turnBase32ToByte(base32String);
 
             byte[] enc = streamCipher.encrypt(iVString,seed,openText);
+            midiUtils.composeMIDI(enc);
 
 //            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
 //            fos.write(iVString);
@@ -74,7 +81,7 @@ public class SemanticUtils {
         File f1 = new File(encryptedPath);
         File f2 = new File(keyPath);
         try {
-            byte[] cypheredBytesWithIV = Files.readAllBytes(f1.toPath());
+            byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
             byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,0,16);
             byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,16,cypheredBytesWithIV.length);
             byte[] keyBytes = Files.readAllBytes(f2.toPath());
