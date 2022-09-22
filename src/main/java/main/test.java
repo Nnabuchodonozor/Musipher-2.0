@@ -34,7 +34,7 @@ public class test {
             String seed = "seed";
             //iv should generate by itself
             semanticUtils.encryptToMIDIFromText(openText, seed);
-
+            semanticUtils.decryptFromMIDIToText("miusik.mid","encryptionKey");
 
 
         }catch (Exception e){

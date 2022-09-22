@@ -23,6 +23,7 @@ public class MidiUtils {
     public byte[] decomposeMIDI(String path) throws InvalidMidiDataException, IOException {
         Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File(path));
         String strInput = decodeMusic(mainPattern);
+
         return null;
     }
 
