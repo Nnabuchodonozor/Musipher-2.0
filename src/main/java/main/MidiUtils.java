@@ -23,8 +23,10 @@ public class MidiUtils {
     public byte[] decomposeMIDI(String path) throws InvalidMidiDataException, IOException {
         Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File(path));
         String strInput = decodeMusic(mainPattern);
+        byte[] parsedBinaryString = parseBinaryString(strInput);
 
-        return null;
+
+        return parsedBinaryString;
     }
 
     private String decodeMusic(Pattern mainPattern){
@@ -57,6 +59,7 @@ public class MidiUtils {
     }
 
     private Pattern createMusic(String strInput){
+        Conductor conductor = new Conductor(strInput);
         return new Pattern("V0 I[Piano] Eq Ch. | Eq Ch. | Dq Eq Dq Cq");
     }
 }

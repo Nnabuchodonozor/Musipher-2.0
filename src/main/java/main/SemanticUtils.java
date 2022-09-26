@@ -87,7 +87,7 @@ public class SemanticUtils {
             byte[] keyBytes = Files.readAllBytes(f2.toPath());
             byte[] decryptedBytes = streamCipher.decrypt(iVBytes, keyBytes,cypheredBytes);
             String base32String = this.turnByteToBase32(decryptedBytes);
-            System.out.println("decyphered " + turnBase32ToAscii(base32String));
+            System.out.println("deciphered " + turnBase32ToAscii(base32String));
         }catch (Exception e){
             e.printStackTrace();
         }
