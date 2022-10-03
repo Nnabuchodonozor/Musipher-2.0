@@ -1,8 +1,7 @@
-package main;
+package main.security;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
@@ -15,27 +14,29 @@ public class StreamCipher {
     public StreamCipher() {
     }
 
-    public byte[] encrypt(byte[] iv, String seed, byte[] cleartext) throws Exception {
+    public byte[] encrypt(byte[] iv, String password, byte[] cleartext) throws Exception {
 
-        byte[] rawKey = getRawKey(seed);
+        byte[] rawKey = getRawKey(password);
         return  encrypt(iv,rawKey, cleartext);
 
     }
 
 
-    private static byte[] getRawKey(String seed) throws Exception {
-        KeyGenerator kgen = KeyGenerator.getInstance("AES");
-        PasswordHash pHash = new PasswordHash();
-        byte[] hashedSeed = pHash.createHash(seed);
-        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
-        sr.setSeed(hashedSeed);
-        kgen.init(128, sr); // 192 and 256 bits may not be available
-        SecretKey skey = kgen.generateKey();
-        byte[] raw = skey.getEncoded();
-        FileOutputStream fos = new FileOutputStream(new File("encryptionKey"));
-        fos.write(raw);
+    private static byte[] getRawKey(String password) throws Exception {
+//      previous implementation incuded generating password from seed, here password will be used to create hash
 
-        return raw;
+        //KeyGenerator kgen = KeyGenerator.getInstance("AES");
+        PasswordHash pHash = new PasswordHash();
+        return pHash.createHash(password);
+//        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+//        sr.setSeed(hashedSeed);
+//        kgen.init(128, sr); // 192 and 256 bits may not be available
+//        SecretKey skey = kgen.generateKey();
+//        byte[] raw = skey.getEncoded();
+//        FileOutputStream fos = new FileOutputStream(new File("encryptionKey"));
+//        fos.write(raw);
+
+
     }
 
 //    byte[] iv = new byte[] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF };
@@ -49,7 +50,8 @@ public class StreamCipher {
         return encrypted;
     }
 
-    public static byte[] decrypt(byte[] iv ,byte[] raw, byte[] encrypted) throws Exception {
+    public static byte[] decrypt(byte[] iv ,String password, byte[] encrypted) throws Exception {
+        byte[] raw = getRawKey(password);
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");

@@ -1,22 +1,15 @@
 package main;
 
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-import javax.crypto.Cipher;
-import javax.crypto.spec.IvParameterSpec;
-import javax.crypto.spec.SecretKeySpec;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.security.SecureRandom;
+import main.utils.SemanticUtils;
 
 public class test {
     public static void main(String[] args) {
         try {
             SemanticUtils semanticUtils = new SemanticUtils();
-//            semanticUtils.encryptToMIDIFromFile("image.jpg");
-//            semanticUtils.decryptFromMIDIToFile("encryptedBytes","encryptionKey");
+            semanticUtils.encryptToMIDIFromFile("image.jpg","password");
+            semanticUtils.decryptFromMIDIToFile("encryptedBytes","password");
+//            semanticUtils.encryptToMIDIFromText("text","password");
 
 //            File file = new File("song1.mp3"); // Sorrow.mp3 is the local mp3 music needs to be sent
 //            FileInputStream loc = new FileInputStream(file);
@@ -29,12 +22,15 @@ public class test {
 //            fos.flush();
 //            fos.close();
 
-      String openText = "this is sacred message";
-      //I need to provide a seed
-            String seed = "seed";
+
+
+//      String openText = "this is sacred message";
+//      I need to provide a seed
+//            String seed = "seed";
             //iv should generate by itself
-            semanticUtils.encryptToMIDIFromText(openText, seed);
-            semanticUtils.decryptFromMIDIToText("miusik.mid","encryptionKey");
+//            semanticUtils.encryptToMIDIFromText(openText, seed);
+//            semanticUtils.decryptFromMIDIToText("miusik.mid","encryptionKey");
+
 
 
         }catch (Exception e){

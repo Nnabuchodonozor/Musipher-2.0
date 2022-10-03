@@ -1,4 +1,4 @@
-package main;
+package main.composition;
 
 public class Conductor {
     String strInput;
@@ -6,7 +6,7 @@ public class Conductor {
         strInput=s;
     }
 
-    protected int getInput(int size){
+    public int getInput(int size){
         String tmp = strInput.substring(0,size);
         strInput = strInput.substring(size);
         return Integer.parseInt(tmp, 2);

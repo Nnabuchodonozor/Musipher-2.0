@@ -1,4 +1,4 @@
-package main;
+package main.security;
 
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
@@ -21,8 +21,8 @@ public class PasswordHash
     public  final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
     // The following constants may be changed without breaking existing hashes.
-    public  final int SALT_BYTES = 24;
-    public  final int HASH_BYTES = 24;
+    public  final int SALT_BYTES = 16;
+    public  final int HASH_BYTES = 16;
     public  final int PBKDF2_ITERATIONS = 1000;
 
     public  final int ITERATION_INDEX = 0;

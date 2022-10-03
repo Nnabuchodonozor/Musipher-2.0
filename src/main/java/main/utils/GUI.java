@@ -1,4 +1,6 @@
-package main;
+package main.utils;
+
+import main.security.StreamCipher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -246,7 +248,7 @@ public class GUI implements ActionListener {
                 if (response == JFileChooser.APPROVE_OPTION) {
                     filename = fileChooser.getSelectedFile().getAbsolutePath();
                 }
-                semanticUtils.encryptToMIDIFromFile(filename);
+                semanticUtils.encryptToMIDIFromFile(filename,"password");
             } else if (e.getSource() == dec2) {
 
                 // Choose file to decrypt and write key and decrypt

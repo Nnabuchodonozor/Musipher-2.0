@@ -1,10 +1,10 @@
-package main;
+package main.utils;
 
 
+import main.composition.Conductor;
 import org.jfugue.midi.MidiFileManager;
 import org.jfugue.pattern.Pattern;
 
-import javax.imageio.IIOException;
 import javax.sound.midi.InvalidMidiDataException;
 import java.io.File;
 import java.io.IOException;

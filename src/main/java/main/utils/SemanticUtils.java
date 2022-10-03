@@ -1,9 +1,8 @@
-package main;
-import javax.crypto.KeyGenerator;
+package main.utils;
+import main.security.StreamCipher;
+
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
@@ -59,15 +58,14 @@ public class SemanticUtils {
      * @param   text    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public void encryptToMIDIFromText(String text, String seed) throws Exception{
-        iVString = "fkdgflfdsfvdeirt".getBytes();
+    public void encryptToMIDIFromText(String text, String password) throws Exception{
         generateTrueRandomIV();
 
         //ascii text => base 32 alphabet string => byte array => encrypted byte array => MIDI
         String base32String = turnAsciiToBase32(text.toLowerCase(Locale.ROOT));
         byte[] openText = turnBase32ToByte(base32String);
 
-            byte[] enc = streamCipher.encrypt(iVString,seed,openText);
+            byte[] enc = streamCipher.encrypt(iVString,password,openText);
             midiUtils.composeMIDI(enc);
 
 //            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
@@ -77,15 +75,15 @@ public class SemanticUtils {
 
     }
 
-    public void decryptFromMIDIToText(String encryptedPath, String keyPath){
-        File f1 = new File(encryptedPath);
-        File f2 = new File(keyPath);
+    public void decryptFromMIDIToText(String encryptedPath, String password){
+//        File f1 = new File(encryptedPath);
+//        File f2 = new File(keyPath);
         try {
             byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
             byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,0,16);
             byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,16,cypheredBytesWithIV.length);
-            byte[] keyBytes = Files.readAllBytes(f2.toPath());
-            byte[] decryptedBytes = streamCipher.decrypt(iVBytes, keyBytes,cypheredBytes);
+
+            byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
             String base32String = this.turnByteToBase32(decryptedBytes);
             System.out.println("deciphered " + turnBase32ToAscii(base32String));
         }catch (Exception e){
@@ -93,36 +91,38 @@ public class SemanticUtils {
         }
     }
 
-    public void encryptToMIDIFromFile(String fileName) throws Exception {
-        iVString = "fkdgflfdsfvdeirt".getBytes();
-        seed = "some seed";
+    public void encryptToMIDIFromFile(String fileName, String password) throws Exception {
+        generateTrueRandomIV();
+
         String[] strings = fileName.split("\\.");
         byte[] fExtension = strings[1].getBytes();
         Integer i = (strings[1].length());
         byte fExtensionLength = i.byteValue();
         File openDataFile = new File(fileName);
         byte[] openBytes = Files.readAllBytes(openDataFile.toPath());
-        byte[] enc = streamCipher.encrypt(iVString,seed,openBytes);
-        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
-        fos.write(fExtensionLength);
-        fos.write(fExtension);
-        fos.write(iVString);
-        fos.write(enc);
-        fos.close();
+        byte[] enc = streamCipher.encrypt(iVString,password,openBytes);
+        midiUtils.composeMIDI(enc);
+
+        //        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
+//        fos.write(fExtensionLength);
+//        fos.write(fExtension);
+//        fos.write(iVString);
+//        fos.write(enc);
+//        fos.close();
     }
 
-    public void decryptFromMIDIToFile(String encryptedPath, String keyPath) throws Exception{
-        File f1 = new File(encryptedPath);
-        File f2 = new File(keyPath);
-        byte[] cipheredBytesWithIV = Files.readAllBytes(f1.toPath());
+    public void decryptFromMIDIToFile(String encryptedPath, String password) throws Exception{
+//        File f1 = new File(encryptedPath);
+//        File f2 = new File(keyPath);
+        byte[] cipheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
         Byte b = cipheredBytesWithIV[0];
         int i = b.intValue();
         byte[] fExtension = Arrays.copyOfRange(cipheredBytesWithIV,1,1+i);
         String stringFileExtension = new String(fExtension, StandardCharsets.UTF_8);
         byte[] iVBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i,1+i+16);
         byte[] cypheredBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i+16,cipheredBytesWithIV.length);
-        byte[] keyBytes = Files.readAllBytes(f2.toPath());
-        byte[] decryptedBytes = streamCipher.decrypt(iVBytes, keyBytes,cypheredBytes);
+
+        byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
         FileOutputStream fos = new FileOutputStream(new File("decryptedFile."+stringFileExtension));
         fos.write(decryptedBytes);
         fos.close();

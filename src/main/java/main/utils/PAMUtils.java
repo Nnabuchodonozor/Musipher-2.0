@@ -1,4 +1,4 @@
-package main;
+package main.utils;
 
 
 import javazoom.jl.decoder.Header;

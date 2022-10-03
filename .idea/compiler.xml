@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DP" />
         <module name="diplomka" />
+        <module name="Musipher 2.0" />
       </profile>
     </annotationProcessing>
   </component>
