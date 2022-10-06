@@ -14,20 +14,20 @@ public class StreamCipher {
     public StreamCipher() {
     }
 
-    public byte[] encrypt(byte[] iv, String password, byte[] cleartext) throws Exception {
+    public byte[] encrypt(byte[] iv, String password, byte[] cleartext, String saltPath) throws Exception {
 
-        byte[] rawKey = getRawKey(password);
+        byte[] rawKey = getRawKey(password,saltPath);
         return  encrypt(iv,rawKey, cleartext);
 
     }
 
 
-    private static byte[] getRawKey(String password) throws Exception {
+    private static byte[] getRawKey(String password, String saltPath) throws Exception {
 //      previous implementation incuded generating password from seed, here password will be used to create hash
 
         //KeyGenerator kgen = KeyGenerator.getInstance("AES");
         PasswordHash pHash = new PasswordHash();
-        return pHash.createHash(password);
+        return pHash.createHash(password, saltPath);
 //        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 //        sr.setSeed(hashedSeed);
 //        kgen.init(128, sr); // 192 and 256 bits may not be available
@@ -50,8 +50,8 @@ public class StreamCipher {
         return encrypted;
     }
 
-    public static byte[] decrypt(byte[] iv ,String password, byte[] encrypted) throws Exception {
-        byte[] raw = getRawKey(password);
+    public static byte[] decrypt(byte[] iv ,String password, byte[] encrypted, String saltPath) throws Exception {
+        byte[] raw = getRawKey(password,saltPath);
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");

@@ -65,7 +65,7 @@ public class SemanticUtils {
         String base32String = turnAsciiToBase32(text.toLowerCase(Locale.ROOT));
         byte[] openText = turnBase32ToByte(base32String);
 
-            byte[] enc = streamCipher.encrypt(iVString,password,openText);
+            byte[] enc = streamCipher.encrypt(iVString,password,openText,null);
             midiUtils.composeMIDI(enc);
 
 //            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
@@ -83,7 +83,7 @@ public class SemanticUtils {
             byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,0,16);
             byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,16,cypheredBytesWithIV.length);
 
-            byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
+            byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes,"pbkdf2Salt");
             String base32String = this.turnByteToBase32(decryptedBytes);
             System.out.println("deciphered " + turnBase32ToAscii(base32String));
         }catch (Exception e){
@@ -100,7 +100,7 @@ public class SemanticUtils {
         byte fExtensionLength = i.byteValue();
         File openDataFile = new File(fileName);
         byte[] openBytes = Files.readAllBytes(openDataFile.toPath());
-        byte[] enc = streamCipher.encrypt(iVString,password,openBytes);
+        byte[] enc = streamCipher.encrypt(iVString,password,openBytes,null);
         midiUtils.composeMIDI(enc);
 
         //        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
@@ -122,7 +122,7 @@ public class SemanticUtils {
         byte[] iVBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i,1+i+16);
         byte[] cypheredBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i+16,cipheredBytesWithIV.length);
 
-        byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
+        byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes,"pbkdf2Salt");
         FileOutputStream fos = new FileOutputStream(new File("decryptedFile."+stringFileExtension));
         fos.write(decryptedBytes);
         fos.close();

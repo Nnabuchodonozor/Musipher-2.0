@@ -1,5 +1,9 @@
 package main.security;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKeyFactory;
@@ -35,10 +39,10 @@ public class PasswordHash
      * @param   password    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public  byte[] createHash(String password)
-            throws NoSuchAlgorithmException, InvalidKeySpecException
+    public  byte[] createHash(String password, String saltPath)
+            throws NoSuchAlgorithmException, InvalidKeySpecException, FileNotFoundException, IOException
     {
-        return createHash(password.toCharArray());
+        return createHash(password.toCharArray(),saltPath);
     }
 
     /**
@@ -47,19 +51,31 @@ public class PasswordHash
      * @param   password    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public  byte[] createHash(char[] password)
-            throws NoSuchAlgorithmException, InvalidKeySpecException
+    public  byte[] createHash(char[] password, String saltPath)
+            throws NoSuchAlgorithmException, InvalidKeySpecException, FileNotFoundException, IOException
     {
-        // Generate a random salt
+        FileInputStream fis = new FileInputStream(saltPath);
+        FileOutputStream fos = new FileOutputStream("pbkdf2Salt");
         SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[SALT_BYTES];
-        random.nextBytes(salt);
+        byte[] salt;
+        if (saltPath.equals(null)){
+            // Generate a random salt and save it
+            salt = new byte[SALT_BYTES];
+            random.nextBytes(salt);
+            fos.write(salt);
+            fos.close();
+        }else{
+            // load salt from memory
+            salt = fis.readAllBytes();
+            fis.close();
+        }
 
         // Hash the password
         byte[] hash = pbkdf2(password, salt, PBKDF2_ITERATIONS, HASH_BYTES);
         // format iterations:salt:hash
         return hash;
     }
+
 
     /**
      * Validates a password using a hash.
