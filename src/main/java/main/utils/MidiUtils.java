@@ -62,4 +62,13 @@ public class MidiUtils {
         Conductor conductor = new Conductor(strInput);
         return new Pattern("V0 I[Piano] Eq Ch. | Eq Ch. | Dq Eq Dq Cq");
     }
+
+
+
+    private void addNotes(Pattern mainPattern, String... notes){
+        for (String s : notes){
+            mainPattern.add(s);
+        }
+    }
+
 }
