@@ -5,6 +5,9 @@ import main.utils.MidiUtils;
 import main.utils.SemanticUtils;
 import org.jfugue.midi.MidiFileManager;
 import org.jfugue.pattern.Pattern;
+import org.jfugue.player.Player;
+import org.jfugue.rhythm.Rhythm;
+import org.jfugue.theory.ChordProgression;
 
 import java.io.File;
 
@@ -29,20 +32,34 @@ public class test {
             mainPattern.add(marker);
             //ties between notes
             String tie = " - ";
-            mainPattern.add(chord);
-            mainPattern.add(chord2);
-            mainPattern.add(voice);
-            mainPattern.add(chord3);
-            mainPattern.clear();
-            mainPattern.add("V0 I0  E5s D#5s | E5s D#5s E5s B4s D5s C5s " +
-                            "V1 I40 E4i       | C4w                     " +
-                            "V3 I19 C3qq      | E4 q " +
-                            "V9 38q 38q 38q 38q | 38q 38q");
+//            mainPattern.add(chord);
+//            mainPattern.add(chord2);
+//            mainPattern.add(voice);
+//            mainPattern.add(chord3);
+//            mainPattern.add(new ChordProgression("I IV V").setKey("Cmaj"));
+            mainPattern.add("C5q :Arpeggiated(Cmaj7w) ");
+//            mainPattern.add("C5q :PitchWheel(63,64)");
+            mainPattern.add("E4W ");
+//            mainPattern.clear();
+//            mainPattern.add("V0 I0  E5s D#5s | E5s D#5s E5s B4s D5s C5s " +
+//                            "V1 I40 E4i       | C4w                     " +
+//                            "V3 I19 C3qq      | E4 q " +
+//                            "V9 38q 38q 38q 38q | 38q 38q");
+
+            Rhythm rhythm = new Rhythm();
+            rhythm.addLayer("O.OO...O.OO....O");
+            rhythm.addLayer("....o.......o...");
+            rhythm.addLayer("^.`.^.`.^.`.^.`.");
+mainPattern.add(rhythm);
+
             System.out.println(mainPattern.toString());
             MidiFileManager.savePatternToMidi(mainPattern, new File("miusik.mid"));
             Pattern loadedPattern = MidiFileManager.loadPatternFromMidi(new File( "miusik.mid"));
             System.out.println(loadedPattern.toString());
 
+
+//            Player player = new Player();
+//            player.play(rhythm.getPattern().repeat(4));
 //            SemanticUtils semanticUtils = new SemanticUtils();
 //            semanticUtils.encryptToMIDIFromFile("image.jpg","password");
 //            semanticUtils.decryptFromMIDIToFile("encryptedBytes","password");
