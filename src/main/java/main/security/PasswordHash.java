@@ -32,6 +32,7 @@ public class PasswordHash
     public  final int ITERATION_INDEX = 0;
     public  final int SALT_INDEX = 1;
     public  final int PBKDF2_INDEX = 2;
+    private byte[] salt;
 
     /**
      * Returns a salted PBKDF2 hash of the password.
@@ -39,10 +40,18 @@ public class PasswordHash
      * @param   password    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public  byte[] createHash(String password, String saltPath)
+    public  byte[] createHash(String password)
             throws NoSuchAlgorithmException, InvalidKeySpecException, FileNotFoundException, IOException
     {
-        return createHash(password.toCharArray(),saltPath);
+        return createHash(password.toCharArray());
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 
     /**
@@ -51,24 +60,24 @@ public class PasswordHash
      * @param   password    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public  byte[] createHash(char[] password, String saltPath)
+    public  byte[] createHash(char[] password)
             throws NoSuchAlgorithmException, InvalidKeySpecException, FileNotFoundException, IOException
     {
-        FileInputStream fis = new FileInputStream(saltPath);
-        FileOutputStream fos = new FileOutputStream("pbkdf2Salt");
+//        FileInputStream fis = new FileInputStream(saltPath);
+//        FileOutputStream fos = new FileOutputStream("pbkdf2Salt");
         SecureRandom random = new SecureRandom();
-        byte[] salt;
-        if (saltPath.equals(null)){
+
+//        if (saltPath.equals(null)){
             // Generate a random salt and save it
             salt = new byte[SALT_BYTES];
             random.nextBytes(salt);
-            fos.write(salt);
-            fos.close();
-        }else{
-            // load salt from memory
-            salt = fis.readAllBytes();
-            fis.close();
-        }
+//            fos.write(salt);
+//            fos.close();
+//        }else{
+//            // load salt from memory
+//            salt = fis.readAllBytes();
+//            fis.close();
+//        }
 
         // Hash the password
         byte[] hash = pbkdf2(password, salt, PBKDF2_ITERATIONS, HASH_BYTES);

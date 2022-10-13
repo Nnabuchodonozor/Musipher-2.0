@@ -3,6 +3,9 @@ package main.security;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.security.SecureRandom;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -11,23 +14,29 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class StreamCipher {
 
+    private byte[] salt;
+
     public StreamCipher() {
     }
 
-    public byte[] encrypt(byte[] iv, String password, byte[] cleartext, String saltPath) throws Exception {
 
-        byte[] rawKey = getRawKey(password,saltPath);
+
+
+    public byte[] encrypt(byte[] iv, String password, byte[] cleartext) throws Exception {
+
+        byte[] rawKey = getRawKey(password);
         return  encrypt(iv,rawKey, cleartext);
 
     }
 
 
-    private static byte[] getRawKey(String password, String saltPath) throws Exception {
+    private byte[] getRawKey(String password) throws Exception {
 //      previous implementation incuded generating password from seed, here password will be used to create hash
 
         //KeyGenerator kgen = KeyGenerator.getInstance("AES");
         PasswordHash pHash = new PasswordHash();
-        return pHash.createHash(password, saltPath);
+        salt = pHash.getSalt();
+        return pHash.createHash(password);
 //        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 //        sr.setSeed(hashedSeed);
 //        kgen.init(128, sr); // 192 and 256 bits may not be available
@@ -41,17 +50,26 @@ public class StreamCipher {
 
 //    byte[] iv = new byte[] { 0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF };
 
-    private static byte[] encrypt(byte[] iv ,byte[] raw, byte[] clear) throws Exception {
+    private byte[] encrypt(byte[] iv ,byte[] raw, byte[] clear) throws Exception {
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivSpec);
         byte[] encrypted = cipher.doFinal(clear);
-        return encrypted;
+        byte [] connectedEncrypted = new byte[encrypted.length + salt.length];
+        int i = 0;
+        for(; i < salt.length; i++){
+            connectedEncrypted[i] = salt[i];
+        }
+        for(int j = i; j < encrypted.length; i++) {
+            connectedEncrypted[j] = encrypted[j];
+        }
+
+            return connectedEncrypted;
     }
 
-    public static byte[] decrypt(byte[] iv ,String password, byte[] encrypted, String saltPath) throws Exception {
-        byte[] raw = getRawKey(password,saltPath);
+    public byte[] decrypt(byte[] iv ,String password, byte[] encrypted) throws Exception {
+        byte[] raw = getRawKey(password);
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");

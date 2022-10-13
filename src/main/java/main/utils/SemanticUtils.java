@@ -65,7 +65,7 @@ public class SemanticUtils {
         String base32String = turnAsciiToBase32(text.toLowerCase(Locale.ROOT));
         byte[] openText = turnBase32ToByte(base32String);
 
-            byte[] enc = streamCipher.encrypt(iVString,password,openText,null);
+            byte[] enc = streamCipher.encrypt(iVString,password,openText);
             midiUtils.composeMIDI(enc);
 
 //            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
@@ -80,10 +80,11 @@ public class SemanticUtils {
 //        File f2 = new File(keyPath);
         try {
             byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
-            byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,0,16);
-            byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,16,cypheredBytesWithIV.length);
+            byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,16,32);
+            byte[] saltBytes = Arrays.copyOfRange(cypheredBytesWithIV, 0, 16);
+            byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,32,cypheredBytesWithIV.length);
 
-            byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes,"pbkdf2Salt");
+            byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
             String base32String = this.turnByteToBase32(decryptedBytes);
             System.out.println("deciphered " + turnBase32ToAscii(base32String));
         }catch (Exception e){
@@ -100,7 +101,7 @@ public class SemanticUtils {
         byte fExtensionLength = i.byteValue();
         File openDataFile = new File(fileName);
         byte[] openBytes = Files.readAllBytes(openDataFile.toPath());
-        byte[] enc = streamCipher.encrypt(iVString,password,openBytes,null);
+        byte[] enc = streamCipher.encrypt(iVString,password,openBytes);
         midiUtils.composeMIDI(enc);
 
         //        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
@@ -122,7 +123,7 @@ public class SemanticUtils {
         byte[] iVBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i,1+i+16);
         byte[] cypheredBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i+16,cipheredBytesWithIV.length);
 
-        byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes,"pbkdf2Salt");
+        byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
         FileOutputStream fos = new FileOutputStream(new File("decryptedFile."+stringFileExtension));
         fos.write(decryptedBytes);
         fos.close();

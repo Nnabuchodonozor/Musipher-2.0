@@ -18,11 +18,14 @@ public class test {
             Pattern mainPattern = new Pattern();
             // add a single note
             String note = "60q ";
-            String instrument ="I32 ";
+            String instrument ="I0 ";
             String voice = "V1";
             mainPattern.add(instrument);
             mainPattern.add(note);
 
+            //chord progression
+            ChordProgression cp = new ChordProgression("I IV V") .eachChordAs("$0 $0 $0 $0 $1 $1 $0 $0 $2 $1 $0 $0");
+            mainPattern.add(cp.getPattern());
             //add chord with duration
             String chord = "60maj/1 ";
             String chord2 = "60maj7/2 ";
@@ -37,14 +40,16 @@ public class test {
 //            mainPattern.add(voice);
 //            mainPattern.add(chord3);
 //            mainPattern.add(new ChordProgression("I IV V").setKey("Cmaj"));
-            mainPattern.add("C5q :Arpeggiated(Cmaj7w) ");
+            mainPattern.add("72q :Arpeggiated(Cmaj7w) ");
 //            mainPattern.add("C5q :PitchWheel(63,64)");
-            mainPattern.add("E4W ");
+            mainPattern.add("36W ");
 //            mainPattern.clear();
 //            mainPattern.add("V0 I0  E5s D#5s | E5s D#5s E5s B4s D5s C5s " +
 //                            "V1 I40 E4i       | C4w                     " +
 //                            "V3 I19 C3qq      | E4 q " +
 //                            "V9 38q 38q 38q 38q | 38q 38q");
+
+            //rhytm
 
             Rhythm rhythm = new Rhythm();
             rhythm.addLayer("O.OO...O.OO....O");
