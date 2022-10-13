@@ -40,10 +40,10 @@ public class PasswordHash
      * @param   password    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public  byte[] createHash(String password)
+    public  byte[] createHash(String password, byte[] previousSalt)
             throws NoSuchAlgorithmException, InvalidKeySpecException, FileNotFoundException, IOException
     {
-        return createHash(password.toCharArray());
+        return createHash(password.toCharArray(), previousSalt);
     }
 
     public byte[] getSalt() {
@@ -60,24 +60,24 @@ public class PasswordHash
      * @param   password    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public  byte[] createHash(char[] password)
+    public  byte[] createHash(char[] password, byte[] previousSalt)
             throws NoSuchAlgorithmException, InvalidKeySpecException, FileNotFoundException, IOException
     {
 //        FileInputStream fis = new FileInputStream(saltPath);
 //        FileOutputStream fos = new FileOutputStream("pbkdf2Salt");
         SecureRandom random = new SecureRandom();
 
-//        if (saltPath.equals(null)){
+        if (previousSalt==null){
             // Generate a random salt and save it
             salt = new byte[SALT_BYTES];
             random.nextBytes(salt);
 //            fos.write(salt);
 //            fos.close();
-//        }else{
+        }else{
 //            // load salt from memory
-//            salt = fis.readAllBytes();
+            salt = previousSalt;
 //            fis.close();
-//        }
+        }
 
         // Hash the password
         byte[] hash = pbkdf2(password, salt, PBKDF2_ITERATIONS, HASH_BYTES);

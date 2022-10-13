@@ -2,6 +2,8 @@ package main.utils;
 import main.security.StreamCipher;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -66,24 +68,26 @@ public class SemanticUtils {
         byte[] openText = turnBase32ToByte(base32String);
 
             byte[] enc = streamCipher.encrypt(iVString,password,openText);
-            midiUtils.composeMIDI(enc);
+//            midiUtils.composeMIDI(enc);
 
-//            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
-//            fos.write(iVString);
-//            fos.write(enc);
-//            fos.close();
+            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
+            fos.write(iVString);
+            fos.write(enc);
+            fos.close();
 
     }
 
-    public void decryptFromMIDIToText(String encryptedPath, String password){
-//        File f1 = new File(encryptedPath);
+    public void decryptFromMIDIToText(String encryptedPath, String password) throws FileNotFoundException {
+        File f1 = new File(encryptedPath);
+        FileInputStream fis = new FileInputStream(f1);
 //        File f2 = new File(keyPath);
         try {
-            byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
-            byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,16,32);
-            byte[] saltBytes = Arrays.copyOfRange(cypheredBytesWithIV, 0, 16);
+//            byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
+            byte[] cypheredBytesWithIV = fis.readAllBytes();
+            byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,0,16);
+            byte[] saltBytes = Arrays.copyOfRange(cypheredBytesWithIV, 16, 32);
             byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,32,cypheredBytesWithIV.length);
-
+            streamCipher.setSalt(saltBytes);
             byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
             String base32String = this.turnByteToBase32(decryptedBytes);
             System.out.println("deciphered " + turnBase32ToAscii(base32String));

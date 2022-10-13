@@ -15,52 +15,67 @@ public class test {
     public static void main(String[] args) {
         try {
 
-            Pattern mainPattern = new Pattern();
-            // add a single note
-            String note = "60q ";
-            String instrument ="I0 ";
-            String voice = "V1";
-            mainPattern.add(instrument);
-            mainPattern.add(note);
+            SemanticUtils semanticUtils = new SemanticUtils();
+            semanticUtils.encryptToMIDIFromText("This is long sentece","password");
+            semanticUtils.decryptFromMIDIToText("encryptedBytes","password");
 
-            //chord progression
-            ChordProgression cp = new ChordProgression("I IV V") .eachChordAs("$0 $0 $0 $0 $1 $1 $0 $0 $2 $1 $0 $0");
-            mainPattern.add(cp.getPattern());
-            //add chord with duration
-            String chord = "60maj/1 ";
-            String chord2 = "60maj7/2 ";
-            String chord3 = "60maj7^^ ";
-            //marker
-            String marker = "#chorus ";
-            mainPattern.add(marker);
-            //ties between notes
-            String tie = " - ";
-//            mainPattern.add(chord);
-//            mainPattern.add(chord2);
-//            mainPattern.add(voice);
-//            mainPattern.add(chord3);
-//            mainPattern.add(new ChordProgression("I IV V").setKey("Cmaj"));
-            mainPattern.add("72q :Arpeggiated(Cmaj7w) ");
-//            mainPattern.add("C5q :PitchWheel(63,64)");
-            mainPattern.add("36W ");
-//            mainPattern.clear();
-//            mainPattern.add("V0 I0  E5s D#5s | E5s D#5s E5s B4s D5s C5s " +
-//                            "V1 I40 E4i       | C4w                     " +
-//                            "V3 I19 C3qq      | E4 q " +
-//                            "V9 38q 38q 38q 38q | 38q 38q");
 
-            //rhytm
 
-            Rhythm rhythm = new Rhythm();
-            rhythm.addLayer("O.OO...O.OO....O");
-            rhythm.addLayer("....o.......o...");
-            rhythm.addLayer("^.`.^.`.^.`.^.`.");
-mainPattern.add(rhythm);
 
-            System.out.println(mainPattern.toString());
-            MidiFileManager.savePatternToMidi(mainPattern, new File("miusik.mid"));
-            Pattern loadedPattern = MidiFileManager.loadPatternFromMidi(new File( "miusik.mid"));
-            System.out.println(loadedPattern.toString());
+
+
+
+
+
+
+
+
+//            Pattern mainPattern = new Pattern();
+//            // add a single note
+//            String note = "60q ";
+//            String instrument ="I0 ";
+//            String voice = "V1";
+//            mainPattern.add(instrument);
+//            mainPattern.add(note);
+//
+//            //chord progression
+//            ChordProgression cp = new ChordProgression("I IV V") .eachChordAs("$0 $0 $0 $0 $1 $1 $0 $0 $2 $1 $0 $0");
+//            mainPattern.add(cp.getPattern());
+//            //add chord with duration
+//            String chord = "60maj/1 ";
+//            String chord2 = "60maj7/2 ";
+//            String chord3 = "60maj7^^ ";
+//            //marker
+//            String marker = "#chorus ";
+//            mainPattern.add(marker);
+//            //ties between notes
+//            String tie = " - ";
+////            mainPattern.add(chord);
+////            mainPattern.add(chord2);
+////            mainPattern.add(voice);
+////            mainPattern.add(chord3);
+////            mainPattern.add(new ChordProgression("I IV V").setKey("Cmaj"));
+//            mainPattern.add("72q :Arpeggiated(Cmaj7w) ");
+////            mainPattern.add("C5q :PitchWheel(63,64)");
+//            mainPattern.add("36W ");
+////            mainPattern.clear();
+////            mainPattern.add("V0 I0  E5s D#5s | E5s D#5s E5s B4s D5s C5s " +
+////                            "V1 I40 E4i       | C4w                     " +
+////                            "V3 I19 C3qq      | E4 q " +
+////                            "V9 38q 38q 38q 38q | 38q 38q");
+//
+//            //rhytm
+//
+//            Rhythm rhythm = new Rhythm();
+//            rhythm.addLayer("O.OO...O.OO....O");
+//            rhythm.addLayer("....o.......o...");
+//            rhythm.addLayer("^.`.^.`.^.`.^.`.");
+//mainPattern.add(rhythm);
+//
+//            System.out.println(mainPattern.toString());
+//            MidiFileManager.savePatternToMidi(mainPattern, new File("miusik.mid"));
+//            Pattern loadedPattern = MidiFileManager.loadPatternFromMidi(new File( "miusik.mid"));
+//            System.out.println(loadedPattern.toString());
 
 
 //            Player player = new Player();

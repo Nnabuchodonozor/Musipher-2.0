@@ -11,32 +11,42 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.print.DocFlavor;
 
 public class StreamCipher {
 
-    private byte[] salt;
+    private byte[] salt = null;
 
     public StreamCipher() {
     }
 
 
+    public byte[] getSalt() {
+        return salt;
+    }
 
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
+    }
 
     public byte[] encrypt(byte[] iv, String password, byte[] cleartext) throws Exception {
 
-        byte[] rawKey = getRawKey(password);
+        byte[] rawKey = getRawKey(password,null);
         return  encrypt(iv,rawKey, cleartext);
-
     }
 
 
-    private byte[] getRawKey(String password) throws Exception {
+    private byte[] getRawKey(String password, byte[] previousSalt) throws Exception {
 //      previous implementation incuded generating password from seed, here password will be used to create hash
 
         //KeyGenerator kgen = KeyGenerator.getInstance("AES");
         PasswordHash pHash = new PasswordHash();
+
+
+
+        byte[] hash=  pHash.createHash(password, previousSalt);
         salt = pHash.getSalt();
-        return pHash.createHash(password);
+        return hash;
 //        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 //        sr.setSeed(hashedSeed);
 //        kgen.init(128, sr); // 192 and 256 bits may not be available
@@ -61,15 +71,14 @@ public class StreamCipher {
         for(; i < salt.length; i++){
             connectedEncrypted[i] = salt[i];
         }
-        for(int j = i; j < encrypted.length; i++) {
-            connectedEncrypted[j] = encrypted[j];
+        for(int j = 0; j < encrypted.length; j++) {
+            connectedEncrypted[i+j] = encrypted[j];
         }
-
             return connectedEncrypted;
     }
 
     public byte[] decrypt(byte[] iv ,String password, byte[] encrypted) throws Exception {
-        byte[] raw = getRawKey(password);
+        byte[] raw = getRawKey(password,salt);
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         IvParameterSpec ivSpec = new IvParameterSpec(iv);
         Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");
