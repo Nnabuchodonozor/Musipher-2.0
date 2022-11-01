@@ -14,20 +14,56 @@ import java.io.File;
 public class test {
     public static void main(String[] args) {
         try {
+            int b = 9;
 
-            SemanticUtils semanticUtils = new SemanticUtils();
-            semanticUtils.encryptToMIDIFromText("This is long sentece","password");
-            semanticUtils.decryptFromMIDIToText("encryptedBytes","password");
+            Integer[] a = new Integer[128];
+            for(int i = 0; i < 128; i++){
+               a[b+i]=i;
+                 //33 = 32 5 bit
+                // MAJOR SCALE
+
+                // pitches: c c# d eb e  f f# g g# a  bb b c
+                //          0 1  2  3 4  5 6  7  8 9 10 11 12
+                //    c maj: 0 2 4 5 7 9 11 12
+
+
+//                if( (i % 12 == 1)||(i % 12 == 3)||(i % 12 == 6)||(i % 12 == 8)||(i % 12 == 10)  )
+//                   System.out.print("");
+//               else
+//                   System.out.print(i + " ");
+
+
+                // MINOR SCALE
+                // pitches: c c# d eb e  f f# g g# a bb b c
+                //          0 1  2  3 4  5 6  7  8 9 10 11 12
+                //    a min: 9 11 12 14 16 17 19 21
+                //           0  2  3  5 7  8  10 12
+
+
+                if( (i % 12 == 1)||(i % 12 == 4)||(i % 12 == 6)||(i % 12 == 9)||(i % 12 == 11)  )
+                    System.out.print("");
+                else
+                    System.out.print(i+b + " ");
+
+
+            }
 
 
 
+                                                    // LYDIAN MODE
+
+            // pitches: c c# d eb e  f f# g g# a bb b c
+            //          0 1  2  3 4  5 6  7  8 9 10 11 12
+            //    c lyd:
+            //           0  2  4 6 7  9  11 12
+
+                                                    // PENTATONIC
 
 
 
-
-
-
-
+//            SemanticUtils semanticUtils = new SemanticUtils();
+//            semanticUtils.encryptToMIDIFromText("This is long sentece","password");
+//            semanticUtils.decryptFromMIDIToText("encryptedBytes","password");
 
 
 //            Pattern mainPattern = new Pattern();
