@@ -40,10 +40,10 @@ public class test {
                 //           0  2  3  5 7  8  10 12
 
 
-                if( (i % 12 == 1)||(i % 12 == 4)||(i % 12 == 6)||(i % 12 == 9)||(i % 12 == 11)  )
-                    System.out.print("");
-                else
-                    System.out.print(i+b + " ");
+//                if( (i % 12 == 1)||(i % 12 == 4)||(i % 12 == 6)||(i % 12 == 9)||(i % 12 == 11)  )
+//                    System.out.print("");
+//                else
+//                    System.out.print(i+b + " ");
 
                 // LYDIAN MODE
 
@@ -51,6 +51,26 @@ public class test {
                 //          0 1  2  3 4  5 6  7  8 9 10 11 12
                 //    c lyd:
                 //           0  2  4 6 7  9  11 12
+
+//                if( (i % 12 == 1)||(i % 12 == 3)||(i % 12 == 5)||(i % 12 == 8)||(i % 12 == 10)  )
+//                    System.out.print("");
+//                else
+//                    System.out.print(i+b + " ");
+
+
+                // DORIAN MODE
+
+                // pitches: c c# d eb e  f f# g g# a bb b c
+                //          0 1  2  3 4  5 6  7  8 9 10 11 12
+                //    c DOR:
+                //           0  2  3 5 7  9 10 12
+
+
+//                if( (i % 12 == 1)||(i % 12 == 4)||(i % 12 == 6)||(i % 12 == 8)||(i % 12 == 11)  )
+//                    System.out.print("");
+//                else
+//                    System.out.print(i+b + " ");
+
 
             }
 
