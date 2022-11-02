@@ -45,17 +45,18 @@ public class test {
                 else
                     System.out.print(i+b + " ");
 
+                // LYDIAN MODE
+
+                // pitches: c c# d eb e  f f# g g# a bb b c
+                //          0 1  2  3 4  5 6  7  8 9 10 11 12
+                //    c lyd:
+                //           0  2  4 6 7  9  11 12
 
             }
 
 
 
-                                                    // LYDIAN MODE
 
-            // pitches: c c# d eb e  f f# g g# a bb b c
-            //          0 1  2  3 4  5 6  7  8 9 10 11 12
-            //    c lyd:
-            //           0  2  4 6 7  9  11 12
 
                                                     // PENTATONIC
 
