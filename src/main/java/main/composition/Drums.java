@@ -14,10 +14,29 @@ public class Drums {
 
     public Rhythm kicks(int input, Rhythm prev){
         //oO
+        //input: 0 1 2 3 ->
+        prev.addLayer("................");
         return prev;
     }
-    public void snares(){}
-    public void kicks(){}
+    public Rhythm snares(int input, Rhythm prev){
+        //sS
+        return  prev;
+    }
+    public Rhythm hiHat(int input, Rhythm prev){
+        //`^
+        return prev;
+
+    }
+    public Rhythm crash(int input, Rhythm prev){
+        //*+
+        return prev;
+
+    }
+    public Rhythm clap(int input, Rhythm prev){
+        //xX
+        return prev;
+
+    }
 
     public static void main(String[] args) {
         Rhythm rhythm = new Rhythm()

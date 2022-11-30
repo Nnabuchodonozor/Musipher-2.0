@@ -241,7 +241,7 @@ public class GUI implements ActionListener {
 //                JOptionPane.showMessageDialog(null, keyAndIV);
 
             } else if (e.getSource() == enc2) {
-
+//
                 // Choose file and encrypt when already generated key
                 response = fileChooser.showOpenDialog(null);
                 filename = "";

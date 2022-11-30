@@ -1,6 +1,7 @@
 package main;
 
 
+import main.composition.Key;
 import main.utils.MidiUtils;
 import main.utils.SemanticUtils;
 import org.jfugue.midi.MidiFileManager;
@@ -16,9 +17,19 @@ public class test {
         try {
             int b = 9;
 
-            Integer[] a = new Integer[128];
-            for(int i = 0; i < 128; i++){
-               a[b+i]=i;
+
+            Key key = new Key();
+            Integer [] a = key.generateKey("00000");
+            for(int i = 1; i < a.length; i++){
+                System.out.print(a[i] + " ");
+            }
+
+
+
+//
+//            Integer[] a = new Integer[128];
+//            for(int i = 0; i < 128; i++){
+//               a[b+i]=i;
                  //33 = 32 5 bit
                 // MAJOR SCALE
 
@@ -72,7 +83,7 @@ public class test {
 //                    System.out.print(i+b + " ");
 
 
-            }
+//       ////     }
 
 
 
