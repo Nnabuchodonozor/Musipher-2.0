@@ -3,7 +3,7 @@ package main.composition;
 
 public class Melody {
     Integer[] key;
-    Integer lastNote;
+    Integer lastNote = 60;
 
     String patternString;
     String strInput;
@@ -12,9 +12,9 @@ public class Melody {
 
     }
 
-    public void addRandomMelody(String pattern, Instrument instrument, String input, Integer Note) {
+    public void addRandomMelody(String pattern, Instrument instrument, String input) {
         //TODO changeable constants f.e. different instrument, different range
-        this.lastNote = Note;
+
         this.patternString = pattern;
         this.strInput = input;
         if(lastNote > 70){
