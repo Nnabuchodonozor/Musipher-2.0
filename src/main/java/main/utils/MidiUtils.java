@@ -65,10 +65,4 @@ public class MidiUtils {
 
 
 
-    private void addNotes(Pattern mainPattern, String... notes){
-        for (String s : notes){
-            mainPattern.add(s);
-        }
-    }
-
 }

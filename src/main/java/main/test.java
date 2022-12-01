@@ -2,6 +2,7 @@ package main;
 
 
 import main.composition.Key;
+import main.composition.Melody;
 import main.utils.MidiUtils;
 import main.utils.SemanticUtils;
 import org.jfugue.midi.MidiFileManager;
@@ -13,17 +14,31 @@ import org.jfugue.theory.ChordProgression;
 import java.io.File;
 
 public class test {
+
+
+
     public static void main(String[] args) {
         try {
             int b = 9;
+            MidiUtils midiUtils = new MidiUtils();
+            String strInput = "00000101010101010101010";
 
+            Key key = new Key(strInput);
+            Integer [] a = key.generateKey();
+            strInput = key.getStrInput();
+            Melody melody = new Melody(a);
 
-            Key key = new Key();
-            Integer [] a = key.generateKey("00000");
-            for(int i = 1; i < a.length; i++){
-                System.out.print(a[i] + " ");
+//            for(int i = 1; i < a.length; i++){
+//                System.out.print(a[i] + " ");
+//            }
+            String patternString = "V0 ";
+            for(int i = 0; i < 5; i++) {
+                melody.addRandomMelody(patternString, null, strInput, 60);
+                strInput = melody.getStrInput();
             }
-
+            Pattern pattern = new Pattern();
+            pattern.add(melody.getPatternString());
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
 
 
 //
