@@ -1,6 +1,7 @@
 package main;
 
 
+import main.composition.Drums;
 import main.composition.Key;
 import main.composition.Melody;
 import main.utils.MidiUtils;
@@ -21,7 +22,7 @@ public class test {
         try {
             int b = 9;
             MidiUtils midiUtils = new MidiUtils();
-            String strInput = "0000010101010011101101011011101001001001011010011011001100110011101001";
+            String strInput = "000001010101001110110101101110100100100011101101011011101001001001011010011011001101110110101101110100100100101101001101100111011010011011001100110011101001110100100100011101101011011101001001001011010011011001101110110101101110100100100101101001101100111011010011011001110100100100011101101011011101001001001011010011011001101110110101101110100100100101101001101100111011010011011001";
 
             Key key = new Key(strInput);
             Integer [] a = key.generateKey();
@@ -39,10 +40,9 @@ public class test {
             }
             Pattern pattern = new Pattern();
             pattern.add(melody.getPatternString());
-            Rhythm rhythm = new Rhythm();
-            rhythm.addLayer("O.OO...O.OO....O");
-            rhythm.addLayer("....o.......o...");
-            rhythm.addLayer("^.`.^.`.^.`.^.`.");
+            Drums drums = new Drums(strInput);
+            Rhythm rhythm = drums.generateDrums();
+            strInput = drums.getStrInput();
             pattern.add(rhythm);
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
 
