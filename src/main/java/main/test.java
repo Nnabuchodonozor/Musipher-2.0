@@ -1,6 +1,7 @@
 package main;
 
 
+import main.composition.Arpeggios;
 import main.composition.Drums;
 import main.composition.Key;
 import main.composition.Melody;
@@ -40,6 +41,14 @@ public class test {
             }
             Pattern pattern = new Pattern();
             pattern.add(melody.getPatternString());
+
+            patternString += "V1 ";
+            Arpeggios arpeggios = new Arpeggios(patternString);
+            arpeggios.upDown(new String[] {"C3q","G3q","E3q"} ,6);
+            pattern.add(arpeggios.getPatternString());
+
+
+
             Drums drums = new Drums(strInput);
             Rhythm rhythm = drums.generateDrums();
             strInput = drums.getStrInput();
