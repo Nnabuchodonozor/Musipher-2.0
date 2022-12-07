@@ -19,8 +19,8 @@ public class Drums {
         rhythm.addLayer(this.kicks());
         rhythm.addLayer(this.snares());
         rhythm.addLayer(this.hiHat());
-        rhythm.addLayer(this.clap());
-        rhythm.addLayer(this.crash());
+//        rhythm.addLayer(this.clap());
+//        rhythm.addLayer(this.crash());
         return rhythm;
     }
 

@@ -44,7 +44,7 @@ public class test {
 
             patternString += "V1 ";
             Arpeggios arpeggios = new Arpeggios(patternString);
-            arpeggios.upDown(new String[] {"C3q","G3q","E3q"} ,6);
+            arpeggios.upUp(new String[] {"C3q","E3q","G3q"} ,6);
             pattern.add(arpeggios.getPatternString());
 
 
@@ -54,7 +54,8 @@ public class test {
             strInput = drums.getStrInput();
             pattern.add(rhythm);
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+            System.out.printf(mainPattern.toString());
                 // LYDIAN MODE
 
                 // pitches: c c# d eb e  f f# g g# a bb b c
