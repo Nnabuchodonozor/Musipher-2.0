@@ -6,6 +6,9 @@ import org.jfugue.player.Player;
 import org.jfugue.rhythm.Rhythm;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Drums {
 
@@ -18,7 +21,7 @@ public class Drums {
         Rhythm rhythm = new Rhythm();
         rhythm.addLayer(this.kicks());
         rhythm.addLayer(this.snares());
-        rhythm.addLayer(this.hiHat());
+//        rhythm.addLayer(this.hiHat());
 //        rhythm.addLayer(this.clap());
 //        rhythm.addLayer(this.crash());
         return rhythm;
@@ -39,7 +42,7 @@ public class Drums {
                 kickLayer += ".";
             }
         }
-
+        System.out.println(kickLayer);
         return kickLayer;
     }
 
@@ -59,6 +62,7 @@ public class Drums {
                 snaresLayer += ".";
             }
         }
+        System.out.println(snaresLayer);
         return snaresLayer;
     }
 
@@ -78,6 +82,7 @@ public class Drums {
                 hiHatLayer += ".";
             }
         }
+        System.out.println(hiHatLayer);
         return hiHatLayer;
 
     }
@@ -98,6 +103,7 @@ public class Drums {
                 crashLayer += ".";
             }
         }
+        System.out.println(crashLayer);
         return crashLayer;
 
     }
@@ -118,6 +124,7 @@ public class Drums {
                 clapLayer += ".";
             }
         }
+        System.out.println(clapLayer);
         return clapLayer;
 
     }
@@ -134,6 +141,90 @@ public class Drums {
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
     }
+//
+//    .Ooo.O.oO.o.o.O.
+//    .sSs.S.S..S..SS.
+
+    // parsed lines
+    // 0 bass
+    // 1 snare
+    // 2 clap
+    // 3 crash
+    // 4 hat
+    public void parseDrums(String unparsedDrums){
+        List<String> drumStreams = Arrays.asList("", "", "", "", "");
+
+        unparsedDrums = unparsedDrums.replaceAll("\\[BASS_DRUM\\]i","O");
+        unparsedDrums = unparsedDrums.replaceAll("\\[BASS_DRUM\\]s","o");
+        unparsedDrums = unparsedDrums.replaceAll("\\[ACOUSTIC_SNARE\\]i","S");
+        unparsedDrums = unparsedDrums.replaceAll("\\[ACOUSTIC_SNARE\\]s","s");
+        unparsedDrums = unparsedDrums.replaceAll("\\[HAND_CLAP\\]i","X");
+        unparsedDrums = unparsedDrums.replaceAll("\\[HAND_CLAP\\]s","x");
+        unparsedDrums = unparsedDrums.replaceAll("\\[CRASH_CYMBAL_1\\]i","*");
+        unparsedDrums = unparsedDrums.replaceAll("\\[CRASH_CYMBAL_1\\]s","+");
+        unparsedDrums = unparsedDrums.replaceAll("\\[PEDAL_HI_HAT\\]i","^");
+        unparsedDrums = unparsedDrums.replaceAll("\\[PEDAL_HI_HAT\\]s","`");
+        System.out.println(unparsedDrums);
+
+        String[] parsedDrums = unparsedDrums.split(" ");
+        for(int i = 0; i < parsedDrums.length; i++){
+            switch (parsedDrums[i]){
+                case "Ri":
+                    for (int j = 0; j < 5; j++){
+                         drumStreams.set(j, drumStreams.get(j) + "__");
+                    }
+                    break;
+                case "Rs":
+                    for (int j = 0; j < 5; j++){
+                        drumStreams.set(j, drumStreams.get(j) + "_");
+                    }
+                    break;
+                case "Ri.":
+                    for (int j = 0; j < 5; j++){
+                        drumStreams.set(j, drumStreams.get(j) + "___");
+                    }
+                    break;
+                case "o":
+                    drumStreams.set(0, drumStreams.get(0)+"_o");
+                    break;
+                case "O":
+                    drumStreams.set(0, drumStreams.get(0)+"O");
+                    break;
+                case "s":
+                    drumStreams.set(1, drumStreams.get(1)+"_s");
+                    break;
+                case "S":
+                    drumStreams.set(1, drumStreams.get(1)+"S");
+                    break;
+                case "x":
+                    drumStreams.set(2, drumStreams.get(2)+"_x");
+                    break;
+                case "X":
+                    drumStreams.set(2, drumStreams.get(2)+"X");
+                    break;
+                case "*":
+                    drumStreams.set(3, drumStreams.get(3)+"_*");
+                    break;
+                case "+":
+                    drumStreams.set(3, drumStreams.get(3)+"+");
+                    break;
+                case "^":
+                    drumStreams.set(4, drumStreams.get(4)+"_^");
+                    break;
+                case "`":
+                    drumStreams.set(4, drumStreams.get(4)+"`");
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        for (String s : drumStreams){
+            System.out.println(s);
+        }
+    }
+
+
 
 
 }

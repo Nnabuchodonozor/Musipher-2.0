@@ -23,29 +23,32 @@ public class test {
         try {
             int b = 9;
             MidiUtils midiUtils = new MidiUtils();
-            String strInput = "000001010101001110110101101110100100100011101101011011101001001001011010011011001101110110101101110100100100101101001101100111011010011011001100110011101001110100100100011101101011011101001001001011010011011001101110110101101110100100100101101001101100111011010011011001110100100100011101101011011101001001001011010011011001101110110101101110100100100101101001101100111011010011011001";
-
-            Key key = new Key(strInput);
-            Integer [] a = key.generateKey();
-            strInput = key.getStrInput();
-            Melody melody = new Melody(a);
-
-//            for(int i = 1; i < a.length; i++){
-//                System.out.print(a[i] + " ");
+            String strInput = "01110100110101101001001100101110" +
+                    "01101100110011110010010001100100" +
+                    "01111001101010011100011000011000" +
+                    "11000001010010011110100101000000" +
+                    "10110101001011100001010101000100";
+//            Key key = new Key(strInput);
+//            Integer [] a = key.generateKey();
+//            strInput = key.getStrInput();
+//            Melody melody = new Melody(a);
+//
+////            for(int i = 1; i < a.length; i++){
+////                System.out.print(a[i] + " ");
+////            }
+//            String patternString = "V0 ";
+//            for(int i = 0; i < 25; i++) {
+//                melody.addRandomMelody(patternString, null, strInput);
+//                strInput = melody.getStrInput();
+//                patternString=melody.getPatternString();
 //            }
-            String patternString = "V0 ";
-            for(int i = 0; i < 25; i++) {
-                melody.addRandomMelody(patternString, null, strInput);
-                strInput = melody.getStrInput();
-                patternString=melody.getPatternString();
-            }
             Pattern pattern = new Pattern();
-            pattern.add(melody.getPatternString());
-
-            patternString += "V1 ";
-            Arpeggios arpeggios = new Arpeggios(patternString);
-            arpeggios.upUp(new String[] {"C3q","E3q","G3q"} ,6);
-            pattern.add(arpeggios.getPatternString());
+//            pattern.add(melody.getPatternString());
+//
+//            patternString += "V1 ";
+//            Arpeggios arpeggios = new Arpeggios(patternString);
+//            arpeggios.upUp(new String[] {"C3q","E3q","G3q"} ,6);
+//            pattern.add(arpeggios.getPatternString());
 
 
 
@@ -55,7 +58,8 @@ public class test {
             pattern.add(rhythm);
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-            System.out.printf(mainPattern.toString());
+            System.out.println(mainPattern.toString());
+            drums.parseDrums(mainPattern.toString());
                 // LYDIAN MODE
 
                 // pitches: c c# d eb e  f f# g g# a bb b c
