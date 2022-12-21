@@ -13,8 +13,22 @@ import java.util.List;
 public class Drums {
 
     String strInput;
+    int lengthOfLayer = 16;
     public Drums(String strInput) {
         this.strInput = strInput;
+    }
+
+    //this is method for generating drums layer for all sounds based on input
+    private String drumsBasedOnInput(String i, String s){
+        String result ="";
+        for(int j = 0; j < lengthOfLayer; j++) {
+            if (this.getChoice(1) == 1){
+                result += i;
+            }else {
+                result += s;
+            }
+        }
+        return  result;
     }
 
     public Rhythm generateDrums(){
@@ -28,60 +42,24 @@ public class Drums {
     }
 
     public String kicks() {
-        String kickLayer = "";
+        String kickLayer = drumsBasedOnInput("O","o");
         //oO
-        //input: 0 1 2 3 ->
-        for(int i = 0; i < 16; i++) {
-            if (this.getChoice(1) == 1) {
-                if (this.getChoice(1) == 1){
-                    kickLayer += "O";
-                }else {
-                    kickLayer += "o";
-                }
-            } else {
-                kickLayer += ".";
-            }
-        }
+
         System.out.println(kickLayer);
         return kickLayer;
     }
 
     public String snares() {
         //sS
-        String snaresLayer = "";
-        //oO
-        //input: 0 1 2 3 ->
-        for(int i = 0; i < 16; i++) {
-            if (this.getChoice(1) == 1) {
-                if (this.getChoice(1) == 1){
-                    snaresLayer += "S";
-                }else {
-                    snaresLayer += "s";
-                }
-            } else {
-                snaresLayer += ".";
-            }
-        }
+        String snaresLayer = drumsBasedOnInput("S","s");
+
         System.out.println(snaresLayer);
         return snaresLayer;
     }
 
     public String hiHat() {
         //`^
-        String hiHatLayer = "";
-        //oO
-        //input: 0 1 2 3 ->
-        for(int i = 0; i < 16; i++) {
-            if (this.getChoice(1) == 1) {
-                if (this.getChoice(1) == 1){
-                    hiHatLayer += "^";
-                }else {
-                    hiHatLayer += "`";
-                }
-            } else {
-                hiHatLayer += ".";
-            }
-        }
+        String hiHatLayer = drumsBasedOnInput("^","`");
         System.out.println(hiHatLayer);
         return hiHatLayer;
 
@@ -89,20 +67,7 @@ public class Drums {
 
     public String crash() {
         //*+
-        String crashLayer = "";
-        //oO
-        //input: 0 1 2 3 ->
-        for(int i = 0; i < 16; i++) {
-            if (this.getChoice(1) == 1) {
-                if (this.getChoice(1) == 1){
-                    crashLayer += "+";
-                }else {
-                    crashLayer += "*";
-                }
-            } else {
-                crashLayer += ".";
-            }
-        }
+        String crashLayer = drumsBasedOnInput("+","*");
         System.out.println(crashLayer);
         return crashLayer;
 
@@ -110,20 +75,7 @@ public class Drums {
 
     public String clap() {
         //xX
-        String clapLayer = "";
-        //oO
-        //input: 0 1 2 3 ->
-        for(int i = 0; i < 16; i++) {
-            if (this.getChoice(1) == 1) {
-                if (this.getChoice(1) == 1){
-                    clapLayer += "X";
-                }else {
-                    clapLayer += "x";
-                }
-            } else {
-                clapLayer += ".";
-            }
-        }
+        String clapLayer = drumsBasedOnInput("X","x");
         System.out.println(clapLayer);
         return clapLayer;
 
@@ -169,21 +121,21 @@ public class Drums {
         String[] parsedDrums = unparsedDrums.split(" ");
         for(int i = 0; i < parsedDrums.length; i++){
             switch (parsedDrums[i]){
-                case "Ri":
-                    for (int j = 0; j < 5; j++){
-                         drumStreams.set(j, drumStreams.get(j) + "__");
-                    }
-                    break;
-                case "Rs":
-                    for (int j = 0; j < 5; j++){
-                        drumStreams.set(j, drumStreams.get(j) + "_");
-                    }
-                    break;
-                case "Ri.":
-                    for (int j = 0; j < 5; j++){
-                        drumStreams.set(j, drumStreams.get(j) + "___");
-                    }
-                    break;
+//                case "Ri":
+//                    for (int j = 0; j < 5; j++){
+//                         drumStreams.set(j, drumStreams.get(j) + "__");
+//                    }
+//                    break;
+//                case "Rs":
+//                    for (int j = 0; j < 5; j++){
+//                        drumStreams.set(j, drumStreams.get(j) + "_");
+//                    }
+//                    break;
+//                case "Ri.":
+//                    for (int j = 0; j < 5; j++){
+//                        drumStreams.set(j, drumStreams.get(j) + "___");
+//                    }
+//                    break;
                 case "o":
                     drumStreams.set(0, drumStreams.get(0)+"o");
                     break;
@@ -209,7 +161,7 @@ public class Drums {
                     drumStreams.set(3, drumStreams.get(3)+"+");
                     break;
                 case "^":
-                    drumStreams.set(4, drumStreams.get(4)+"_^");
+                    drumStreams.set(4, drumStreams.get(4)+"^");
                     break;
                 case "`":
                     drumStreams.set(4, drumStreams.get(4)+"`");
