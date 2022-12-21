@@ -185,25 +185,25 @@ public class Drums {
                     }
                     break;
                 case "o":
-                    drumStreams.set(0, drumStreams.get(0)+"_o");
+                    drumStreams.set(0, drumStreams.get(0)+"o");
                     break;
                 case "O":
                     drumStreams.set(0, drumStreams.get(0)+"O");
                     break;
                 case "s":
-                    drumStreams.set(1, drumStreams.get(1)+"_s");
+                    drumStreams.set(1, drumStreams.get(1)+"s");
                     break;
                 case "S":
                     drumStreams.set(1, drumStreams.get(1)+"S");
                     break;
                 case "x":
-                    drumStreams.set(2, drumStreams.get(2)+"_x");
+                    drumStreams.set(2, drumStreams.get(2)+"x");
                     break;
                 case "X":
                     drumStreams.set(2, drumStreams.get(2)+"X");
                     break;
                 case "*":
-                    drumStreams.set(3, drumStreams.get(3)+"_*");
+                    drumStreams.set(3, drumStreams.get(3)+"*");
                     break;
                 case "+":
                     drumStreams.set(3, drumStreams.get(3)+"+");
