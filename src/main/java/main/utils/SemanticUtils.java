@@ -68,7 +68,7 @@ public class SemanticUtils {
         byte[] openText = turnBase32ToByte(base32String);
 
             byte[] enc = streamCipher.encrypt(iVString,password,openText);
-//            midiUtils.composeMIDI(enc);
+            midiUtils.composeMIDI(enc);
 
             FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
             fos.write(iVString);

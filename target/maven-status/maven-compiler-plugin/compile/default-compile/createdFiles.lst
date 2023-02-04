@@ -3,7 +3,10 @@ main/Help.class
 main/utils/PAMUtils.class
 main/utils/SemanticUtils.class
 main/Main.class
+main/composition/Instrument.class
+Jm808.class
 main/composition/Drums.class
+main/composition/Arpeggios.class
 main/utils/MidiUtils.class
 main/composition/Melody.class
 main/test.class

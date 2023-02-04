@@ -27,6 +27,13 @@
             <version>1.0.1</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.explodingart/jmusic -->
+        <dependency>
+            <groupId>com.explodingart</groupId>
+            <artifactId>jmusic</artifactId>
+            <version>1.6.4.1</version>
+        </dependency>
+
     <dependency>
         <groupId>com.github.JensPiegsa</groupId>
         <artifactId>jfugue</artifactId>

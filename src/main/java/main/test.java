@@ -22,13 +22,13 @@ public class test {
 
     public static void main(String[] args) {
         try {
-//            int b = 9;
-//            MidiUtils midiUtils = new MidiUtils();
-//            String strInput = "01110100110101101001001100101110" +
-//                    "01101100110011110010010001100100" +
-//                    "01111001101010011100011000011000" +
-//                    "11000001010010011110100101000000" +
-//                    "10110101001011100001010101000100";
+            int b = 9;
+            MidiUtils midiUtils = new MidiUtils();
+            String strInput = "01110100110101101001001100101110" +
+                    "01101100110011110010010001100100" +
+                    "01111001101010011100011000011000" +
+                    "11000001010010011110100101000000" +
+                    "10110101001011100001010101000100";
 
             //            Key key = new Key(strInput);
 //            Integer [] a = key.generateKey();
@@ -44,7 +44,7 @@ public class test {
 //                strInput = melody.getStrInput();
 //                patternString=melody.getPatternString();
 //            }
-//            Pattern pattern = new Pattern();
+            Pattern pattern = new Pattern();
 //            pattern.add(melody.getPatternString());
 //
 //            patternString += "V1 ";
@@ -54,14 +54,14 @@ public class test {
 
 
 //
-//            Drums drums = new Drums(strInput);
-//            Rhythm rhythm = drums.generateDrums();
-//            strInput = drums.getStrInput();
-//            pattern.add(rhythm);
-//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-//            System.out.println(mainPattern.toString());
-//            drums.parseDrums(mainPattern.toString());
+            Drums drums = new Drums(strInput);
+            Rhythm rhythm = drums.generateDrums();
+            strInput = drums.getStrInput();
+            pattern.add(rhythm);
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+            System.out.println(mainPattern.toString());
+            drums.parseDrums(mainPattern.toString());
 
                 // LYDIAN MODE
 
@@ -154,12 +154,12 @@ public class test {
 
 
 
-      String openText = "this is sacred message";
-//      I need to provide a seed
-            String seed = "seed";
-            //iv should generate by itself
-            semanticUtils.encryptToMIDIFromText(openText, seed);
-            semanticUtils.decryptFromMIDIToText("miusik.mid","encryptionKey");
+//      String openText = "this is sacred message";
+////      I need to provide a seed
+//            String seed = "seed";
+//            //iv should generate by itself
+//            semanticUtils.encryptToMIDIFromText(openText, seed);
+//            semanticUtils.decryptFromMIDIToText("miusik.mid","encryptionKey");
 
 
         }catch (Exception e){
