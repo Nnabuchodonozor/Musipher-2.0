@@ -96,7 +96,7 @@ public class SemanticUtils {
         }
     }
 
-    public void encryptToMIDIFromFile(String fileName, String password) throws Exception {
+    public void encryptToMIDIFromFile(String fileName, String password, int j) throws Exception {
         generateTrueRandomIV();
 
         String[] strings = fileName.split("\\.");
@@ -106,14 +106,14 @@ public class SemanticUtils {
         File openDataFile = new File(fileName);
         byte[] openBytes = Files.readAllBytes(openDataFile.toPath());
         byte[] enc = streamCipher.encrypt(iVString,password,openBytes);
-        midiUtils.composeMIDI(enc);
-
-        //        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
-//        fos.write(fExtensionLength);
-//        fos.write(fExtension);
-//        fos.write(iVString);
-//        fos.write(enc);
-//        fos.close();
+//        midiUtils.composeMIDI(enc);
+                String a = "outputs/encryptedBytes"  + j + ".bin";
+                FileOutputStream fos = new FileOutputStream(new File(a));
+        fos.write(fExtensionLength);
+        fos.write(fExtension);
+        fos.write(iVString);
+        fos.write(enc);
+        fos.close();
     }
 
     public void decryptFromMIDIToFile(String encryptedPath, String password) throws Exception{

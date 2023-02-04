@@ -95,6 +95,7 @@ public class Drums {
     }
 //
 //    .Ooo.O.oO.o.o.O.
+//    OooOoOooO
 //    .sSs.S.S..S..SS.
 
     // parsed lines
