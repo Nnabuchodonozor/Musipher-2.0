@@ -13,6 +13,9 @@ import static org.jfugue.midi.MidiFileManager.loadPatternFromMidi;
 
 public class MidiUtils {
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     public void composeMIDI(byte[] encryptedData) throws IOException {
         String strInput = createBinaryString(encryptedData);
@@ -31,6 +34,25 @@ public class MidiUtils {
 
     private String decodeMusic(Pattern mainPattern){
         return "1010010101010110";
+    }
+
+    public void evaluateDeciphering(String original, String deciphered){
+        if (original.length() == deciphered.length())
+            System.out.println("length is the same");
+        else
+            System.out.println("lenght does not match");
+        System.out.println(original);
+        char[] originalC = original.toCharArray();
+        char[] decipheredC = deciphered.toCharArray();
+
+        for (int i = 0; i < decipheredC.length; i++) {
+            if(decipheredC[i]==originalC[i]){
+                System.out.print(ANSI_GREEN + decipheredC[i] + ANSI_RESET);
+            }else {
+                System.out.print(ANSI_RED + decipheredC[i] + ANSI_RESET);
+            }
+        }
+        System.out.println();
     }
 
     private String createBinaryString(byte[] encryptedData){

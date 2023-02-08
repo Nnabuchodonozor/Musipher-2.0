@@ -13,6 +13,7 @@ import java.util.List;
 public class Drums {
 
     String strInput;
+    StringBuilder strOutput = new StringBuilder();
     int lengthOfLayer = 16;
     public Drums(String strInput) {
         this.strInput = strInput;
@@ -29,6 +30,21 @@ public class Drums {
             }
         }
         return  result;
+    }
+    //this is method for getting decomposed output from drum layers
+    private void outputBasedOnDrums(String layer, String s){
+        for(int j = 0; j < lengthOfLayer; j++){
+            String choice = layer.substring(0,1);
+            layer = layer.substring(1);
+            if (choice.equals(s))
+                strOutput.append(0);
+            else
+                strOutput.append(1);
+        }
+    }
+
+    public String getStroutput(){
+        return strOutput.toString();
     }
 
     public Rhythm generateDrums(){
@@ -173,9 +189,13 @@ public class Drums {
         }
 
         for (String s : drumStreams){
-            System.out.println(s);
+            if (!s.isEmpty()) {
+                System.out.println(s);
+                this.outputBasedOnDrums(s, s.substring(0, 1).toLowerCase());
+            }
         }
     }
+
 
 
 

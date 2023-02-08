@@ -30,6 +30,20 @@ public class test {
                     "11000001010010011110100101000000" +
                     "10110101001011100001010101000100";
 
+            Pattern pattern = new Pattern();
+
+
+            Drums drums = new Drums(strInput);
+            Rhythm rhythm = drums.generateDrums();
+//            strInput = drums.getStrInput();
+            pattern.add(rhythm);
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+            System.out.println(mainPattern.toString());
+            drums.parseDrums(mainPattern.toString());
+            String strOutput = drums.getStroutput();
+            midiUtils.evaluateDeciphering(strInput,strOutput);
+
             //            Key key = new Key(strInput);
 //            Integer [] a = key.generateKey();
 //            strInput = key.getStrInput();
@@ -44,7 +58,6 @@ public class test {
 //                strInput = melody.getStrInput();
 //                patternString=melody.getPatternString();
 //            }
-            Pattern pattern = new Pattern();
 //            pattern.add(melody.getPatternString());
 //
 //            patternString += "V1 ";
@@ -54,14 +67,6 @@ public class test {
 
 
 //
-            Drums drums = new Drums(strInput);
-            Rhythm rhythm = drums.generateDrums();
-            strInput = drums.getStrInput();
-            pattern.add(rhythm);
-            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-            System.out.println(mainPattern.toString());
-            drums.parseDrums(mainPattern.toString());
 
                 // LYDIAN MODE
 
