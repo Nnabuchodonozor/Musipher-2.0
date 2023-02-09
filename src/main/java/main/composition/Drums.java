@@ -15,8 +15,10 @@ public class Drums {
     String strInput;
     StringBuilder strOutput = new StringBuilder();
     int lengthOfLayer = 16;
+    DrumBank drumBank = new DrumBank();
     public Drums(String strInput) {
         this.strInput = strInput;
+
     }
 
     //this is method for generating drums layer for all sounds based on input
@@ -48,9 +50,20 @@ public class Drums {
     }
 
     public Rhythm generateDrums(){
+        String layer1 = this.kicks();
+        String layer2 = this.snares();
+        String[] layers = new String[2];
+        layers[0] = layer1;
+        layers[1] = layer2;
+        String[] finalLayers = drumBank.fillLayers(layers);
         Rhythm rhythm = new Rhythm();
-        rhythm.addLayer(this.kicks());
-        rhythm.addLayer(this.snares());
+
+        for(String s : finalLayers){
+            System.out.println("adapted "+s );
+            rhythm.addLayer(s);
+        }
+//        rhythm.addLayer(this.kicks());
+//        rhythm.addLayer(this.snares());
 //        rhythm.addLayer(this.hiHat());
 //        rhythm.addLayer(this.clap());
 //        rhythm.addLayer(this.crash());

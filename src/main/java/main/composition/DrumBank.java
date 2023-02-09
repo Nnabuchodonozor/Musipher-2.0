@@ -5,7 +5,7 @@ public class DrumBank {
     }
 // empty drumset "................"
     private String[] r1 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
-        ".s.s..s.ss.s..s..s.s..s.ss.s..s.",
+        ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
         "................",
         "................",
         "................" };
@@ -22,11 +22,11 @@ public class DrumBank {
 
             for (int j = 0; j < inputLayer.length; j++){
                 while (currentLayer[k]=='.' ){
-                    k++;
                     newLayer.append('.');
+                    k++;
                 }
-                k++;
                 newLayer.append(inputLayer[j]);
+                k++;
             }
             finalLayers[i] = newLayer.toString();
         }
