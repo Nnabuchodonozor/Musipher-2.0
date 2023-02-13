@@ -37,6 +37,7 @@ public class MidiUtils {
     }
 
     public void evaluateDeciphering(String original, String deciphered){
+        System.out.println(ANSI_RED + "Decompose evaluation function "+ ANSI_RESET);
         if (original.length() == deciphered.length())
             System.out.println("length is the same");
         else

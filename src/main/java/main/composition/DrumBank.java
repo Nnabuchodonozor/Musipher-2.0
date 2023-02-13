@@ -3,13 +3,49 @@ package main.composition;
 public class DrumBank {
     public DrumBank() {
     }
-// empty drumset "................"
-    private String[] r1 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
-        ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
-        "................",
-        "................",
-        "................" };
+// empty drumset  "................................................................"
+    private String[] r1 = new String[] { "o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.o.",
+                                         ".s.ss.s.ss.s.ss..s.s..s.ss.s.s..",
+        "................................",
+        "................................",
+        "................................" };
 
+    private String[] r2 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
+            ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
+            "................",
+            "................",
+            "................" };
+
+    private String[] r3 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
+            ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
+            "................",
+            "................",
+            "................" };
+
+    private String[] r4 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
+            ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
+            "................",
+            "................",
+            "................" };
+
+    private String[] r5 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
+            ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
+            "................",
+            "................",
+            "................" };
+
+
+    private String[] r6 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
+            ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
+            "................",
+            "................",
+            "................" };
+
+    private String[] r7 = new String[] { "o..oo..o..oo.oo.o..oo..o..oo.oo.",
+            ".s.ss.s.ss.s.ss..s.s..s.ss.s..s.",
+            "................",
+            "................",
+            "................" };
 //    public static
 
     public String[] fillLayers(String[] layers){
@@ -27,6 +63,9 @@ public class DrumBank {
                 }
                 newLayer.append(inputLayer[j]);
                 k++;
+            }
+            while(newLayer.length()< 64){
+                newLayer.append(".");
             }
             finalLayers[i] = newLayer.toString();
         }

@@ -33,37 +33,41 @@ public class test {
             Pattern pattern = new Pattern();
 
 
-            Drums drums = new Drums(strInput);
-            Rhythm rhythm = drums.generateDrums();
-//            strInput = drums.getStrInput();
-            pattern.add(rhythm);
-            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-            System.out.println(mainPattern.toString());
-            drums.parseDrums(mainPattern.toString());
-            String strOutput = drums.getStroutput();
-            midiUtils.evaluateDeciphering(strInput,strOutput);
+            //// TEST DRUMS
 
-            //            Key key = new Key(strInput);
-//            Integer [] a = key.generateKey();
-//            strInput = key.getStrInput();
-//            Melody melody = new Melody(a);
-//
-////            for(int i = 1; i < a.length; i++){
-////                System.out.print(a[i] + " ");
-////            }
-//            String patternString = "V0 ";
-//            for(int i = 0; i < 25; i++) {
-//                melody.addRandomMelody(patternString, null, strInput);
-//                strInput = melody.getStrInput();
-//                patternString=melody.getPatternString();
+//            Drums drums = new Drums(strInput);
+//            Rhythm rhythm = drums.generateDrums();
+////            strInput = drums.getStrInput();
+//            pattern.add(rhythm);
+//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+//            System.out.println(mainPattern.toString());
+//            drums.parseDrums(mainPattern.toString());
+//            String strOutput = drums.getStroutput();
+//            midiUtils.evaluateDeciphering(strInput,strOutput);
+
+            //// TEST DRUMS END
+
+            Key key = new Key(strInput);
+            Integer [] a = key.generateKey();
+            strInput = key.getStrInput();
+            Melody melody = new Melody(a);
+
+//            for(int i = 1; i < a.length; i++){
+//                System.out.print(a[i] + " ");
 //            }
-//            pattern.add(melody.getPatternString());
+            String patternString = "V0 ";
+            for(int i = 0; i < 25; i++) {
+                melody.addRandomMelody(patternString, null, strInput);
+                strInput = melody.getStrInput();
+                patternString=melody.getPatternString();
+            }
+            pattern.add(melody.getPatternString());
 //
-//            patternString += "V1 ";
-//            Arpeggios arpeggios = new Arpeggios(patternString);
-//            arpeggios.upUp(new String[] {"C3q","E3q","G3q"} ,6);
-//            pattern.add(arpeggios.getPatternString());
+            patternString += "V1 ";
+            Arpeggios arpeggios = new Arpeggios(patternString);
+            arpeggios.upUp(new String[] {"C3q","E3q","G3q"} ,6);
+            pattern.add(arpeggios.getPatternString());
 
 
 //
