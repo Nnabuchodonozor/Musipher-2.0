@@ -1,10 +1,7 @@
 package main;
 
 
-import main.composition.Arpeggios;
-import main.composition.Drums;
-import main.composition.Key;
-import main.composition.Melody;
+import main.composition.*;
 import main.utils.MidiUtils;
 import main.utils.SemanticUtils;
 import org.jfugue.midi.MidiFileManager;
@@ -30,7 +27,6 @@ public class test {
                     "11000001010010011110100101000000" +
                     "10110101001011100001010101000100";
 
-            Pattern pattern = new Pattern();
 
 
             Key key = new Key(strInput);
@@ -46,7 +42,12 @@ public class test {
                 patternString=melody.getPatternString();
             }
 
+            Motif motif = new Motif(patternString, patternString);
+            motif.developPattern();
+            patternString= motif.getPatternString();
 
+            Pattern pattern = new Pattern();
+            pattern.add(patternString);
 
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
