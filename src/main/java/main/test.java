@@ -33,64 +33,29 @@ public class test {
             Pattern pattern = new Pattern();
 
 
-            //// TEST DRUMS
-
-//            Drums drums = new Drums(strInput);
-//            Rhythm rhythm = drums.generateDrums();
-////            strInput = drums.getStrInput();
-//            pattern.add(rhythm);
-//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-//            System.out.println(mainPattern.toString());
-//            drums.parseDrums(mainPattern.toString());
-//            String strOutput = drums.getStroutput();
-//            midiUtils.evaluateDeciphering(strInput,strOutput);
-
-            //// TEST DRUMS END
-
             Key key = new Key(strInput);
             Integer [] a = key.generateKey();
             strInput = key.getStrInput();
             Melody melody = new Melody(a);
 
-//            for(int i = 1; i < a.length; i++){
-//                System.out.print(a[i] + " ");
-//            }
+            // add 5 note random motif
             String patternString = "V0 ";
-            for(int i = 0; i < 25; i++) {
+            for(int i = 0; i < 5; i++) {
                 melody.addRandomMelody(patternString, null, strInput);
                 strInput = melody.getStrInput();
                 patternString=melody.getPatternString();
             }
-            pattern.add(melody.getPatternString());
-//
-            patternString += "V1 ";
-            Arpeggios arpeggios = new Arpeggios(patternString);
-            arpeggios.upUp(new String[] {"C3q","E3q","G3q"} ,6);
-            pattern.add(arpeggios.getPatternString());
-
-
-//
-
-                // LYDIAN MODE
-
-                // pitches: c c# d eb e  f f# g g# a bb b c
-                //          0 1  2  3 4  5 6  7  8 9 10 11 12
-                //    c lyd:
-                //           0  2  4 6 7  9  11 12
-
-//                if( (i % 12 == 1)||(i % 12 == 3)||(i % 12 == 5)||(i % 12 == 8)||(i % 12 == 10)  )
-//                    System.out.print("");
-//                else
-//                    System.out.print(i+b + " ");
 
 
 
-                                                    // PENTATONIC
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+            System.out.println(mainPattern.toString());
 
 
 
-            SemanticUtils semanticUtils = new SemanticUtils();
+
+//            SemanticUtils semanticUtils = new SemanticUtils();
 
 
 //            Pattern mainPattern = new Pattern();
@@ -127,18 +92,6 @@ public class test {
 ////                            "V3 I19 C3qq      | E4 q " +
 ////                            "V9 38q 38q 38q 38q | 38q 38q");
 //
-//            //rhytm
-//
-//            Rhythm rhythm = new Rhythm();
-//            rhythm.addLayer("O.OO...O.OO....O");
-//            rhythm.addLayer("....o.......o...");
-//            rhythm.addLayer("^.`.^.`.^.`.^.`.");
-//mainPattern.add(rhythm);
-//
-//            System.out.println(mainPattern.toString());
-//            MidiFileManager.savePatternToMidi(mainPattern, new File("miusik.mid"));
-//            Pattern loadedPattern = MidiFileManager.loadPatternFromMidi(new File( "miusik.mid"));
-//            System.out.println(loadedPattern.toString());
 
 
 //            Player player = new Player();
