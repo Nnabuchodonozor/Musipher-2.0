@@ -8,15 +8,19 @@ import java.util.List;
 public class Motif {
 
 
-    // Present - Repeat - Vary - Deminish
+    //todo Present - Repeat - Vary - Deminish
+    //todo reasoner which decides which motivic
     String mainMotif;
+    String[] possibleLengths = new String[] {
+            "h", "q.", "q", "i.", "i", "s.", "s", "t.","t" };
 //    Pair[] parsedMotif;
     List<Pair<Integer, String>> parsedMotif = new ArrayList<>();
     String strInput;
     Integer[] key;
 
     String patternString;
-    public Motif(String mainMotif, String patternString) {
+    public Motif(String mainMotif, String patternString, Integer[] key) {
+        this.key=key;
         this.mainMotif = mainMotif;
         this.patternString = patternString;
         this.parseMotif();
@@ -89,13 +93,24 @@ public class Motif {
     //
 
     public String createSequence(int relativeDistance){
-        String resultMotif = "";
+        StringBuilder resultMotif = new StringBuilder();
         for( int i = 0; i < parsedMotif.size(); i++){
-            resultMotif += parsedMotif.get(i).getValue0() + relativeDistance;
-            resultMotif += parsedMotif.get(i).getValue1() + " ";
+            int notePos= this.getPositionInKey(parsedMotif.get(i).getValue0());
+            resultMotif.append( key[notePos] + relativeDistance);
+            resultMotif.append(parsedMotif.get(i).getValue1()).append(" ");
 
         }
-        return resultMotif;
+        return resultMotif.toString();
+    }
+
+    private int getPositionInKey(Integer note){
+        for(int i = 0; i < key.length; i++){
+            if(note.equals(key[i])){
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     public String decodeSequence(){
@@ -156,10 +171,10 @@ public class Motif {
         this.patternString += motifToAdd;
 
         String motifToAdd1 = this.createSequence(4);
-        this.patternString += motifToAdd;
+        this.patternString += motifToAdd1;
 
         String motifToAdd2 = this.createSequence(5);
-        this.patternString += motifToAdd;
+        this.patternString += motifToAdd2;
 //        for()
 //        this.patternString +=
 
