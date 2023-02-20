@@ -27,45 +27,31 @@ public class test {
                     "11000001010010011110100101000000" +
                     "10110101001011100001010101000100";
 
-//// TEST DRUMS
+
+            Key key = new Key(strInput);
+            Integer [] a = key.generateKey();
+            strInput = key.getStrInput();
+            Melody melody = new Melody(a);
+
+            // add 5 note random motif
+            String patternString = "V0 ";
+            for(int i = 0; i < 4; i++) {
+                melody.addRandomMelody(patternString, null, strInput);
+                strInput = melody.getStrInput();
+                patternString=melody.getPatternString();
+            }
+
+            Motif motif = new Motif(patternString, patternString, a, strInput);
+            motif.developPattern();
+            patternString= motif.getPatternString();
+
             Pattern pattern = new Pattern();
-            Drums drums = new Drums(strInput);
-            Rhythm rhythm = drums.generateDrums();
-//            strInput = drums.getStrInput();
-            pattern.add(rhythm);
+            pattern.add(patternString);
+
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
             System.out.println(mainPattern.toString());
-            drums.parseDrums(mainPattern.toString());
-            String strOutput = drums.getStroutput();
-            midiUtils.evaluateDeciphering(strInput,strOutput);
-
-//// TEST DRUMS END
-
-//            Key key = new Key(strInput);
-//            Integer [] a = key.generateKey();
-//            strInput = key.getStrInput();
-//            Melody melody = new Melody(a);
-//
-//            // add 5 note random motif
-//            String patternString = "V0 ";
-//            for(int i = 0; i < 4; i++) {
-//                melody.addRandomMelody(patternString, null, strInput);
-//                strInput = melody.getStrInput();
-//                patternString=melody.getPatternString();
-//            }
-//
-//            Motif motif = new Motif(patternString, patternString, a);
-//            motif.developPattern();
-//            patternString= motif.getPatternString();
-//
-//            Pattern pattern = new Pattern();
-//            pattern.add(patternString);
-//
-//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-//            System.out.println(mainPattern.toString());
-//            System.out.println(midiUtils.parseIncomingNotes(mainPattern.toString()));
+            System.out.println(midiUtils.parseIncomingNotes(mainPattern.toString()));
 
 
 

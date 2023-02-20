@@ -102,12 +102,18 @@ public class MidiUtils {
     public String parseIncomingNotes(String incomingNotes){
         String[] tokenizedNotes = incomingNotes.split(" ");
         StringBuilder parsedMelody=new StringBuilder();
+        int c= 0;
         for (int i = 0; i < tokenizedNotes.length; i++){
             if(tokenizedNotes[i].startsWith("V") || tokenizedNotes[i].startsWith("I"))
                 continue;
+            if(tokenizedNotes[i].endsWith(".")){
+                c=2;
+            }else {
+                c=1;
+            }
             for(int j = 0; j < jfugueMelodyNotes.length; j ++){
-                if(jfugueMelodyNotes[j].equals(tokenizedNotes[i].substring(0,tokenizedNotes[i].length()-1))) {
-                    parsedMelody.append(j).append(tokenizedNotes[i].substring(tokenizedNotes[i].length() - 1)).append(" ");
+                if(jfugueMelodyNotes[j].equals(tokenizedNotes[i].substring(0,tokenizedNotes[i].length()-c))) {
+                    parsedMelody.append(j).append(tokenizedNotes[i].substring(tokenizedNotes[i].length() - c)).append(" ");
                     break;
                 }
             }

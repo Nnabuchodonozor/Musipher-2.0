@@ -11,6 +11,7 @@ public class Motif {
     //todo Present - Repeat - Vary - Deminish
     //todo reasoner which decides which motivic
     String mainMotif;
+    //half
     String[] possibleLengths = new String[] {
             "h", "q.", "q", "i.", "i", "s.", "s", "t.","t" };
 //    Pair[] parsedMotif;
@@ -19,10 +20,11 @@ public class Motif {
     Integer[] key;
 
     String patternString;
-    public Motif(String mainMotif, String patternString, Integer[] key) {
+    public Motif(String mainMotif, String patternString, Integer[] key, String strInput) {
         this.key=key;
         this.mainMotif = mainMotif;
         this.patternString = patternString;
+        this.strInput = strInput;
         this.parseMotif();
     }
 
@@ -79,18 +81,26 @@ public class Motif {
 
     private void parseMotif(){
         String[] tokenised = this.mainMotif.split(" ");
+        String length = "";
+        Integer pitch;
         for(String s : tokenised){
             if(s.startsWith("V")||s.startsWith("I"))
                 continue;
-            String length = s.substring(s.length() - 1);
-            Integer pitch = Integer.parseInt(s.substring(0,s.length()-1));
+            if(s.endsWith(".")){
+                length = s.substring(s.length() - 2);
+                pitch = Integer.parseInt(s.substring(0,s.length()-2));
+            }else {
+                length = s.substring(s.length() - 1);
+                pitch = Integer.parseInt(s.substring(0,s.length()-1));
+            }
+
             this.parsedMotif.add(new Pair<>(pitch,length));
         }
     }
 
 
     //sequence = changing pitches in melody, for example for using same motif in different chord
-    //
+    // how do i encode shit in sequence, relative distance is the key-.
 
     public String createSequence(int relativeDistance){
         StringBuilder resultMotif = new StringBuilder();
@@ -118,9 +128,134 @@ public class Motif {
     }
 
     //augment = add longer lenghts
+    // if some length is not greater than the biggest length 
+//    String[] possibleLengths = new String[] {
+//            "h", "q.", "q", "i.", "i", "s.", "s", "t.","t" };
 
-    public String createAugment(){
-        return null;
+    public void createAugment(){
+        for (Pair p : parsedMotif){
+            switch (p.getValue1().toString()){
+                case "h ":
+                    break;
+                case "q. ":
+                    break;
+                case "q ":
+                    int choice = getChoice(1);
+                    if(choice==0){
+                        this.patternString += p.getValue0() + "q. ";
+                    }else {
+                        this.patternString += p.getValue0() + "h ";
+                    }
+                    break;
+                case "i.":
+                    choice = getChoice(1);
+                    if(choice==0){
+                        this.patternString += p.getValue0() + "q ";
+                    }else {
+                        this.patternString += p.getValue0() + "q. ";
+                    }
+                    break;
+                case "i":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "q ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "q. ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "h ";
+                            break;
+                    }
+                    break;
+                case "s.":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "q ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "q. ";
+                            break;
+                    }
+                    break;
+                case "s":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "s. ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "q ";
+                            break;
+                    }
+                    break;
+                case "t.":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "s ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "s. ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                    }
+                    break;
+                case "t":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "t. ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "s ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "s. ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 4:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 5:
+                            this.patternString += p.getValue0() + "q ";
+                            break;
+                        case 6:
+                            this.patternString += p.getValue0() + "q. ";
+                            break;
+                        case 7:
+                            this.patternString += p.getValue0() + "h ";
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public String decodeAugment(){
@@ -167,18 +302,17 @@ public class Motif {
 
     public void developPattern(){
 
-        String motifToAdd = this.createSequence(3);
-        this.patternString += motifToAdd;
+//        String motifToAdd = this.createSequence(3);
+//        this.patternString += motifToAdd;
 
-        String motifToAdd1 = this.createSequence(4);
-        this.patternString += motifToAdd1;
+         this.createAugment();
 
-        String motifToAdd2 = this.createSequence(5);
-        this.patternString += motifToAdd2;
-//        for()
-//        this.patternString +=
+    }
 
-
+    public int getChoice(int length){
+        String a = strInput.substring(0,length);
+        strInput = strInput.substring(length);
+        return Integer.parseInt(a, 2);
     }
 
 }

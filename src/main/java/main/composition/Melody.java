@@ -18,11 +18,11 @@ public class Melody {
         this.patternString = pattern;
         this.strInput = input;
         if(lastNote > 70){
-            patternString += key[this.returnIndex(lastNote)-1] + "i ";
+            patternString += key[this.returnIndex(lastNote)-1] + "s ";
             lastNote = key[returnIndex(lastNote)-1];
         }
          else if(lastNote < 40){
-            patternString += key[this.returnIndex(lastNote)+1] + "i ";
+            patternString += key[this.returnIndex(lastNote)+1] + "s ";
             lastNote = key[returnIndex(lastNote)+1];
         }else { // melody is in listenable interval
             boolean ascending = (this.getChoice(1) == 1 );
@@ -37,10 +37,10 @@ public class Melody {
 
     private void addStep( boolean ascending){
         if(ascending){
-            patternString += key[this.returnIndex(lastNote)+1] + "i ";
+            patternString += key[this.returnIndex(lastNote)+1] + "s ";
             lastNote = key[this.returnIndex(lastNote)+1];
         }else {
-            patternString += key[this.returnIndex(lastNote)-1] + "i ";
+            patternString += key[this.returnIndex(lastNote)-1] + "s ";
             lastNote = key[this.returnIndex(lastNote)-1];
         }
     }
@@ -48,10 +48,10 @@ public class Melody {
     private void addLeap( boolean ascending){
 
         if(ascending){
-            patternString += key[this.returnIndex(lastNote)+1+(this.getChoice(2))] + "i ";
+            patternString += key[this.returnIndex(lastNote)+1+(this.getChoice(2))] + "s ";
             lastNote = key[this.returnIndex(lastNote)+1+(this.getChoice(2))];
         }else {
-            patternString += key[this.returnIndex(lastNote)-1+(this.getChoice(2))] + "i ";
+            patternString += key[this.returnIndex(lastNote)-1+(this.getChoice(2))] + "s ";
             lastNote = key[this.returnIndex(lastNote)-1+(this.getChoice(2))];
         }
     }
