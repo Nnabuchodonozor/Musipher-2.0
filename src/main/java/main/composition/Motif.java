@@ -264,8 +264,130 @@ public class Motif {
 
     // dimunation = lesser lengths
 
-    public String createDimunation(){
-        return null;
+    public void createDimunation(){
+        for (Pair p : parsedMotif){
+            switch (p.getValue1().toString()){
+                case "t ":
+                    break;
+                case "t. ":
+                    break;
+                case "s ":
+                    int choice = getChoice(1);
+                    if(choice==0){
+                        this.patternString += p.getValue0() + "t. ";
+                    }else {
+                        this.patternString += p.getValue0() + "t ";
+                    }
+                    break;
+                case "s.":
+                    choice = getChoice(1);
+                    if(choice==0){
+                        this.patternString += p.getValue0() + "s ";
+                    }else {
+                        this.patternString += p.getValue0() + "t. ";
+                    }
+                    break;
+                case "i":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "s. ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "s ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "t. ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "t ";
+                            break;
+                    }
+                    break;
+                case "i.":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "q ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "q. ";
+                            break;
+                    }
+                    break;
+                case "q":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "s. ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "s ";
+                            break;
+                    }
+                    break;
+                case "q.":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "q ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "s. ";
+                            break;
+                    }
+                    break;
+                case "h":
+                    choice = getChoice(2);
+                    switch (choice){
+                        case 0:
+                            this.patternString += p.getValue0() + "q. ";
+                            break;
+                        case 1:
+                            this.patternString += p.getValue0() + "q ";
+                            break;
+                        case 2:
+                            this.patternString += p.getValue0() + "i. ";
+                            break;
+                        case 3:
+                            this.patternString += p.getValue0() + "i ";
+                            break;
+                        case 4:
+                            this.patternString += p.getValue0() + "s. ";
+                            break;
+                        case 5:
+                            this.patternString += p.getValue0() + "s ";
+                            break;
+                        case 6:
+                            this.patternString += p.getValue0() + "t. ";
+                            break;
+                        case 7:
+                            this.patternString += p.getValue0() + "t ";
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public String decodeDimunation(){
@@ -306,6 +428,9 @@ public class Motif {
 //        this.patternString += motifToAdd;
 
          this.createAugment();
+        this.createAugment();
+        this.createAugment();
+        this.createAugment();
 
     }
 
