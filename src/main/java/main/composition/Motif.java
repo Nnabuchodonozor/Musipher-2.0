@@ -424,13 +424,11 @@ public class Motif {
 
     public void developPattern(){
 
-//        String motifToAdd = this.createSequence(3);
-//        this.patternString += motifToAdd;
+        String motifToAdd = this.createSequence(3);
+        this.patternString += motifToAdd;
 
          this.createAugment();
-        this.createAugment();
-        this.createAugment();
-        this.createAugment();
+        this.createDimunation();
 
     }
 
