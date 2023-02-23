@@ -88,4 +88,20 @@ ________________________________________________________________________________
 //                    System.out.print(i+b + " ");
 
 
-__________________________________________________________________________________________-
+__________________________________________________________________________________________
+
+
+//                      test arpegios
+
+            Arpeggios arpeggios = new Arpeggios("V1 ");
+            String notes[] = new String[] {
+                    "60i", "64i", "67i", "72i", "76i", "79i", "84i", "79i", "76i", "72i", "67i", "64i" };
+            arpeggios.arpegiate(notes,2);
+            notes = new String[] {
+                    "60i", "64i", "69i", "72i", "76i", "81i", "84i", "81i", "76i", "69i", "67i", "64i" };
+            arpeggios.arpegiate(notes,2);
+            notes = new String[] {
+                    "60i", "65i", "69i", "72i", "77i", "81i", "84i", "81i", "77i", "69i", "65i", "65i" };
+            arpeggios.arpegiate(notes,2);
+            String toplay = arpeggios.getPatternString();
+            Pattern pattern = new Pattern(toplay);

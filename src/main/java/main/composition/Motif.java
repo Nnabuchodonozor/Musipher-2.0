@@ -395,9 +395,24 @@ public class Motif {
     }
 
     // expand = add more notes
+    // from input string 010110 of motif length will be taken. If 1 is then note will be added after if 0 then no.
+    // if 1 is then new note will be added based on new input taken
+    //lets try to make 8 chord notes
+    public void createExpand(Integer[] chordNotes){
+        StringBuilder temp = new StringBuilder(patternString);
 
-    public String createExpand(){
-        return null;
+        for (Pair p : parsedMotif){
+            int choice = getChoice(1);
+            if(choice==0){
+                temp.append(p.getValue0()).append(p.getValue1()).append(" ");
+            }else {
+                //here i should add something that sounds good, so what about chord note?
+                choice=getChoice(3);
+                temp.append(p.getValue0()).append(p.getValue1()).append(" ");
+                temp.append(chordNotes[choice]).append(p.getValue1()).append(" ");
+            }
+        }
+        patternString = temp.toString();
     }
 
     public String decodeExpand(){
@@ -424,12 +439,13 @@ public class Motif {
 
     public void developPattern(){
 
-        String motifToAdd = this.createSequence(3);
-        this.patternString += motifToAdd;
-
-         this.createAugment();
-        this.createDimunation();
-
+//        String motifToAdd = this.createSequence(3);
+//        this.patternString += motifToAdd;
+//
+//         this.createAugment();
+//        this.createDimunation();
+        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
+        this.createExpand(chord);
     }
 
     public int getChoice(int length){

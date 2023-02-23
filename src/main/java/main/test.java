@@ -28,32 +28,27 @@ public class test {
                     "10110101001011100001010101000100";
 
 
-            Arpeggios arpeggios = new Arpeggios("V1 ");
-            String notes[] = new String[] {
-                    "60i", "64i", "67i", "72i", "76i", "79i", "84i", "79i", "76i", "72i", "67i", "64i" };
-            arpeggios.arpegiate(notes,4);
-            String toplay = arpeggios.getPatternString();
-            Pattern pattern = new Pattern(toplay);
 
-//            Key key = new Key(strInput);
-//            Integer [] a = key.generateKey();
-//            strInput = key.getStrInput();
-//            Melody melody = new Melody(a);
-//
-//            // add 5 note random motif
-//            String patternString = "V0 ";
-//            for(int i = 0; i < 4; i++) {
-//                melody.addRandomMelody(patternString, null, strInput);
-//                strInput = melody.getStrInput();
-//                patternString=melody.getPatternString();
-//            }
-//
-//            Motif motif = new Motif(patternString, patternString, a, strInput);
-//            motif.developPattern();
-//            patternString= motif.getPatternString();
-//
-//            Pattern pattern = new Pattern();
-//            pattern.add(patternString);
+
+            Key key = new Key(strInput);
+            Integer [] a = key.generateKey();
+            strInput = key.getStrInput();
+            Melody melody = new Melody(a);
+
+            // add 4 note random motif
+            String patternString = "V0 ";
+            for(int i = 0; i < 4; i++) {
+                melody.addRandomMelody(patternString, null, strInput);
+                strInput = melody.getStrInput();
+                patternString=melody.getPatternString();
+            }
+
+            Motif motif = new Motif(patternString, patternString, a, strInput);
+            motif.developPattern();
+            patternString= motif.getPatternString();
+
+            Pattern pattern = new Pattern();
+            pattern.add(patternString);
 //
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
