@@ -30,7 +30,7 @@ public class test {
 
             Arpeggios arpeggios = new Arpeggios("V1 ");
             String notes[] = new String[] {
-                    "60q", "62q", "64q", "62q" };
+                    "60i", "64i", "67i", "72i", "76i", "79i", "84i", "79i", "76i", "72i", "67i", "64i" };
             arpeggios.arpegiate(notes,4);
             String toplay = arpeggios.getPatternString();
             Pattern pattern = new Pattern(toplay);

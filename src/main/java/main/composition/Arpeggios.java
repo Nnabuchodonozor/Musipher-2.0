@@ -41,4 +41,10 @@ public class Arpeggios {
     }
 
 
+    //todo diferent types of arpegios that will be created
+
+    // four note octave c - e - g - c - g - e - c
+    // three clasic ceg ceg .. cea cea ... cfa cfa
+    //
+
 }
