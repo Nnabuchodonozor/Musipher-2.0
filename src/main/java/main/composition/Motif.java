@@ -399,20 +399,20 @@ public class Motif {
     // if 1 is then new note will be added based on new input taken
     //lets try to make 8 chord notes
     public void createExpand(Integer[] chordNotes){
-        StringBuilder temp = new StringBuilder(patternString);
+        StringBuilder stringBuilder = new StringBuilder(patternString);
 
         for (Pair p : parsedMotif){
             int choice = getChoice(1);
             if(choice==0){
-                temp.append(p.getValue0()).append(p.getValue1()).append(" ");
+                stringBuilder.append(p.getValue0()).append(p.getValue1()).append(" ");
             }else {
                 //here i should add something that sounds good, so what about chord note?
                 choice=getChoice(3);
-                temp.append(p.getValue0()).append(p.getValue1()).append(" ");
-                temp.append(chordNotes[choice]).append(p.getValue1()).append(" ");
+                stringBuilder.append(p.getValue0()).append(p.getValue1()).append(" ");
+                stringBuilder.append(chordNotes[choice]).append(p.getValue1()).append(" ");
             }
         }
-        patternString = temp.toString();
+        patternString = stringBuilder.toString();
     }
 
     public String decodeExpand(){
@@ -420,8 +420,21 @@ public class Motif {
     }
     // contract = reduce some notes
 
-    public String createContract(){
-        return null;
+
+    //how to get some bits into deleting notes?
+    // if 0 delete note from motif, if 1 keep it
+    public void createContract(){
+        int choice;
+        StringBuilder stringBuilder = new StringBuilder(patternString);
+        for (Pair p : parsedMotif){
+            choice= this.getChoice(1);
+            if(choice==0){
+                stringBuilder.append(p.getValue0()).append(p.getValue1()).append(" ");
+            }
+            // else is negligible since nothing happens, but in decoding should be addressed
+        }
+        patternString = stringBuilder.toString();
+
     }
 
     public String decodeContract(){
@@ -444,8 +457,9 @@ public class Motif {
 //
 //         this.createAugment();
 //        this.createDimunation();
-        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
-        this.createExpand(chord);
+//        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
+//        this.createExpand(chord);
+          this.createContract();
     }
 
     public int getChoice(int length){
