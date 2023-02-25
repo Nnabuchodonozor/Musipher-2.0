@@ -17,6 +17,16 @@ public class Motif {
 //    Pair[] parsedMotif;
     List<Pair<Integer, String>> parsedMotif = new ArrayList<>();
     String strInput;
+
+    public String getStrOutput() {
+        return strOutput;
+    }
+
+    public void setStrOutput(String strOutput) {
+        this.strOutput = strOutput;
+    }
+
+    String strOutput;
     Integer[] key;
 
     String patternString;
@@ -437,11 +447,20 @@ public class Motif {
 
     }
 
-    public String decodeContract(){
-        return null;
+    public void decodeContract(  List<Pair<Integer, String>> melodyToDecode, int startIndex){
+        StringBuilder stringBuilder = new StringBuilder(strOutput);
+        for (Pair p : parsedMotif){
+            if(melodyToDecode.get(startIndex).equals(p)){
+                stringBuilder.append("0");
+                startIndex++;
+            }else {
+                stringBuilder.append("1");
+            }
+        }
+        this.strOutput = stringBuilder.toString();
     }
-    // divide = segment notes to AB and then make AABB
 
+    // divide = segment notes to AB and then make AABB
     public String createDivide(){
         return null;
     }
