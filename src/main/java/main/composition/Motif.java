@@ -477,7 +477,7 @@ public class Motif {
 
     // divide = segment notes to AB and then make AABB
     //if i can devide motif to abc then we can make abc
-
+    // smallest part of devision should be
     public void createDivide(){
         if(mainMotif.length()%4==0){
             int divisor = mainMotif.length()/4;
