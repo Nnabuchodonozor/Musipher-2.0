@@ -46,6 +46,7 @@ public class Motif {
         this.mainMotif=mainMotif;
         this.strOutput = strOutput;
         this.songToDecode = parseMotif(song);
+        this.parsedMotif = parseMotif(mainMotif);
     }
 
     public String getPatternString() {

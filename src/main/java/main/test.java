@@ -42,7 +42,7 @@ public class test {
                 strInput = melody.getStrInput();
                 patternString=melody.getPatternString();
             }
-
+            String motiv1 = patternString;
             Motif motif = new Motif(patternString, patternString, a, strInput);
             motif.developPattern();
             patternString= motif.getPatternString();
@@ -53,7 +53,8 @@ public class test {
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
             System.out.println(mainPattern.toString());
-            System.out.println(midiUtils.parseIncomingNotes(mainPattern.toString()));
+            String decodeSong =  midiUtils.parseIncomingNotes(mainPattern.toString());
+//            Motif decodeMotif = new Motif();
 //
 
 
