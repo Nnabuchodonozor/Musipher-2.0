@@ -463,6 +463,8 @@ public class Motif {
     public void decodeContract(  List<Pair<Integer, String>> melodyToDecode, int startIndex){
         StringBuilder stringBuilder = new StringBuilder(strOutput);
         for (Pair p : parsedMotif){
+            if(startIndex>=melodyToDecode.size())
+                break;
             if(melodyToDecode.get(startIndex).equals(p)){
                 stringBuilder.append("0");
                 startIndex++;
@@ -474,9 +476,24 @@ public class Motif {
     }
 
     // divide = segment notes to AB and then make AABB
-    public String createDivide(){
-        return null;
+    //if i can devide motif to abc then we can make abc
+
+    public void createDivide(){
+        if(mainMotif.length()%4==0){
+            int divisor = mainMotif.length()/4;
+        }else if(mainMotif.length()%3==0){
+            int divisor = mainMotif.length()/3;
+        }else if(mainMotif.length()%2==0){
+            int divisor = mainMotif.length()/2;
+        }else {
+            int divisor = mainMotif.length()/2;
+        }
     }
+
+    private void fourDivide(){}
+    private void threeDivide(){}
+    private void twoDivide(){}
+
 
     public String decodeDivide(){
         return null;
@@ -495,6 +512,7 @@ public class Motif {
     }
 
     public void decodePattern(){
+
         this.decodeContract(songToDecode,4);
     }
 

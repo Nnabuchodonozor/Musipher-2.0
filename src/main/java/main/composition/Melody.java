@@ -36,23 +36,25 @@ public class Melody {
     }
 
     private void addStep( boolean ascending){
+        int indexOfLastNote = this.returnIndex(lastNote);
         if(ascending){
-            patternString += key[this.returnIndex(lastNote)+1] + "i ";
-            lastNote = key[this.returnIndex(lastNote)+1];
+            patternString += key[indexOfLastNote+1] + "i ";
+            lastNote = key[indexOfLastNote+1];
         }else {
-            patternString += key[this.returnIndex(lastNote)-1] + "i ";
-            lastNote = key[this.returnIndex(lastNote)-1];
+            patternString += key[indexOfLastNote-1] + "i ";
+            lastNote = key[indexOfLastNote-1];
         }
     }
 
     private void addLeap( boolean ascending){
-
+        int indexOfLastNote = this.returnIndex(lastNote);
+        int choice = this.getChoice(2);
         if(ascending){
-            patternString += key[this.returnIndex(lastNote)+1+(this.getChoice(2))] + "i ";
-            lastNote = key[this.returnIndex(lastNote)+1+(this.getChoice(2))];
+            patternString += key[indexOfLastNote+1+choice] + "i ";
+            lastNote = key[indexOfLastNote+1+choice];
         }else {
-            patternString += key[this.returnIndex(lastNote)-1+(this.getChoice(2))] + "i ";
-            lastNote = key[this.returnIndex(lastNote)-1+(this.getChoice(2))];
+            patternString += key[indexOfLastNote-1-choice] + "i ";
+            lastNote = key[indexOfLastNote-1-choice];
         }
     }
 
@@ -87,7 +89,5 @@ public class Melody {
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
     }
-
-
 
 }

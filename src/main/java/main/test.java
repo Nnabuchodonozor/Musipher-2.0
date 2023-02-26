@@ -53,8 +53,10 @@ public class test {
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
             System.out.println(mainPattern.toString());
-            String decodeSong =  midiUtils.parseIncomingNotes(mainPattern.toString());
-//            Motif decodeMotif = new Motif();
+            String decodedSong =  midiUtils.parseIncomingNotes(mainPattern.toString());
+            System.out.println(decodedSong);
+//            Motif decodeMotif = new Motif(motiv1,a,"",decodedSong);
+//            decodeMotif.decodePattern();
 //
 
 
