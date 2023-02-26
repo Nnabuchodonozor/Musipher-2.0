@@ -16,6 +16,8 @@ public class Motif {
             "h", "q.", "q", "i.", "i", "s.", "s", "t.","t" };
 //    Pair[] parsedMotif;
     List<Pair<Integer, String>> parsedMotif = new ArrayList<>();
+
+    List<Pair<Integer, String>> songToDecode = new ArrayList<>();
     String strInput;
 
     public String getStrOutput() {
@@ -30,12 +32,20 @@ public class Motif {
     Integer[] key;
 
     String patternString;
+    //encoding constructor
     public Motif(String mainMotif, String patternString, Integer[] key, String strInput) {
         this.key=key;
         this.mainMotif = mainMotif;
         this.patternString = patternString;
         this.strInput = strInput;
-        this.parseMotif();
+        this.parsedMotif = parseMotif(mainMotif);
+    }
+    //decoding constructor
+    public Motif(String mainMotif, Integer[] key, String strOutput,String song){
+        this.key = key;
+        this.mainMotif=mainMotif;
+        this.strOutput = strOutput;
+        this.songToDecode = parseMotif(song);
     }
 
     public String getPatternString() {
@@ -89,8 +99,9 @@ public class Motif {
         return null;
     }
 
-    private void parseMotif(){
-        String[] tokenised = this.mainMotif.split(" ");
+    private List<Pair<Integer, String>> parseMotif(String motifToParse){
+        List<Pair<Integer, String>> parsed = new ArrayList<>();
+        String[] tokenised = motifToParse.split(" ");
         String length = "";
         Integer pitch;
         for(String s : tokenised){
@@ -104,8 +115,9 @@ public class Motif {
                 pitch = Integer.parseInt(s.substring(0,s.length()-1));
             }
 
-            this.parsedMotif.add(new Pair<>(pitch,length));
+            parsed.add(new Pair<>(pitch,length));
         }
+        return parsed;
     }
 
 
@@ -479,6 +491,10 @@ public class Motif {
 //        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
 //        this.createExpand(chord);
           this.createContract();
+    }
+
+    public void decodePattern(){
+        this.decodeContract(songToDecode,4);
     }
 
     public int getChoice(int length){
