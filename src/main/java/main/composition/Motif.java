@@ -479,12 +479,10 @@ public class Motif {
     //if i can devide motif to abc then we can make abc
     // smallest part of devision should be
     public void createDivide(){
-        if(mainMotif.length()%4==0){
+        if(mainMotif.length()>6){
             int divisor = mainMotif.length()/4;
-        }else if(mainMotif.length()%3==0){
+        }else if(mainMotif.length()>4){
             int divisor = mainMotif.length()/3;
-        }else if(mainMotif.length()%2==0){
-            int divisor = mainMotif.length()/2;
         }else {
             int divisor = mainMotif.length()/2;
         }
