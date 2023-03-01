@@ -479,19 +479,121 @@ public class Motif {
     //if i can devide motif to abc then we can make abc
     // smallest part of devision should be
     public void createDivide(){
-        if(mainMotif.length()>6){
-            int divisor = mainMotif.length()/4;
-        }else if(mainMotif.length()>4){
-            int divisor = mainMotif.length()/3;
-        }else {
-            int divisor = mainMotif.length()/2;
+        int divisorLength = parsedMotif.size() / 3;
+        StringBuilder stringBuilder = new StringBuilder(patternString);
+        List<Pair<Integer, String>> firstPart = parsedMotif.subList(0,divisorLength);
+        List<Pair<Integer, String>> secondPart = parsedMotif.subList(divisorLength,parsedMotif.size());
+        List<Pair<Integer, String>> thirdPart = parsedMotif.subList(divisorLength,parsedMotif.size());
+        int choice = getChoice(3);
+        switch (choice){
+            case 0: //aabb
+                stringBuilder.append(appendAll(firstPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(secondPart));
+                break;
+            case 1: //abab
+                stringBuilder.append(appendAll(firstPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(secondPart));
+                break;
+            case 2: //bbaa
+                stringBuilder.append(appendAll(secondPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(firstPart));
+                break;
+            case 3: //baba
+                stringBuilder.append(appendAll(secondPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(firstPart));
+                break;
+            case 4: //aacc
+                stringBuilder.append(appendAll(firstPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(thirdPart));
+                break;
+            case 5: //acac
+                stringBuilder.append(appendAll(firstPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(thirdPart));
+                break;
+            case 6: //ccaa
+                stringBuilder.append(appendAll(thirdPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(firstPart));
+                break;
+            case 7: //caca
+                stringBuilder.append(appendAll(thirdPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(firstPart));
+                break;
+            case 8: //bbcc
+                stringBuilder.append(appendAll(secondPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(thirdPart));
+                break;
+            case 9: //bcbc
+                stringBuilder.append(appendAll(secondPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(thirdPart));
+                break;
+            case 10: //ccbb
+                stringBuilder.append(appendAll(thirdPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(secondPart));
+                break;
+            case 11: //cbcb
+                stringBuilder.append(appendAll(thirdPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(secondPart));
+                break;
+            case 12: //abca
+                stringBuilder.append(appendAll(firstPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(firstPart));
+                break;
+            case 13: //abcb
+                stringBuilder.append(appendAll(firstPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(secondPart));
+                break;
+            case 14: //abcc
+                stringBuilder.append(appendAll(firstPart))
+                        .append(appendAll(secondPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(thirdPart));
+                break;
+            case 15: //ccab
+                stringBuilder.append(appendAll(thirdPart))
+                        .append(appendAll(thirdPart))
+                        .append(appendAll(firstPart))
+                        .append(appendAll(secondPart));
+                break;
+
         }
+        this.patternString = stringBuilder.toString();
     }
 
-    private void fourDivide(){}
-    private void threeDivide(){}
-    private void twoDivide(){}
-
+    private String appendAll(List<Pair<Integer, String>> motif){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Pair p : motif){
+            stringBuilder.append(p.getValue0()).append(p.getValue1()).append(" ");
+        }
+        return stringBuilder.toString();
+    }
 
     public String decodeDivide(){
         return null;
@@ -506,7 +608,8 @@ public class Motif {
 //        this.createDimunation();
 //        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
 //        this.createExpand(chord);
-          this.createContract();
+//          this.createContract();
+    this.createDivide();
     }
 
     public void decodePattern(){

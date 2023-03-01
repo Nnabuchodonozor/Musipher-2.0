@@ -37,7 +37,7 @@ public class test {
 
             // add 4 note random motif
             String patternString = "V0 ";
-            for(int i = 0; i < 4; i++) {
+            for(int i = 0; i < 6; i++) {
                 melody.addRandomMelody(patternString, null, strInput);
                 strInput = melody.getStrInput();
                 patternString=melody.getPatternString();
