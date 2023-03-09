@@ -604,12 +604,15 @@ public class Motif {
 //        String motifToAdd = this.createSequence(3);
 //        this.patternString += motifToAdd;
 //
-//         this.createAugment();
+         this.createAugment();
+        this.createAugment();
+        this.createAugment();
+        this.createAugment();
 //        this.createDimunation();
 //        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
 //        this.createExpand(chord);
 //          this.createContract();
-    this.createDivide();
+//    this.createDivide();
     }
 
     public void decodePattern(){
