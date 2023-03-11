@@ -19,9 +19,8 @@ public class test {
 
     public static void main(String[] args) {
         try {
-            int b = 9;
             MidiUtils midiUtils = new MidiUtils();
-            String strInput = "00000100110101101001001100101110" +
+            String strInput = "00111000100110101101001001100101110" +
                     "01101100110011110010010001100100" +
                     "01111001101010011100011000011000" +
                     "11000001010010011110100101000000" +
@@ -33,6 +32,13 @@ public class test {
             Key key = new Key(strInput);
             Integer [] a = key.generateKey();
             strInput = key.getStrInput();
+
+            for(int i = 12; i < 32; i++){
+                System.out.println("key " + i);
+                Integer [] b = key.generateKeyTest(i);
+                Harmony harmony = new Harmony(b);
+                harmony.printChords();
+            }
 
 
 

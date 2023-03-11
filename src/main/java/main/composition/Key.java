@@ -23,6 +23,16 @@ public class Key {
         }
     }
 
+    public Integer[] generateKeyTest(int choice){
+        if(choice < 12){ // generate major
+            return generateMajor(choice);
+        }else if(choice < 24){ // generate minor
+            return generateMinor(choice-12);
+        }else { // generate dorian
+            return generateDorian(choice-24);
+        }
+    }
+
     private Integer[] generateMajor(int choice){
         int keyCounter = 0;
         Integer[] a = new Integer[128];
