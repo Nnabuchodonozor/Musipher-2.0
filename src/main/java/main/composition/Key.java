@@ -22,20 +22,21 @@ public class Key {
         }else if(choice < 29) { // generate dorian
             return generateDorian(choice-24+1); //24,25,26,27,28,29
         }else { //30,31
-            return generatePentatonic(choice-29);
+            return generateHarmonic(choice-29);
         }
     }
 
-    private Integer[] generatePentatonic(int choice){
+    private Integer[] generateHarmonic(int choice){
         int keyCounter = 0;
         Integer[] a = new Integer[128];
         for(int i = 0; i < 128; i++){
 
-            if( (i % 12 == 1)||(i % 12 == 3)||(i % 12 == 5)||(i % 12 == 6)||(i % 12 == 8)||(i % 12 == 10)||(i % 12 == 11)  )
+            if( (i % 12 == 1)||(i % 12 == 4)||(i % 12 == 6)||(i % 12 == 9)||(i % 12 == 10)  )
                 continue;
             else
                 a[keyCounter++]=i + choice;
         }
+        a[keyCounter++]=-1;
         return Arrays.copyOfRange(a, 0, keyCounter);
     }
 
@@ -47,7 +48,7 @@ public class Key {
         }else if(choice < 29) { // generate dorian
             return generateDorian(choice-24+1); //24,25,26,27,28,29
         }else { //30,31
-            return generatePentatonic(choice-29);
+            return generateHarmonic(choice-29);
         }
     }
 
@@ -80,7 +81,7 @@ public class Key {
     private Integer[] generateDorian(int choice){
         //create first C ionian which is C major
         int keyCounter = 0;
-        Integer[] a = new Integer[129];
+        Integer[] a = new Integer[128];
         for(int i = 0; i < 128; i++){
 
             if( (i % 12 == 1)||(i % 12 == 3)||(i % 12 == 6)||(i % 12 == 8)||(i % 12 == 10)  )
@@ -88,7 +89,6 @@ public class Key {
             else
                 a[keyCounter++]=i;
         }
-        a[keyCounter++]=-1;
         //then move it with a offset
 
         return Arrays.copyOfRange(a, choice, keyCounter);
