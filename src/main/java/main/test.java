@@ -27,13 +27,11 @@ public class test {
                     "10110101001011100001010101000100";
 
 
-
-
             Key key = new Key(strInput);
             Integer [] a = key.generateKey();
             strInput = key.getStrInput();
 
-            for(int i = 12; i < 32; i++){
+            for(int i = 24; i < 32; i++){
                 System.out.println("key " + i);
                 Integer [] b = key.generateKeyTest(i);
                 Harmony harmony = new Harmony(b);

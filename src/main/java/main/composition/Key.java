@@ -1,5 +1,6 @@
 package main.composition;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Key {
@@ -18,9 +19,24 @@ public class Key {
             return generateMajor(choice);
         }else if(choice < 24){ // generate minor
             return generateMinor(choice-12);
-        }else { // generate dorian
-            return generateDorian(choice-24);
+        }else if(choice < 29) { // generate dorian
+            return generateDorian(choice-24+1); //24,25,26,27,28,29
+        }else { //30,31
+            return generatePentatonic(choice-29);
         }
+    }
+
+    private Integer[] generatePentatonic(int choice){
+        int keyCounter = 0;
+        Integer[] a = new Integer[128];
+        for(int i = 0; i < 128; i++){
+
+            if( (i % 12 == 1)||(i % 12 == 3)||(i % 12 == 5)||(i % 12 == 6)||(i % 12 == 8)||(i % 12 == 10)||(i % 12 == 11)  )
+                continue;
+            else
+                a[keyCounter++]=i + choice;
+        }
+        return Arrays.copyOfRange(a, 0, keyCounter);
     }
 
     public Integer[] generateKeyTest(int choice){
@@ -28,8 +44,10 @@ public class Key {
             return generateMajor(choice);
         }else if(choice < 24){ // generate minor
             return generateMinor(choice-12);
-        }else { // generate dorian
-            return generateDorian(choice-24);
+        }else if(choice < 29) { // generate dorian
+            return generateDorian(choice-24+1); //24,25,26,27,28,29
+        }else { //30,31
+            return generatePentatonic(choice-29);
         }
     }
 
@@ -60,16 +78,20 @@ public class Key {
     }
 
     private Integer[] generateDorian(int choice){
+        //create first C ionian which is C major
         int keyCounter = 0;
-        Integer[] a = new Integer[128];
+        Integer[] a = new Integer[129];
         for(int i = 0; i < 128; i++){
 
-            if( (i % 12 == 1)||(i % 12 == 4)||(i % 12 == 6)||(i % 12 == 8)||(i % 12 == 11)  )
+            if( (i % 12 == 1)||(i % 12 == 3)||(i % 12 == 6)||(i % 12 == 8)||(i % 12 == 10)  )
                 continue;
             else
-                a[keyCounter++]=i + choice;
+                a[keyCounter++]=i;
         }
-        return a;
+        a[keyCounter++]=-1;
+        //then move it with a offset
+
+        return Arrays.copyOfRange(a, choice, keyCounter);
     }
 
     public int getChoice(int length){
