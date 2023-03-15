@@ -157,8 +157,72 @@ public class Harmony {
 
     }
 
-    public void decodeFunctionalHarmony(List<Integer> chordProgression){
+    public void decodeFunctionalHarmony(List<Integer> chordProgression) throws Exception{
+        StringBuilder stringBuilder = new StringBuilder(strOutput);
+        int current = 0;
+     while (current<chordProgression.size()){
+         switch (chordProgression.get(current)){
 
+         case 0,2,5:
+             switch (chordProgression.get(current+1)){
+                 case 4:
+                     stringBuilder.append("00");
+                     break;
+                 case 6:
+                     stringBuilder.append("01");
+                     break;
+                 case 1:
+                     stringBuilder.append("10");
+                     break;
+                 case 3:
+                     stringBuilder.append("11");
+                     break;
+                 default:
+                     throw new Exception("unknown choice");
+             }
+             break;
+         case 1,3:
+             switch (chordProgression.get(current+1)){
+                 case 0:
+                     stringBuilder.append("00");
+                     break;
+                 case 2:
+                     stringBuilder.append("01");
+                     break;
+                 case 5:
+                     stringBuilder.append("10");
+                     break;
+                 case 3:
+                     stringBuilder.append("11");
+                     break;
+                 default:
+                     throw new Exception("unknown choice");
+             }
+             break;
+         case 4,6:
+             switch (chordProgression.get(current+1)){
+                 case 1:
+                     stringBuilder.append("00");
+                     break;
+                 case 3:
+                     stringBuilder.append("01");
+                     break;
+                 case 0:
+                     stringBuilder.append("10");
+                     break;
+                 case 2:
+                     stringBuilder.append("11");
+                     break;
+                 default:
+                     throw new Exception("unknown choice");
+             }
+             break;
+         default:
+             throw new Exception("unknown chord");
+        }
+         current++;
+     }
+     strOutput = stringBuilder.toString();
     }
 
 
