@@ -40,11 +40,12 @@ public class test {
 
             String patternString = "V0 ";
             for (Integer i: chordProgression){
-                System.out.print(i + " ");
+//                System.out.print(i + " ");
                   patternString += chords.get(i)[0] + "h+" + chords.get(i)[1] + "h+" + chords.get(i)[2] + "h ";
             }
-
             System.out.println(patternString);
+            harmony.decodeFunctionalHarmony(chordProgression);
+
             Pattern pattern = new Pattern();
             pattern.add(patternString);
 //

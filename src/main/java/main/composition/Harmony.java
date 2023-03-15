@@ -27,7 +27,7 @@ public class Harmony {
     List<Integer> chordProgression = new ArrayList<>();
     Integer[] key;
     String strInput;
-    String strOutput;
+    String strOutput="";
     public String getStrInput() {
         return strInput;
     }
@@ -98,7 +98,6 @@ public class Harmony {
         switch (previousChord){
             case 0,2,5:
                 int choice = this.getChoice(2);
-                System.out.println("choice "+choice);
                 switch (choice){
                     case 0:
                         return 4;
@@ -113,7 +112,6 @@ public class Harmony {
                 }
             case 1,3:
                 choice = this.getChoice(2);
-                System.out.println("choice "+choice);
                 switch (choice){
                     case 0:
                         return 0;
@@ -128,7 +126,6 @@ public class Harmony {
                 }
             case 4,6:
                 choice = this.getChoice(2);
-                System.out.println("choice "+choice);
                 switch (choice){
                     case 0:
                         return 1;
@@ -160,7 +157,7 @@ public class Harmony {
     public void decodeFunctionalHarmony(List<Integer> chordProgression) throws Exception{
         StringBuilder stringBuilder = new StringBuilder(strOutput);
         int current = 0;
-     while (current<chordProgression.size()){
+     while (current<chordProgression.size()-1){
          switch (chordProgression.get(current)){
 
          case 0,2,5:
@@ -223,6 +220,7 @@ public class Harmony {
          current++;
      }
      strOutput = stringBuilder.toString();
+        System.out.println(strOutput);
     }
 
 
@@ -231,6 +229,7 @@ public class Harmony {
 
     public int getChoice(int length){
         String a = strInput.substring(0,length);
+        System.out.print(a);
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
     }
