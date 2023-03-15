@@ -10,8 +10,10 @@ import org.jfugue.player.Player;
 import org.jfugue.rhythm.Rhythm;
 import org.jfugue.theory.ChordProgression;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.List;
 
 public class test {
 
@@ -30,16 +32,24 @@ public class test {
             Key key = new Key(strInput);
             Integer [] a = key.generateKey();
             strInput = key.getStrInput();
+            Harmony harmony = new Harmony(a,strInput);
+            harmony.createFunctionalHarmony(10);
+            strInput = harmony.getStrInput();
+            List<Integer> chordProgression = harmony.getChordProgression();
+            List<Integer[]> chords = harmony.getChords();
 
-            for(int i = 24; i < 32; i++){
-                System.out.println("key " + i);
-                Integer [] b = key.generateKeyTest(i);
-                Harmony harmony = new Harmony(b);
-                harmony.printChords();
+            String patternString = "V0 ";
+            for (Integer i: chordProgression){
+                System.out.print(i + " ");
+                  patternString += chords.get(i)[0] + "h+" + chords.get(i)[1] + "h+" + chords.get(i)[2] + "h ";
             }
 
-
-
+            System.out.println(patternString);
+            Pattern pattern = new Pattern();
+            pattern.add(patternString);
+//
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
 
 //.......................................................................................
 //            Melody melody = new Melody(a);

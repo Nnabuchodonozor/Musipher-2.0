@@ -5,10 +5,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Harmony {
+
     List<Integer[]> chords = new ArrayList<>();
+
+    public List<Integer[]> getChords() {
+        return chords;
+    }
+
+    public void setChords(List<Integer[]> chords) {
+        this.chords = chords;
+    }
+
+    public List<Integer> getChordProgression() {
+        return chordProgression;
+    }
+
+    public void setChordProgression(List<Integer> chordProgression) {
+        this.chordProgression = chordProgression;
+    }
+
+    List<Integer> chordProgression = new ArrayList<>();
     Integer[] key;
-    public Harmony(Integer [] key) {
+    String strInput;
+    String strOutput;
+    public String getStrInput() {
+        return strInput;
+    }
+
+    public void setStrInput(String strInput) {
+        this.strInput = strInput;
+    }
+
+    public String getStrOutput() {
+        return strOutput;
+    }
+
+    public void setStrOutput(String strOutput) {
+        this.strOutput = strOutput;
+    }
+
+    public Harmony(Integer [] key, String strInput) {
         this.key=key;
+        this.strInput= strInput;
         this.generateChords();
     }
 
@@ -44,11 +82,7 @@ public class Harmony {
             }
             this.chords.add(chord);
         }
-        System.out.println();
     }
-
-
-
     public void printChords(){
         int counter = 0;
         for (Integer[] chord : this.chords){
@@ -59,4 +93,83 @@ public class Harmony {
             System.out.println();
         }
     }
+
+    private int determineFollowingChord(int previousChord) throws Exception{
+        switch (previousChord){
+            case 0,2,5:
+                int choice = this.getChoice(2);
+                System.out.println("choice "+choice);
+                switch (choice){
+                    case 0:
+                        return 4;
+                    case 1:
+                        return 6;
+                    case 2:
+                        return 1;
+                    case 3:
+                        return 3;
+                    default:
+                        throw new Exception("unknown choice");
+                }
+            case 1,3:
+                choice = this.getChoice(2);
+                System.out.println("choice "+choice);
+                switch (choice){
+                    case 0:
+                        return 0;
+                    case 1:
+                        return 2;
+                    case 2:
+                        return 5;
+                    case 3:
+                        return 3;
+                    default:
+                        throw new Exception("unknown choice");
+                }
+            case 4,6:
+                choice = this.getChoice(2);
+                System.out.println("choice "+choice);
+                switch (choice){
+                    case 0:
+                        return 1;
+                    case 1:
+                        return 3;
+                    case 2:
+                        return 0;
+                    case 3:
+                        return 2;
+                    default:
+                        throw new Exception("unknown choice");
+                }
+            default:
+                throw new Exception("unknown chord");
+        }
+    }
+
+    public void createFunctionalHarmony(int numberOfChords)throws Exception {
+        this.chordProgression.add(0);
+        int iterator=0;
+
+        while ((iterator<numberOfChords) || (this.chordProgression.get(this.chordProgression.size()-1) != 0)){
+            this.chordProgression.add(determineFollowingChord(this.chordProgression.get(this.chordProgression.size()-1)));
+            iterator++;
+        }
+
+    }
+
+    public void decodeFunctionalHarmony(List<Integer> chordProgression){
+
+    }
+
+
+
+
+
+    public int getChoice(int length){
+        String a = strInput.substring(0,length);
+        strInput = strInput.substring(length);
+        return Integer.parseInt(a, 2);
+    }
+
+
 }

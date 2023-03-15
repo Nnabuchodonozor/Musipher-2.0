@@ -11,7 +11,7 @@ public class Melody {
     this.key = key;
 
     }
-
+    //random melody meaning generated based on some random input
     public void addRandomMelody(String pattern, Instrument instrument, String input) {
         //TODO changeable constants f.e. different instrument, different range
 
