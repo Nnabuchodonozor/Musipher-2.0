@@ -295,23 +295,11 @@ public class Motif {
                 case "t. ":
                     break;
                 case "s ":
-                    int choice = getChoice(1);
-                    if(choice==0){
-                        this.patternString += p.getValue0() + "t. ";
-                    }else {
-                        this.patternString += p.getValue0() + "t ";
-                    }
                     break;
                 case "s.":
-                    choice = getChoice(1);
-                    if(choice==0){
-                        this.patternString += p.getValue0() + "s ";
-                    }else {
-                        this.patternString += p.getValue0() + "t. ";
-                    }
                     break;
                 case "i":
-                    choice = getChoice(2);
+                    int choice = getChoice(1);
                     switch (choice){
                         case 0:
                             this.patternString += p.getValue0() + "s. ";
@@ -319,33 +307,21 @@ public class Motif {
                         case 1:
                             this.patternString += p.getValue0() + "s ";
                             break;
-                        case 2:
-                            this.patternString += p.getValue0() + "t. ";
-                            break;
-                        case 3:
-                            this.patternString += p.getValue0() + "t ";
-                            break;
                     }
                     break;
                 case "i.":
-                    choice = getChoice(2);
+                    choice = getChoice(1);
                     switch (choice){
                         case 0:
                             this.patternString += p.getValue0() + "i ";
                             break;
                         case 1:
-                            this.patternString += p.getValue0() + "i. ";
-                            break;
-                        case 2:
-                            this.patternString += p.getValue0() + "q ";
-                            break;
-                        case 3:
-                            this.patternString += p.getValue0() + "q. ";
+                            this.patternString += p.getValue0() + "s ";
                             break;
                     }
                     break;
                 case "q":
-                    choice = getChoice(2);
+                    choice = getChoice(1);
                     switch (choice){
                         case 0:
                             this.patternString += p.getValue0() + "i. ";
@@ -392,18 +368,6 @@ public class Motif {
                             break;
                         case 3:
                             this.patternString += p.getValue0() + "i ";
-                            break;
-                        case 4:
-                            this.patternString += p.getValue0() + "s. ";
-                            break;
-                        case 5:
-                            this.patternString += p.getValue0() + "s ";
-                            break;
-                        case 6:
-                            this.patternString += p.getValue0() + "t. ";
-                            break;
-                        case 7:
-                            this.patternString += p.getValue0() + "t ";
                             break;
                     }
                     break;
@@ -603,11 +567,12 @@ public class Motif {
 
 //        String motifToAdd = this.createSequence(3);
 //        this.patternString += motifToAdd;
-//
-         this.createAugment();
+
         this.createAugment();
         this.createAugment();
         this.createAugment();
+        this.createAugment();
+//        this.createAugment();
 //        this.createDimunation();
 //        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
 //        this.createExpand(chord);

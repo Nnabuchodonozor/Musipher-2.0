@@ -105,3 +105,26 @@ ________________________________________________________________________________
             arpeggios.arpegiate(notes,2);
             String toplay = arpeggios.getPatternString();
             Pattern pattern = new Pattern(toplay);
+
+
+__________________________________________________________________________________
+
+//                      test chord progressions
+
+            Harmony harmony = new Harmony(a,strInput);
+            harmony.createFunctionalHarmony(10);
+            strInput = harmony.getStrInput();
+            List<Integer> chordProgression = harmony.getChordProgression();
+            List<Integer[]> chords = harmony.getChords();
+
+            String patternString = "V0 ";
+            for (Integer i: chordProgression){
+//                System.out.print(i + " ");
+                  patternString += chords.get(i)[0] + "h+" + chords.get(i)[1] + "h+" + chords.get(i)[2] + "h ";
+            }
+            System.out.println(patternString);
+            harmony.decodeFunctionalHarmony(chordProgression);
+
+________________________________________________________________________--
+
+
