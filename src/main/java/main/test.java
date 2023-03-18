@@ -22,7 +22,7 @@ public class test {
     public static void main(String[] args) {
         try {
             MidiUtils midiUtils = new MidiUtils();
-            String strInput = "00111000100110101101001001100101110" +
+            String strInput = "00000000100110101101001001100101110" +
                     "01101100110011110010010001100100" +
                     "01111001101010011100011000011000" +
                     "11000001010010011110100101000000" +
@@ -34,25 +34,45 @@ public class test {
             strInput = key.getStrInput();
 
 
-//.......................................................................................
-            Melody melody = new Melody(a);
-            // add 4 note random motif
-            String patternString = "V0 ";
-            for(int i = 0; i < 12; i++) {
-                melody.addRandomMelody(patternString, null, strInput);
-                strInput = melody.getStrInput();
-                patternString=melody.getPatternString();
-            }
-            String motiv1 = patternString;
-            Motif motif = new Motif(patternString, patternString, a, strInput);
-            motif.developPattern();
-            patternString= motif.getPatternString();
+            Harmony harmony = new Harmony(a,strInput);
+            harmony.createFunctionalHarmony(10);
+            strInput = harmony.getStrInput();
+            List<Integer> chordProgression = harmony.getChordProgression();
+            List<Integer[]> chords = harmony.getChords();
 
+            String patternString = "V0 ";
+            for (Integer i: chordProgression){
+//                System.out.print(i + " ");
+                patternString += chords.get(i)[0] + "w+" + chords.get(i)[1] + "w+" + chords.get(i)[2] + "w ";
+            }
+            System.out.println(patternString);
+            harmony.decodeFunctionalHarmony(chordProgression);
             Pattern pattern = new Pattern();
             pattern.add(patternString);
 //
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+
+
+//.......................................................................................
+//            Melody melody = new Melody(a);
+//            // add 4 note random motif
+//            String patternString = "V0 ";
+//            for(int i = 0; i < 12; i++) {
+//                melody.addRandomMelody(patternString, null, strInput);
+//                strInput = melody.getStrInput();
+//                patternString=melody.getPatternString();
+//            }
+//            String motiv1 = patternString;
+//            Motif motif = new Motif(patternString, patternString, a, strInput);
+//            motif.developPattern();
+//            patternString= motif.getPatternString();
+//
+//            Pattern pattern = new Pattern();
+//            pattern.add(patternString);
+////
+//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
 //            System.out.println(mainPattern.toString());
 //            String decodedSong =  midiUtils.parseIncomingNotes(mainPattern.toString());
 //            System.out.println(decodedSong);

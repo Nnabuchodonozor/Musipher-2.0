@@ -83,6 +83,38 @@ public class Harmony {
             this.chords.add(chord);
         }
     }
+
+    private void generateSeptaChords(){
+        int offset = 0;
+        if(key[0]>5){
+            offset = 7;
+        }
+        for(int i = 35; i < 42; i++){
+            Integer [] chord = new Integer[8];
+            if(i < 38){
+                chord[0] = key[i-offset];
+                chord[1] = key[i + 2-offset];
+                chord[2] = key[i + 4-offset];
+                chord[3] = key[i + 6-offset];
+                chord[4] = key[i + 7-offset];
+                chord[5] = key[i + 9-offset];
+                chord[6] = key[i + 11-offset];
+                chord[7] = key[i -1 -offset];
+            }else {
+                int a = 7;
+                chord[0] = key[i-offset];
+                chord[1] = key[i + 2-offset];
+                chord[2] = key[i + 4-offset];
+                chord[3] = key[i + 6-offset];
+                chord[4] = key[i + 7-offset];
+                chord[5] = key[i + 9-offset];
+                chord[6] = key[i + 11-offset];
+                chord[7] = key[i -1 -offset];
+            }
+            this.chords.add(chord);
+        }
+    }
+
     public void printChords(){
         int counter = 0;
         for (Integer[] chord : this.chords){
