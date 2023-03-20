@@ -39,19 +39,25 @@ public class test {
             strInput = harmony.getStrInput();
             List<Integer> chordProgression = harmony.getChordProgression();
             List<Integer[]> chords = harmony.getChords();
+            Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
+            Integer[] c = harmony.findClosestInversion(antedecent,1);
 
-            String patternString = "V0 ";
-            for (Integer i: chordProgression){
-//                System.out.print(i + " ");
-                patternString += chords.get(i)[0] + "w+" + chords.get(i)[1] + "w+" + chords.get(i)[2] + "w ";
-            }
-            System.out.println(patternString);
-            harmony.decodeFunctionalHarmony(chordProgression);
-            Pattern pattern = new Pattern();
-            pattern.add(patternString);
-//
-            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+
+
+
+
+//            String patternString = "V0 ";
+//            for (Integer i: chordProgression){
+////                System.out.print(i + " ");
+//                patternString += chords.get(i)[0] + "w+" + chords.get(i)[1] + "w+" + chords.get(i)[2] + "w+" + chords.get(i)[3] + "w ";
+//            }
+//            System.out.println(patternString);
+//            harmony.decodeFunctionalHarmony(chordProgression);
+//            Pattern pattern = new Pattern();
+//            pattern.add(patternString);
+////
+//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
 
 
 //.......................................................................................

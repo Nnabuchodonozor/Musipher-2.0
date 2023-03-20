@@ -2,7 +2,9 @@ package main.composition;
 
 import java.beans.Introspector;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class Harmony {
 
@@ -47,7 +49,8 @@ public class Harmony {
     public Harmony(Integer [] key, String strInput) {
         this.key=key;
         this.strInput= strInput;
-        this.generateChords();
+//        this.generateChords();
+        this.generateSeptaChords();
     }
 
     //major and minor and chr scales are using the same intervals
@@ -255,7 +258,45 @@ public class Harmony {
         System.out.println(strOutput);
     }
 
+    public Integer[] findClosestInversion(Integer[] antedecentChord, int consequentChordIndex){
+        List<Integer> b = new ArrayList<>(Arrays.asList(this.chords.get(consequentChordIndex)));
+        Integer[] result = new Integer[antedecentChord.length];
+        if(antedecentChord.length==4) {
+            for (int i = 0; i < antedecentChord.length; i++) {
+                int distance = this.closestDistance(antedecentChord[i],b);
+                result[i] = b.get(distance);
 
+                //remove chord note and its octave as well
+                int difference = b.size()/2;
+                if(distance > (b.size()/2)){
+                    b.remove(distance);
+                    b.remove(distance-difference);
+                }else {
+                    b.remove(distance);
+                    // -1 because the previous was already removed
+                    if (b.size()>1) {
+                        b.remove(distance + difference - 1);
+                    }else {
+                        b.remove(distance + difference);
+                    }
+                }
+            }
+        }
+        else {}
+        return result;
+    }
+
+    private int closestDistance(Integer a, List<Integer> b){
+        int min = 0;
+        for(int i = 0; i < b.size();i++){
+            int l = Math.abs(a - b.get(i));
+            int k = Math.abs(a-b.get(min));
+            if(l<=k){
+                min=i;
+            }
+        }
+        return min;
+    }
 
 
 
