@@ -127,4 +127,11 @@ ________________________________________________________________________________
 
 ________________________________________________________________________--
 
+                    print all chords possible
 
+//            for (int i = 0; i < 32; i++){
+//                Integer[] a = key.generateKeyTest(i);
+//                Harmony harmony = new Harmony(a,strInput);
+//                harmony.printChords();
+//                System.out.println();
+//            }

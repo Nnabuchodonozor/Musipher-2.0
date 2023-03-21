@@ -30,34 +30,33 @@ public class test {
 
 
             Key key = new Key(strInput);
-            Integer [] a = key.generateKey();
+            Integer[] a  = key.generateKey();
             strInput = key.getStrInput();
 
-
             Harmony harmony = new Harmony(a,strInput);
+
             harmony.createFunctionalHarmony(10);
             strInput = harmony.getStrInput();
             List<Integer> chordProgression = harmony.getChordProgression();
             List<Integer[]> chords = harmony.getChords();
+
+            String patternString = "V0 ";
+            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
             Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
-            Integer[] c = harmony.findClosestInversion(antedecent,1);
+
+            for(int i = 1; i < chordProgression.size(); i++){
+             antedecent = harmony.findClosestInversion(antedecent, chordProgression.get(i));
+             patternString += antedecent[0] + "w+" + antedecent[1] + "w+" + antedecent[2] + "w+" + antedecent[3] + "w ";
+            }
 
 
-
-
-
-//            String patternString = "V0 ";
-//            for (Integer i: chordProgression){
-////                System.out.print(i + " ");
-//                patternString += chords.get(i)[0] + "w+" + chords.get(i)[1] + "w+" + chords.get(i)[2] + "w+" + chords.get(i)[3] + "w ";
-//            }
-//            System.out.println(patternString);
-//            harmony.decodeFunctionalHarmony(chordProgression);
-//            Pattern pattern = new Pattern();
-//            pattern.add(patternString);
-////
-//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+            System.out.println(patternString);
+            harmony.decodeFunctionalHarmony(chordProgression);
+            Pattern pattern = new Pattern();
+            pattern.add(patternString);
+//
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
 
 
 //.......................................................................................

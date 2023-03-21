@@ -99,20 +99,20 @@ public class Harmony {
                 chord[1] = key[i + 2-offset];
                 chord[2] = key[i + 4-offset];
                 chord[3] = key[i + 6-offset];
-                chord[4] = key[i + 7-offset];
-                chord[5] = key[i + 9-offset];
-                chord[6] = key[i + 11-offset];
-                chord[7] = key[i -1 -offset];
+                chord[4] = key[i - 7-offset];
+                chord[5] = key[i - 5-offset];
+                chord[6] = key[i - 3-offset];
+                chord[7] = key[i - 1-offset];
             }else {
                 int a = 7;
-                chord[0] = key[i-offset];
-                chord[1] = key[i + 2-offset];
-                chord[2] = key[i + 4-offset];
-                chord[3] = key[i + 6-offset];
-                chord[4] = key[i + 7-offset];
-                chord[5] = key[i + 9-offset];
-                chord[6] = key[i + 11-offset];
-                chord[7] = key[i -1 -offset];
+                chord[0] = key[i-offset-a];
+                chord[1] = key[i + 2-offset-a];
+                chord[2] = key[i + 4-offset-a];
+                chord[3] = key[i + 6-offset-a];
+                chord[4] = key[i - 7-offset-a];
+                chord[5] = key[i - 5-offset-a];
+                chord[6] = key[i - 3-offset-a];
+                chord[7] = key[i - 1-offset-a];
             }
             this.chords.add(chord);
         }
@@ -268,7 +268,7 @@ public class Harmony {
 
                 //remove chord note and its octave as well
                 int difference = b.size()/2;
-                if(distance > (b.size()/2)){
+                if(distance >= (b.size()/2)){
                     b.remove(distance);
                     b.remove(distance-difference);
                 }else {
@@ -277,7 +277,7 @@ public class Harmony {
                     if (b.size()>1) {
                         b.remove(distance + difference - 1);
                     }else {
-                        b.remove(distance + difference);
+                        b.remove(0);
                     }
                 }
             }
