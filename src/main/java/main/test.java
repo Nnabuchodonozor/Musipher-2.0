@@ -26,8 +26,13 @@ public class test {
                     "01101100110011110010010001100100" +
                     "01111001101010011100011000011000" +
                     "11000001010010011110100101000000" +
+                    "01101100110011110010010001100100" +
+                    "01111001101010011100011000011000" +
+                    "11000001010010011110100101000000" +
+                    "01101100110011110010010001100100" +
+                    "01111001101010011100011000011000" +
+                    "11000001010010011110100101000000" +
                     "10110101001011100001010101000100";
-
 
             Key key = new Key(strInput);
             Integer[] a  = key.generateKey();
@@ -40,19 +45,34 @@ public class test {
             List<Integer> chordProgression = harmony.getChordProgression();
             List<Integer[]> chords = harmony.getChords();
 
-            String patternString = "V0 ";
-            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
+            String patternString = "V0 I[Cello] ";
+//            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
             Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
+            Arpeggios arpeggios = new Arpeggios(patternString);
 
             for(int i = 1; i < chordProgression.size(); i++){
-             antedecent = harmony.findClosestInversion(antedecent, chordProgression.get(i));
-             patternString += antedecent[0] + "w+" + antedecent[1] + "w+" + antedecent[2] + "w+" + antedecent[3] + "w ";
+                String arpegi[] = new String[]{antedecent[0]+"q",antedecent[1]+"q",antedecent[2]+"q",antedecent[3]+"q"};
+                antedecent = harmony.findClosestInversion(antedecent, chordProgression.get(i));
+//             patternString += antedecent[0] + "w+" + antedecent[1] + "w+" + antedecent[2] + "w+" + antedecent[3] + "w ";
+            arpeggios.arpegiate(arpegi,2);
+            }
+//
+            String toplay = arpeggios.getPatternString();
+            patternString += toplay;
+            patternString += "V1 ";
+            Melody melody = new Melody(a);
+            for(int i = 0; i < 60; i++) {
+                melody.addRandomMelody(patternString, null, strInput);
+                strInput = melody.getStrInput();
+                patternString=melody.getPatternString();
             }
 
 
+
+            Pattern pattern = new Pattern(patternString);
+
             System.out.println(patternString);
             harmony.decodeFunctionalHarmony(chordProgression);
-            Pattern pattern = new Pattern();
             pattern.add(patternString);
 //
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
