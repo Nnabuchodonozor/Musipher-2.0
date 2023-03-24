@@ -60,6 +60,7 @@ public class test {
             String toplay = arpeggios.getPatternString();
             patternString += toplay;
             patternString += "V1 ";
+            String melod
             Melody melody = new Melody(a);
             for(int i = 0; i < 60; i++) {
                 melody.addRandomMelody(patternString, null, strInput);

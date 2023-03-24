@@ -18,11 +18,12 @@ public class Melody {
         this.patternString = pattern;
         this.strInput = input;
         if(lastNote > 70){
-            patternString += key[this.returnIndex(lastNote)-1] + "i ";
+//            patternString += key[this.returnIndex(lastNote)-1] + " ";
+            patternString += key[this.returnIndex(lastNote)-1] + " ";
             lastNote = key[returnIndex(lastNote)-1];
         }
          else if(lastNote < 40){
-            patternString += key[this.returnIndex(lastNote)+1] + "i ";
+            patternString += key[this.returnIndex(lastNote)+1] + " ";
             lastNote = key[returnIndex(lastNote)+1];
         }else { // melody is in listenable interval
             boolean ascending = (this.getChoice(1) == 1 );
@@ -38,10 +39,10 @@ public class Melody {
     private void addStep( boolean ascending){
         int indexOfLastNote = this.returnIndex(lastNote);
         if(ascending){
-            patternString += key[indexOfLastNote+1] + "i ";
+            patternString += key[indexOfLastNote+1] + " ";
             lastNote = key[indexOfLastNote+1];
         }else {
-            patternString += key[indexOfLastNote-1] + "i ";
+            patternString += key[indexOfLastNote-1] + " ";
             lastNote = key[indexOfLastNote-1];
         }
     }
@@ -50,10 +51,10 @@ public class Melody {
         int indexOfLastNote = this.returnIndex(lastNote);
         int choice = this.getChoice(2);
         if(ascending){
-            patternString += key[indexOfLastNote+1+choice] + "i ";
+            patternString += key[indexOfLastNote+1+choice] + " ";
             lastNote = key[indexOfLastNote+1+choice];
         }else {
-            patternString += key[indexOfLastNote-1-choice] + "i ";
+            patternString += key[indexOfLastNote-1-choice] + " ";
             lastNote = key[indexOfLastNote-1-choice];
         }
     }
@@ -82,6 +83,16 @@ public class Melody {
             }
         }
         return -1; //note not found, return negtive index
+    }
+
+    public Integer[] parseMelody(){
+        String[] strMelody = patternString.split(" ");
+        Integer[] intMelody = new Integer[strMelody.length];
+
+        for (int i = 0; i < strMelody.length; i++){
+            intMelody[i] = Integer.parseInt(strMelody[i]);
+        }
+        return intMelody;
     }
 
     public int getChoice(int length){
