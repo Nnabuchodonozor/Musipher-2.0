@@ -17,12 +17,12 @@ public class Melody {
 
         this.patternString = pattern;
         this.strInput = input;
-        if(lastNote > 70){
+        if(lastNote > 80){
 //            patternString += key[this.returnIndex(lastNote)-1] + " ";
             patternString += key[this.returnIndex(lastNote)-1] + " ";
             lastNote = key[returnIndex(lastNote)-1];
         }
-         else if(lastNote < 40){
+         else if(lastNote < 50){
             patternString += key[this.returnIndex(lastNote)+1] + " ";
             lastNote = key[returnIndex(lastNote)+1];
         }else { // melody is in listenable interval

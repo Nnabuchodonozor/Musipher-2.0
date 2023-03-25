@@ -37,37 +37,37 @@ public class Rhytm {
             int i = 0;
             while (i < melody.length) {
                 if((beatCounter==0) || (beatCounter==8)){
-                    resultList.add(i + "q");
+                    resultList.add( melody[i]  + "q ");
                     i++;
                 }else {
                     int choice = getChoice(2);
                     switch (choice){
                         case 0:
-                            resultList.add(i + "i");
+                            resultList.add( melody[i] + "i ");
                             i++;
-                            resultList.add(i + "s");
+                            resultList.add( melody[i] + "s ");
                             i++;
-                            resultList.add(i + "s");
+                            resultList.add( melody[i] + "s ");
                             i++;
                             break;
                         case 1:
-                            resultList.add(i + "i.");
+                            resultList.add( melody[i] + "i. ");
                             i++;
-                            resultList.add(i + "s");
+                            resultList.add( melody[i] + "s ");
                             i++;
                             break;
                         case 2:
-                            resultList.add(i + "s");
+                            resultList.add( melody[i] + "s ");
                             i++;
-                            resultList.add(i + "s");
+                            resultList.add( melody[i] + "s ");
                             i++;
-                            resultList.add(i + "i");
+                            resultList.add( melody[i] + "i ");
                             i++;
                             break;
                         case 3:
-                            resultList.add(i + "i");
+                            resultList.add( melody[i] + "i ");
                             i++;
-                            resultList.add(i + "i");
+                            resultList.add( melody[i] + "i ");
                             i++;
                             break;
                         default:

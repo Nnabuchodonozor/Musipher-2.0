@@ -14,6 +14,7 @@ import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Random;
 
 public class test {
 
@@ -22,17 +23,29 @@ public class test {
     public static void main(String[] args) {
         try {
             MidiUtils midiUtils = new MidiUtils();
-            String strInput = "00000000100110101101001001100101110" +
-                    "01101100110011110010010001100100" +
-                    "01111001101010011100011000011000" +
-                    "11000001010010011110100101000000" +
-                    "01101100110011110010010001100100" +
-                    "01111001101010011100011000011000" +
-                    "11000001010010011110100101000000" +
-                    "01101100110011110010010001100100" +
-                    "01111001101010011100011000011000" +
-                    "11000001010010011110100101000000" +
-                    "10110101001011100001010101000100";
+
+            String randomBinaryString = "";
+            Random random = new Random();
+
+            for (int i = 0; i < 1000; i++) {
+                int bit = random.nextInt(2);
+                randomBinaryString += bit;
+            }
+
+            System.out.println(randomBinaryString);
+
+            String strInput = randomBinaryString;
+//            String strInput = "00000000100110101101001001100101110" +
+//                    "01101100110011110010010001100100" +
+//                    "01111001101010011100011000011000" +
+//                    "11000001010010011110100101000000" +
+//                    "01101100110011110010010001100100" +
+//                    "01111001101010011100011000011000" +
+//                    "11000001010010011110100101000000" +
+//                    "01101100110011110010010001100100" +
+//                    "01111001101010011100011000011000" +
+//                    "11000001010010011110100101000000" +
+//                    "10110101001011100001010101000100";
 
             Key key = new Key(strInput);
             Integer[] a  = key.generateKey();
@@ -59,22 +72,24 @@ public class test {
 //
             String toplay = arpeggios.getPatternString();
             patternString += toplay;
-            patternString += "V1 ";
-            String melod
+            String melodyString = "";
             Melody melody = new Melody(a);
             for(int i = 0; i < 60; i++) {
-                melody.addRandomMelody(patternString, null, strInput);
+                melody.addRandomMelody(melodyString, null, strInput);
                 strInput = melody.getStrInput();
-                patternString=melody.getPatternString();
+                melodyString=melody.getPatternString();
             }
+            Integer[] parsedMelody = melody.parseMelody();
+            Rhytm mainRhytm = new Rhytm(strInput);
+            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,1,chords.get(0));
+            strInput= mainRhytm.getStrInput();
+            melodyString = String.join("", rhytmisisedMelody);
+            melodyString = "V1 " + melodyString;
+            Pattern pattern = new Pattern( melodyString);
 
-
-
-            Pattern pattern = new Pattern(patternString);
-
-            System.out.println(patternString);
-            harmony.decodeFunctionalHarmony(chordProgression);
-            pattern.add(patternString);
+            System.out.println( melodyString);
+//            harmony.decodeFunctionalHarmony(chordProgression);
+//            pattern.add(patternString);
 //
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
