@@ -62,7 +62,7 @@ public class Key {
                else
                    a[keyCounter++]=i + choice;
             }
-        return a;
+        return Arrays.copyOfRange(a, 0, keyCounter);
     }
 
     private Integer[] generateMinor(int choice){
@@ -75,7 +75,7 @@ public class Key {
             else
                 a[keyCounter++]=i + choice;
         }
-        return a;
+        return Arrays.copyOfRange(a, 0, keyCounter);
     }
 
     private Integer[] generateDorian(int choice){

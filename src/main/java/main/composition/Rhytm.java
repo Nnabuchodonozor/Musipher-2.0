@@ -35,7 +35,7 @@ public class Rhytm {
         if (syncopationStrength==1) {
             int beatCounter = 0;
             int i = 0;
-            while (i < melody.length) {
+            while (i < melody.length-3) {
                 if((beatCounter==0) || (beatCounter==8)){
                     resultList.add( melody[i]  + "q ");
                     i++;

@@ -77,7 +77,9 @@ public class Melody {
     }
 
     private int returnIndex(Integer note){
+//        System.out.println(key.length);
         for(int i = 0; i < key.length; i++ ){
+//            System.out.println(key[i]);
             if(key[i].equals(note)){
                 return i;
             }
