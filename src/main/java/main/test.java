@@ -85,9 +85,9 @@ public class test {
             strInput= mainRhytm.getStrInput();
             melodyString = String.join("", rhytmisisedMelody);
             melodyString = "V1 " + melodyString;
-            Pattern pattern = new Pattern( melodyString);
+            Pattern pattern = new Pattern(patternString + melodyString);
 
-            System.out.println( melodyString);
+            System.out.println(patternString + melodyString);
 //            harmony.decodeFunctionalHarmony(chordProgression);
 //            pattern.add(patternString);
 //

@@ -3,13 +3,13 @@ package main.composition;
 
 public class Melody {
     Integer[] key;
-    Integer lastNote = 60;
+    Integer lastNote;
 
     String patternString;
     String strInput;
     public Melody(Integer[] key) {
     this.key = key;
-
+    this.lastNote= key[35];
     }
     //random melody meaning generated based on some random input
     public void addRandomMelody(String pattern, Instrument instrument, String input) {
