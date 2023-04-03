@@ -2,8 +2,11 @@
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/Conductor.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/test.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/security/StreamCipher.java
+/Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/DrumBank.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/utils/MidiUtils.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/utils/PAMUtils.java
+/Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/Rhytm.java
+/Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/Motif.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/Arpeggios.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/Instrument.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/Help.java
@@ -15,3 +18,4 @@
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/Mp3InputStream.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/utils/GUI.java
 /Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/Key.java
+/Users/pavolskumaprospektykapitalizmu/Desktop/diplomka/Musipher 2.0/src/main/java/main/composition/Harmony.java

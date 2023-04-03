@@ -1,10 +1,13 @@
+main/composition/DrumBank.class
+main/composition/Harmony.class
+main/composition/Motif.class
 main/security/PasswordHash.class
+main/composition/Rhytm.class
 main/Help.class
 main/utils/PAMUtils.class
 main/utils/SemanticUtils.class
 main/Main.class
 main/composition/Instrument.class
-Jm808.class
 main/composition/Drums.class
 main/composition/Arpeggios.class
 main/utils/MidiUtils.class
@@ -13,4 +16,5 @@ main/test.class
 main/composition/Conductor.class
 main/utils/GUI.class
 main/composition/Key.class
+main/composition/Jm808.class
 main/security/StreamCipher.class
