@@ -68,12 +68,15 @@ public class SemanticUtils {
         byte[] openText = turnBase32ToByte(base32String);
 
             byte[] enc = streamCipher.encrypt(iVString,password,openText);
-            midiUtils.composeMIDI(enc);
+            byte[] result = Arrays.copyOf(enc, enc.length + iVString.length);
+            System.arraycopy(iVString, 0, result, enc.length, iVString.length);
 
-            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
-            fos.write(iVString);
-            fos.write(enc);
-            fos.close();
+            midiUtils.composeMIDI(result);
+
+//            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
+//            fos.write(iVString);
+//            fos.write(enc);
+//            fos.close();
 
     }
 
@@ -106,14 +109,21 @@ public class SemanticUtils {
         File openDataFile = new File(fileName);
         byte[] openBytes = Files.readAllBytes(openDataFile.toPath());
         byte[] enc = streamCipher.encrypt(iVString,password,openBytes);
+
+        byte[] result = Arrays.copyOf(enc, enc.length + iVString.length);
+        System.arraycopy(iVString, 0, result, enc.length, iVString.length);
+
+
 //        midiUtils.composeMIDI(enc);
-                String a = "outputs/encryptedBytes"  + j + ".bin";
-                FileOutputStream fos = new FileOutputStream(new File(a));
-        fos.write(fExtensionLength);
-        fos.write(fExtension);
-        fos.write(iVString);
-        fos.write(enc);
-        fos.close();
+
+
+//                String a = "outputs/encryptedBytes"  + j + ".bin";
+//                FileOutputStream fos = new FileOutputStream(new File(a));
+//        fos.write(fExtensionLength);
+//        fos.write(fExtension);
+//        fos.write(iVString);
+//        fos.write(enc);
+//        fos.close();
     }
 
     public void decryptFromMIDIToFile(String encryptedPath, String password) throws Exception{

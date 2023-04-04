@@ -14,6 +14,11 @@ public class DecryptCommand extends Command{
     @Override
     public void execute() {
 
+        if (arguments.size() < 3){
+            printUsage();
+            return;
+        }
+
         try {
             SemanticUtils semanticUtils = new SemanticUtils();
             switch (arguments.get(1)){

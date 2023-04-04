@@ -38,6 +38,7 @@ public class Main {
                 case "encrypt":
                     EncryptCommand encryptCommand = new EncryptCommand(splitedLine,fileManager);
                     encryptCommand.execute();
+
                     break;
                 case "decrypt":
                     DecryptCommand decryptCommand = new DecryptCommand(splitedLine,fileManager);
