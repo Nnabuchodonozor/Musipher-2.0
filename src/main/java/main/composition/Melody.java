@@ -13,16 +13,14 @@ public class Melody {
     }
     //random melody meaning generated based on some random input
     public void addRandomMelody(String pattern, Instrument instrument, String input) {
-        //TODO changeable constants f.e. different instrument, different range
-
         this.patternString = pattern;
         this.strInput = input;
-        if(lastNote > 80){
+        if(lastNote > instrument.getUpperRange()){
 //            patternString += key[this.returnIndex(lastNote)-1] + " ";
             patternString += key[this.returnIndex(lastNote)-1] + " ";
             lastNote = key[returnIndex(lastNote)-1];
         }
-         else if(lastNote < 50){
+         else if(lastNote < instrument.getLowerRange()){
             patternString += key[this.returnIndex(lastNote)+1] + " ";
             lastNote = key[returnIndex(lastNote)+1];
         }else { // melody is in listenable interval

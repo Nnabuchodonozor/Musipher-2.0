@@ -58,36 +58,43 @@ public class test {
             List<Integer> chordProgression = harmony.getChordProgression();
             List<Integer[]> chords = harmony.getChords();
 
-            String patternString = "V0 I[Cello] ";
+            String patternString = "V0 I[Soprano_sax] ";
 //            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
             Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
             Arpeggios arpeggios = new Arpeggios(patternString);
 
             for(int i = 1; i < chordProgression.size(); i++){
-                String arpegi[] = new String[]{antedecent[0]+"q",antedecent[1]+"q",antedecent[2]+"q",antedecent[3]+"q"};
-                antedecent = harmony.findClosestInversion(antedecent, chordProgression.get(i));
+//                String arpegi[] = new String[]{antedecent[0]+"q",antedecent[1]+"q",antedecent[2]+"q",antedecent[3]+"q"};
+//                antedecent = harmony.findClosestInversion(antedecent, chordProgression.get(i));
 //             patternString += antedecent[0] + "w+" + antedecent[1] + "w+" + antedecent[2] + "w+" + antedecent[3] + "w ";
-            arpeggios.arpegiate(arpegi,2);
+
+            String arpegi[] = new String[]{ chords.get(chordProgression.get(i))[0] + "q",
+                    chords.get(chordProgression.get(i))[1] + "q",
+                    chords.get(chordProgression.get(i))[2] + "q",
+                    chords.get(chordProgression.get(i))[3] + "q"
+            };
+            arpeggios.arpegiateRandom(arpegi,2);
             }
 //
             String toplay = arpeggios.getPatternString();
             patternString += toplay;
             String melodyString = "";
-            Melody melody = new Melody(a);
-            for(int i = 0; i < 60; i++) {
-                melody.addRandomMelody(melodyString, null, strInput);
-                strInput = melody.getStrInput();
-                melodyString=melody.getPatternString();
-            }
-            Integer[] parsedMelody = melody.parseMelody();
-            Rhytm mainRhytm = new Rhytm(strInput);
-            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,1,chords.get(0));
-            strInput= mainRhytm.getStrInput();
-            melodyString = String.join("", rhytmisisedMelody);
+//            Melody melody = new Melody(a);
+//            for(int i = 0; i < 60; i++) {
+//                melody.addRandomMelody(melodyString, null, strInput);
+//                strInput = melody.getStrInput();
+//                melodyString=melody.getPatternString();
+//            }
+//            Integer[] parsedMelody = melody.parseMelody();
+//            Rhytm mainRhytm = new Rhytm(strInput);
+//            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,1,chords.get(0));
+//            strInput= mainRhytm.getStrInput();
+//            melodyString = String.join("", rhytmisisedMelody);
+            melodyString= "G5q B5q G5q C6q- | C6-q- | C6-q B5q A5q G5q";
             melodyString = "V1 " + melodyString;
-            Pattern pattern = new Pattern(patternString + melodyString);
+            Pattern pattern = new Pattern(/*patternString +*/ melodyString);
 
-            System.out.println(patternString + melodyString);
+//            System.out.println(patternString + melodyString);
 //            harmony.decodeFunctionalHarmony(chordProgression);
 //            pattern.add(patternString);
 //
