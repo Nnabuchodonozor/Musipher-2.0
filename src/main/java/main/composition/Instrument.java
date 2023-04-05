@@ -35,12 +35,12 @@ public class Instrument {
                 this.upperRange = 75;
                 break;
             case "Clarinet":
-                this.lowerRange = 50;
-                this.upperRange = 80;
+                this.lowerRange = 65;
+                this.upperRange = 95;
                 break;
             case "Soprano_sax":
-                this.lowerRange = 50;
-                this.upperRange = 80;
+                this.lowerRange = 65;
+                this.upperRange = 90;
                 break;
             default:
                 break;

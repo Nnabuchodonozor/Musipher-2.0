@@ -79,18 +79,17 @@ public class test {
             String toplay = arpeggios.getPatternString();
             patternString += toplay;
             String melodyString = "";
-//            Melody melody = new Melody(a);
-//            for(int i = 0; i < 60; i++) {
-//                melody.addRandomMelody(melodyString, null, strInput);
-//                strInput = melody.getStrInput();
-//                melodyString=melody.getPatternString();
-//            }
-//            Integer[] parsedMelody = melody.parseMelody();
-//            Rhytm mainRhytm = new Rhytm(strInput);
-//            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,1,chords.get(0));
-//            strInput= mainRhytm.getStrInput();
-//            melodyString = String.join("", rhytmisisedMelody);
-            melodyString= "G5q B5q G5q C6q- | C6-q- | C6-q B5q A5q G5q";
+            Melody melody = new Melody(a);
+            for(int i = 0; i < 60; i++) {
+                melody.addRandomMelody(melodyString, new Instrument("Piano"), strInput);
+                strInput = melody.getStrInput();
+                melodyString=melody.getPatternString();
+            }
+            Integer[] parsedMelody = melody.parseMelody();
+            Rhytm mainRhytm = new Rhytm(strInput);
+            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,1,chords, chordProgression,2);
+            strInput= mainRhytm.getStrInput();
+            melodyString = String.join("", rhytmisisedMelody);
             melodyString = "V1 " + melodyString;
             Pattern pattern = new Pattern(/*patternString +*/ melodyString);
 

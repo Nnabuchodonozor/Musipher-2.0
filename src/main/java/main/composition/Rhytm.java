@@ -30,15 +30,21 @@ public class Rhytm {
         this.strOutput = strOutput;
     }
     // there has to be rule that only melody of sizes of measures will be added, not more not less.
-    public String[] createRhytmValues(Integer[] melody, int syncopationStrength, Integer[] chordNotes){
+    public String[] createRhytmValues(Integer[] melody, int syncopationStrength, List <Integer[]> chords, List<Integer> progression, int chordLength){
+        int measureCounter = 0;
+        int chordCounter = 0;
+
         List<String> resultList = new ArrayList<>();
         if (syncopationStrength==1) {
             int beatCounter = 0;
             int i = 0;
             while (i < melody.length-3) {
                 if((beatCounter==0) || (beatCounter==8)){
-                    resultList.add( melody[i]  + "q ");
-                    i++;
+                    int choice1 = getChoice(3);
+                    resultList.add( chords.get(progression.get(chordCounter) )[choice1]  + "q ");
+
+//                    resultList.add( melody[i]  + "q ");
+//                    i++;
                 }else {
                     int choice = getChoice(2);
                     switch (choice){
@@ -75,8 +81,14 @@ public class Rhytm {
                     }
                 }
                 beatCounter+=4;
-                if (beatCounter==16)
-                    beatCounter=0;
+                if (beatCounter==16) {
+                    beatCounter = 0;
+                    measureCounter++;
+                    if(measureCounter==chordLength){
+                        chordCounter++;
+                        chordLength = chordLength + chordLength;
+                    }
+                }
             }
 
         }
