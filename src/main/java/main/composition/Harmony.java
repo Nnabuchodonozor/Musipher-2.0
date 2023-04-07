@@ -182,7 +182,7 @@ public class Harmony {
         this.chordProgression.add(0);
         int iterator=0;
 
-        while ((iterator<numberOfChords) || (this.chordProgression.get(this.chordProgression.size()-1) != 0)){
+        while (iterator<numberOfChords){
             this.chordProgression.add(determineFollowingChord(this.chordProgression.get(this.chordProgression.size()-1)));
             iterator++;
         }

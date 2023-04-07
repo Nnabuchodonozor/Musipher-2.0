@@ -8,7 +8,9 @@ import org.jfugue.pattern.Pattern;
 import javax.sound.midi.InvalidMidiDataException;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.jfugue.midi.MidiFileManager.loadPatternFromMidi;
@@ -98,27 +100,42 @@ public class MidiUtils {
         return new Pattern("V0 I[Piano] Eq Ch. | Eq Ch. | Dq Eq Dq Cq");
     }
 
+
+
     // hashMap would be faster but whatever
-    public String parseIncomingNotes(String incomingNotes){
+    public List<ArrayList<String>> parseIncomingNotes(String incomingNotes){
+        List<ArrayList<String>> structuredMelody = new ArrayList<>();
+        ArrayList<String> layer = new ArrayList<>();
+
         String[] tokenizedNotes = incomingNotes.split(" ");
         StringBuilder parsedMelody=new StringBuilder();
         int c= 0;
-        for (int i = 0; i < tokenizedNotes.length; i++){
-            if(tokenizedNotes[i].startsWith("V") || tokenizedNotes[i].startsWith("I"))
+        for (int i = 1; i < tokenizedNotes.length; i++){
+            if(tokenizedNotes[i].startsWith("V")) {
+                structuredMelody.add(layer);
+                layer = new ArrayList<>();
                 continue;
-            if(tokenizedNotes[i].endsWith(".")){
-                c=2;
+            }else if(tokenizedNotes[i].startsWith("I")){
+                layer.add(tokenizedNotes[i]);
+                continue;
             }else {
-                c=1;
+                if (tokenizedNotes[i].endsWith(".")) {
+                    c = 2;
+                } else {
+                    c = 1;
+                }
             }
             for(int j = 0; j < jfugueMelodyNotes.length; j ++){
                 if(jfugueMelodyNotes[j].equals(tokenizedNotes[i].substring(0,tokenizedNotes[i].length()-c))) {
-                    parsedMelody.append(j).append(tokenizedNotes[i].substring(tokenizedNotes[i].length() - c)).append(" ");
+                    layer.add(j + tokenizedNotes[i].substring(tokenizedNotes[i].length() - c) + " ");
+//                    parsedMelody.append(j).append(tokenizedNotes[i].substring(tokenizedNotes[i].length() - c)).append(" ");
                     break;
                 }
             }
         }
-        return parsedMelody.toString();
+        //added last layer
+        structuredMelody.add(layer);
+        return structuredMelody;
     }
 
 

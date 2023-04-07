@@ -23,29 +23,32 @@ public class test {
     public static void main(String[] args) {
         try {
             MidiUtils midiUtils = new MidiUtils();
+
+            String randomBinaryString = "";
+            Random random = new Random();
+
+            for (int i = 0; i < 1000; i++) {
+                int bit = random.nextInt(2);
+                randomBinaryString += bit;
+            }
 //
-//            String randomBinaryString = "";
-//            Random random = new Random();
+//            System.out.println(randomBinaryString);
 //
-//            for (int i = 0; i < 1000; i++) {
-//                int bit = random.nextInt(2);
-//                randomBinaryString += bit;
-//            }
-////
-////            System.out.println(randomBinaryString);
-////
-//            String strInput = randomBinaryString;
-            String strInput = "01011000100110101101001001100101110" +
-                    "01101100110011110010010001100100" +
-                    "01111001101010011100011000011000" +
-                    "11000001010010011110100101000000" +
-                    "01101100110011110010010001100100" +
-                    "01111001101010011100011000011000" +
-                    "11000001010010011110100101000000" +
-                    "01101100110011110010010001100100" +
-                    "01111001101010011100011000011000" +
-                    "11000001010010011110100101000000" +
-                    "10110101001011100001010101000100";
+            String strInput = randomBinaryString;
+
+            Conductor conductor = new Conductor(strInput);
+            conductor.composeSong();
+//            String strInput = "01011000100110101101001001100101110" +
+//                    "01101100110011110010010001100100" +
+//                    "01111001101010011100011000011000" +
+//                    "11000001010010011110100101000000" +
+//                    "01101100110011110010010001100100" +
+//                    "01111001101010011100011000011000" +
+//                    "11000001010010011110100101000000" +
+//                    "01101100110011110010010001100100" +
+//                    "01111001101010011100011000011000" +
+//                    "11000001010010011110100101000000" +
+//                    "10110101001011100001010101000100";
 //
 //           Key key = new Key(strInput);
 //
@@ -68,7 +71,7 @@ public class test {
 //
 //
 //            String bass = "V2 I[ELECTRIC_BASS_PICK] ";
-//            String patternString = "V0 I[Piano] ";
+//            String patternString = "V0 ";
 ////            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
 //            Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
 //            Arpeggios arpeggios = new Arpeggios(patternString);
@@ -102,28 +105,18 @@ public class test {
 //            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,2,chords, chordProgression,2);
 //            strInput= mainRhytm.getStrInput();
 //            melodyString = String.join("", rhytmisisedMelody);
-//            melodyString = "V1 " + melodyString;
-//            Pattern pattern = new Pattern(patternString /*+ melodyString + bass*/);
-
+//            melodyString = "V1 I[Violin] " + melodyString;
+//            Pattern pattern = new Pattern(patternString + melodyString + bass);
+//
 //            System.out.println(patternString + melodyString);
 //            harmony.decodeFunctionalHarmony(chordProgression);
 //            pattern.add(patternString);
 //
 //            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
 //            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+//            System.out.println(mainPattern.toString());
+//            System.out.println(midiUtils.parseIncomingNotes(mainPattern.toString())) ;
 //-------------------------------------------------------------------------------------------------------------------
-
-            Pattern pattern = new Pattern();
-            Drums drums = new Drums(strInput);
-            Rhythm rhythm = drums.generateDrums();
-//            strInput = drums.getStrInput();
-            pattern.add(rhythm);
-            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-            System.out.println(mainPattern.toString());
-            drums.parseDrums(mainPattern.toString());
-            String strOutput = drums.getStroutput();
-            midiUtils.evaluateDeciphering(strInput,strOutput);
 
 
 
