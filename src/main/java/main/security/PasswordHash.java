@@ -40,7 +40,7 @@ public class PasswordHash
      * @param   password    the password to hash
      * @return              a salted PBKDF2 hash of the password
      */
-    public  byte[] createHash(String password, byte[] previousSalt)
+    public byte[] createHash(String password, byte[] previousSalt)
             throws NoSuchAlgorithmException, InvalidKeySpecException, FileNotFoundException, IOException
     {
         return createHash(password.toCharArray(), previousSalt);

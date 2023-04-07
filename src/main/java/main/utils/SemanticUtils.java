@@ -67,23 +67,21 @@ public class SemanticUtils {
         String base32String = turnAsciiToBase32(text.toLowerCase(Locale.ROOT));
         byte[] openText = turnBase32ToByte(base32String);
 
-            byte[] enc = streamCipher.encrypt(iVString,password,openText);
-            byte[] result = Arrays.copyOf(enc, enc.length + iVString.length);
-            System.arraycopy(iVString, 0, result, enc.length, iVString.length);
+        byte[] enc = streamCipher.encrypt(iVString,password,openText);
+        byte[] generatedSalt = streamCipher.getSalt();
+        byte[] result = this.connects3Arrays(iVString,generatedSalt,enc);
 
-            midiUtils.composeMIDI(result);
+//            midiUtils.composeMIDI(result);
 
-//            FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
-//            fos.write(iVString);
-//            fos.write(enc);
-//            fos.close();
+        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
+        fos.write(result);
+        fos.close();
 
     }
 
     public void decryptFromMIDIToText(String encryptedPath, String password) throws FileNotFoundException {
         File f1 = new File(encryptedPath);
         FileInputStream fis = new FileInputStream(f1);
-//        File f2 = new File(keyPath);
         try {
 //            byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
             byte[] cypheredBytesWithIV = fis.readAllBytes();
@@ -93,7 +91,7 @@ public class SemanticUtils {
             streamCipher.setSalt(saltBytes);
             byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
             String base32String = this.turnByteToBase32(decryptedBytes);
-            System.out.println("deciphered " + turnBase32ToAscii(base32String));
+            System.out.println("Deciphered text: " + turnBase32ToAscii(base32String));
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -200,4 +198,21 @@ public class SemanticUtils {
         return output;
     }
 
+    private byte[] connects3Arrays(byte[] iv, byte[] salt, byte[] enc){
+        byte[] result = new byte[iv.length + salt.length + enc.length];
+        int i = 0;
+        for(int j = 0; j < iv.length; j++){
+            result[i]=iv[j];
+            i++;
+        }
+        for(int j = 0; j < salt.length; j++){
+            result[i]=salt[j];
+            i++;
+        }
+        for(int j = 0; j < enc.length; j++){
+            result[i]=enc[j];
+            i++;
+        }
+        return result;
+    }
 }

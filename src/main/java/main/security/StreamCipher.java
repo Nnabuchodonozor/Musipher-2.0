@@ -66,15 +66,8 @@ public class StreamCipher {
         Cipher cipher = Cipher.getInstance("AES/CFB/NoPadding");
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec, ivSpec);
         byte[] encrypted = cipher.doFinal(clear);
-        byte [] connectedEncrypted = new byte[encrypted.length + salt.length];
-        int i = 0;
-        for(; i < salt.length; i++){
-            connectedEncrypted[i] = salt[i];
-        }
-        for(int j = 0; j < encrypted.length; j++) {
-            connectedEncrypted[i+j] = encrypted[j];
-        }
-            return connectedEncrypted;
+
+            return encrypted;
     }
 
     public byte[] decrypt(byte[] iv ,String password, byte[] encrypted) throws Exception {

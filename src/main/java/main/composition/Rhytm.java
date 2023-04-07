@@ -35,12 +35,12 @@ public class Rhytm {
         int chordCounter = 0;
 
         List<String> resultList = new ArrayList<>();
-        if (syncopationStrength==1) {
             int beatCounter = 0;
             int i = 0;
             while (i < melody.length-3) {
-                if((beatCounter==0) || (beatCounter==8)){
-                    int choice1 = getChoice(3);
+
+                if(determineSync(beatCounter,syncopationStrength)){
+                    int choice1 = getChoice(2);
                     resultList.add( chords.get(progression.get(chordCounter) )[choice1]  + "q ");
 
 //                    resultList.add( melody[i]  + "q ");
@@ -91,11 +91,32 @@ public class Rhytm {
                 }
             }
 
-        }
 
         return resultList.toArray(new String[0]);
     }
 
+    private boolean determineSync(int beatCounter ,int s){
+        if(s == 0){
+            if (beatCounter == 0)
+                return true;
+            else
+                return false;
+        }else if(s == 1) {
+            if ((beatCounter == 0) || (beatCounter == 8))
+                return true;
+            else
+                return false;
+        }else if (s == 2)
+        {
+            if ((beatCounter == 0) || (beatCounter == 8) || (beatCounter == 12))
+                return true;
+            else
+                return false;
+        }else if(s == 3){
+                return true;
+        }else
+            return false;
+    }
 
 
     public int getChoice(int length){

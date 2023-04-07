@@ -20,7 +20,7 @@ public class Arpeggios {
         this.patternString = patternString;
     }
 
-    public void arpegiateUpDown(String[] notes, int length){
+    public void arpegiateUpDownRepeated(String[] notes, int length){
         for(int i = 0; i < length; i++){
             patternString+= notes[0] + " ";
             patternString+= notes[1]+ " ";
@@ -30,6 +30,17 @@ public class Arpeggios {
             patternString+= notes[2]+ " ";
             patternString+= notes[1]+ " ";
             patternString+= notes[0]+ " ";
+        }
+    }
+
+    public void arpegiateUpDown(String[] notes, int length){
+        for(int i = 0; i < length; i++){
+            patternString+= notes[0] + " ";
+            patternString+= notes[1]+ " ";
+            patternString+= notes[2]+ " ";
+            patternString+= notes[3]+ " ";
+            patternString+= notes[2]+ " ";
+            patternString+= notes[1]+ " ";
         }
     }
 
