@@ -14,7 +14,6 @@ public class Drums {
 
     String strInput;
     StringBuilder strOutput = new StringBuilder();
-    int lengthOfLayer = 16;
     DrumBank drumBank = new DrumBank();
     public Drums(String strInput) {
         this.strInput = strInput;
@@ -22,7 +21,7 @@ public class Drums {
     }
 
     //this is method for generating drums layer for all sounds based on input
-    private String drumsBasedOnInput(String i, String s){
+    private String drumsBasedOnInput(String i, String s, int lengthOfLayer){
         String result ="";
         for(int j = 0; j < lengthOfLayer; j++) {
             if (this.getChoice(1) == 1){
@@ -34,7 +33,18 @@ public class Drums {
         return  result;
     }
     //this is method for getting decomposed output from drum layers
-    private void outputBasedOnDrums(String layer, String s){
+    private void outputBasedOnDrums(String layer, String s, int lengthOfLayer){
+        switch (s){
+            case "*","+":
+                s="*";
+                break;
+            case "^","`":
+                s="`";
+                break;
+            default:
+                break;
+        }
+
         for(int j = 0; j < lengthOfLayer; j++){
             String choice = layer.substring(0,1);
             layer = layer.substring(1);
@@ -52,9 +62,15 @@ public class Drums {
     public Rhythm generateDrums(){
         String layer1 = this.kicks();
         String layer2 = this.snares();
-        String[] layers = new String[2];
+        String layer3 = this.clap();
+        String layer4 = this.crash();
+        String layer5 = this.hiHat();
+        String[] layers = new String[5];
         layers[0] = layer1;
         layers[1] = layer2;
+        layers[2] = layer3;
+        layers[3] = layer4;
+        layers[4] = layer5;
         String[] finalLayers = drumBank.fillLayers(layers);
         Rhythm rhythm = new Rhythm();
 
@@ -71,7 +87,7 @@ public class Drums {
     }
 
     public String kicks() {
-        String kickLayer = drumsBasedOnInput("O","o");
+        String kickLayer = drumsBasedOnInput("O","o",32);
         //oO
 
         System.out.println(kickLayer);
@@ -80,7 +96,7 @@ public class Drums {
 
     public String snares() {
         //sS
-        String snaresLayer = drumsBasedOnInput("S","s");
+        String snaresLayer = drumsBasedOnInput("S","s",32);
 
         System.out.println(snaresLayer);
         return snaresLayer;
@@ -88,7 +104,7 @@ public class Drums {
 
     public String hiHat() {
         //`^
-        String hiHatLayer = drumsBasedOnInput("^","`");
+        String hiHatLayer = drumsBasedOnInput("^","`",32);
         System.out.println(hiHatLayer);
         return hiHatLayer;
 
@@ -96,7 +112,7 @@ public class Drums {
 
     public String crash() {
         //*+
-        String crashLayer = drumsBasedOnInput("+","*");
+        String crashLayer = drumsBasedOnInput("+","*",8);
         System.out.println(crashLayer);
         return crashLayer;
 
@@ -104,7 +120,7 @@ public class Drums {
 
     public String clap() {
         //xX
-        String clapLayer = drumsBasedOnInput("X","x");
+        String clapLayer = drumsBasedOnInput("X","x",16);
         System.out.println(clapLayer);
         return clapLayer;
 
@@ -204,7 +220,7 @@ public class Drums {
         for (String s : drumStreams){
             if (!s.isEmpty()) {
                 System.out.println(s);
-                this.outputBasedOnDrums(s, s.substring(0, 1).toLowerCase());
+                this.outputBasedOnDrums(s, s.substring(0, 1).toLowerCase(),s.length());
             }
         }
     }
