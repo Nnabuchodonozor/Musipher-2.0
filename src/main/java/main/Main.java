@@ -58,6 +58,7 @@ public class Main {
                     break;
             }
                 if (splitedLine.get(0).equals("quit")){
+                    System.out.println("  ---             THANKS BYE               ---   ");
                     terminal.close();
                     break;
                 }

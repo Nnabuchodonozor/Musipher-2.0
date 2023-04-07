@@ -21,18 +21,18 @@ public class ImportCommand extends Command{
 
             case "-t" :
                 fileManager.setText(arguments.get(2));
+                System.out.println("Imported text: " + arguments.get(2));
                 break;
             case "-f" :
                 File f = new File(arguments.get(2));
                 fileManager.setOpenFile(f);
+                System.out.println("Imported open file: " + arguments.get(2));
+
                 break;
             case "-e" :
                 File e = new File(arguments.get(2));
                 fileManager.setEncryptionFile(e);
-                break;
-            case "-k":
-                File k = new File(arguments.get(2));
-                fileManager.setKeyFile(k);
+                System.out.println("Imported encrypted file: " + arguments.get(2));
                 break;
             default:
                 printUsage();
@@ -46,11 +46,10 @@ public class ImportCommand extends Command{
 
     private void printUsage(){
         System.out.println("Incorrect Usage: Please follow the instructions \n" +
-                "import <-t|-f|-e|-k> <filename> | <text> \n" +
+                "import <-t|-f|-e> <filename> | <text> \n" +
                 "-t : text data to be encrypted \n" +
                 "-f : file data to be encrypted \n" +
                 "-e : encrypted MIDI file to be decrypted \n" +
-                "-k : encrytion/decription key file \n" +
                 "<text> lower case normalised base 32 text \n" +
                 "<filename> path to the file");
     }

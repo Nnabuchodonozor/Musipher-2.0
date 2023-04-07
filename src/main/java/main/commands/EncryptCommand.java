@@ -40,6 +40,7 @@ public class EncryptCommand extends Command{
                 printUsage();
                 break;
         }
+            System.out.println("Encryption complete, stored as: music.mid");
 
         }catch (Exception e){
             e.printStackTrace();

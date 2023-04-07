@@ -22,15 +22,17 @@ public class DeleteCommand extends Command{
 
                 case "-t" :
                     fileManager.setText(null);
+                    System.out.println("Deleted text");
                     break;
                 case "-f" :
                     fileManager.setOpenFile(null);
+                    System.out.println("Deleted open file");
+
                     break;
                 case "-e" :
                     fileManager.setEncryptionFile(null);
-                    break;
-                case "-k":
-                    fileManager.setKeyFile(null);
+                    System.out.println("Deleted encrypted file");
+
                     break;
                 default:
                     printUsage();
@@ -43,10 +45,9 @@ public class DeleteCommand extends Command{
 
     private void printUsage(){
         System.out.println("Incorrect Usage: Please follow the instructions \n" +
-                "delete <-t|-f|-e|-k> \n" +
+                "delete <-t|-f|-k> \n" +
                 "-t : delete text data \n" +
                 "-f : delete open file data \n" +
-                "-e : delete encrypted MIDI file \n" +
                 "-k : delete encrytion/decription key file  \n"
                 );
     }
