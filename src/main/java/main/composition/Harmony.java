@@ -177,7 +177,7 @@ public class Harmony {
                 throw new Exception("unknown chord");
         }
     }
-
+    // number of chords will be increased + 3 .. I in the beginning V and I at the end
     public void createFunctionalHarmony(int numberOfChords)throws Exception {
         this.chordProgression.add(0);
         int iterator=0;
@@ -186,6 +186,8 @@ public class Harmony {
             this.chordProgression.add(determineFollowingChord(this.chordProgression.get(this.chordProgression.size()-1)));
             iterator++;
         }
+        this.chordProgression.add(4);
+        this.chordProgression.add(0);
 
     }
 
@@ -302,7 +304,7 @@ public class Harmony {
 
     public int getChoice(int length){
         String a = strInput.substring(0,length);
-        System.out.print(a);
+//        System.out.print(a);
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
     }

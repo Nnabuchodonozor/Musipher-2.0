@@ -6,6 +6,7 @@ import java.util.List;
 public class Key {
 
     String strInput;
+    int whatKey;
     public Key(String strInput) {
         this.strInput = strInput;
     }
@@ -16,12 +17,16 @@ public class Key {
     public Integer[] generateKey(){
         int choice = getChoice(5);
         if(choice < 12){ // generate major
+            this.whatKey = 0;
             return generateMajor(choice);
         }else if(choice < 24){ // generate minor
+            this.whatKey = 1;
             return generateMinor(choice-12);
         }else if(choice < 29) { // generate dorian
+            this.whatKey = 2;
             return generateDorian(choice-24+1); //24,25,26,27,28,29
         }else { //30,31
+            this.whatKey = 3;
             return generateHarmonic(choice-29);
         }
     }
@@ -42,12 +47,16 @@ public class Key {
 
     public Integer[] generateKeyTest(int choice){
         if(choice < 12){ // generate major
+            this.whatKey = 0;
             return generateMajor(choice);
         }else if(choice < 24){ // generate minor
+            this.whatKey = 1;
             return generateMinor(choice-12);
         }else if(choice < 29) { // generate dorian
+            this.whatKey = 2;
             return generateDorian(choice-24+1); //24,25,26,27,28,29
         }else { //30,31
+            this.whatKey = 3;
             return generateHarmonic(choice-29);
         }
     }
@@ -106,5 +115,13 @@ public class Key {
 
     public void setStrInput(String strInput) {
         this.strInput = strInput;
+    }
+
+    public int getWhatKey() {
+        return whatKey;
+    }
+
+    public void setWhatKey(int whatKey) {
+        this.whatKey = whatKey;
     }
 }

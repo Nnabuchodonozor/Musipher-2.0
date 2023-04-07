@@ -115,10 +115,11 @@ public class MidiUtils {
                 structuredMelody.add(layer);
                 layer = new ArrayList<>();
                 continue;
-            }else if(tokenizedNotes[i].startsWith("I")){
+            }else if(tokenizedNotes[i].startsWith("I")||tokenizedNotes[i].startsWith("R")){
                 layer.add(tokenizedNotes[i]);
                 continue;
-            }else {
+            }
+            else {
                 if (tokenizedNotes[i].endsWith(".")) {
                     c = 2;
                 } else {

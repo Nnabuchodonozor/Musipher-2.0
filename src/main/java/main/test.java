@@ -24,20 +24,27 @@ public class test {
         try {
             MidiUtils midiUtils = new MidiUtils();
 
-            String randomBinaryString = "";
-            Random random = new Random();
+                String randomBinaryString = "";
+                Random random = new Random();
 
-            for (int i = 0; i < 1000; i++) {
-                int bit = random.nextInt(2);
-                randomBinaryString += bit;
-            }
-//
-//            System.out.println(randomBinaryString);
-//
-            String strInput = randomBinaryString;
+                for (int i = 0; i < 1000; i++) {
+                    int bit = random.nextInt(2);
+                    randomBinaryString += bit;
+                }
 
-            Conductor conductor = new Conductor(strInput);
-            conductor.composeSong();
+
+                String strInput = randomBinaryString;
+                Conductor conductor = new Conductor(strInput);
+                Pattern pattern = new Pattern(conductor.composeSong());
+
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+            System.out.println(mainPattern.toString());
+            Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
+            analyst.analyzeSong();
+
+
+
 //            String strInput = "01011000100110101101001001100101110" +
 //                    "01101100110011110010010001100100" +
 //                    "01111001101010011100011000011000" +
