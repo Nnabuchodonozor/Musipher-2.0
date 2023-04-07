@@ -109,6 +109,8 @@ public class Key {
         return Integer.parseInt(a, 2);
     }
 
+
+
     public String getStrInput() {
         return strInput;
     }

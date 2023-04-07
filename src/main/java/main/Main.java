@@ -1,14 +1,12 @@
 package main;
 
 import main.commands.*;
-import main.utils.GUI;
 import org.jline.reader.*;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
