@@ -33,7 +33,7 @@ public class test {
                 }
 
 
-                String strInput = randomBinaryString;
+                String strInput = "00001"+randomBinaryString;
                 Conductor conductor = new Conductor(strInput);
                 Pattern pattern = new Pattern(conductor.composeSong());
 
@@ -42,6 +42,7 @@ public class test {
             System.out.println(mainPattern.toString());
             Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
             analyst.analyzeSong();
+
 
 
 
