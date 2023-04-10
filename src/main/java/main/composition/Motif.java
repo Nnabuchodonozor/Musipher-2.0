@@ -100,6 +100,10 @@ public class Motif {
         return null;
     }
 
+    public void createSmallMotif(){
+
+    }
+
     private List<Pair<Integer, String>> parseMotif(String motifToParse){
         List<Pair<Integer, String>> parsed = new ArrayList<>();
         String[] tokenised = motifToParse.split(" ");

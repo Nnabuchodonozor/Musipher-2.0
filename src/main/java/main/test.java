@@ -34,14 +34,14 @@ public class test {
 
 
                 String strInput = "00001"+randomBinaryString;
-                Conductor conductor = new Conductor(strInput);
-                Pattern pattern = new Pattern(conductor.composeSong());
-
-            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-            System.out.println(mainPattern.toString());
-            Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
-            analyst.analyzeSong();
+//                Conductor conductor = new Conductor(strInput);
+//                Pattern pattern = new Pattern(conductor.composeSong());
+//
+//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+//            System.out.println(mainPattern.toString());
+////            Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
+////            analyst.analyzeSong();
 
 
 
@@ -58,72 +58,75 @@ public class test {
 //                    "11000001010010011110100101000000" +
 //                    "10110101001011100001010101000100";
 //
-//           Key key = new Key(strInput);
-//
-////            for (int i = 0; i < 32; i++){
-////                Integer[] a = key.generateKeyTest(i);
-////                Harmony harmony = new Harmony(a,strInput);
-////                harmony.printChords();
-////                System.out.println();
-////            }
-////
-//            Integer[] a  = key.generateKey();
-//            strInput = key.getStrInput();
-//
-//            Harmony harmony = new Harmony(a,strInput);
-//
-//            harmony.createFunctionalHarmony(10);
-//            strInput = harmony.getStrInput();
-//            List<Integer> chordProgression = harmony.getChordProgression();
-//            List<Integer[]> chords = harmony.getChords();
-//
-//
-//            String bass = "V2 I[ELECTRIC_BASS_PICK] ";
-//            String patternString = "V0 ";
-////            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
-//            Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
-//            Arpeggios arpeggios = new Arpeggios(patternString);
-//
-//            for(int i = 1; i < chordProgression.size(); i++){
-//                String arpegi[] = new String[]{antedecent[0]+"s",antedecent[1]+"s",antedecent[2]+"s",antedecent[3]+"s"};
-//                bass += (chords.get(chordProgression.get(i))[0]-24)+"q " + (chords.get(chordProgression.get(i))[1]-24)+"q " + (chords.get(chordProgression.get(i))[2]-24)+"q " + (chords.get(chordProgression.get(i))[3]-24)+"q ";
-//                antedecent = harmony.findClosestInversion(antedecent, chordProgression.get(i));
-////                patternString += antedecent[0] + "w+" + antedecent[1] + "w+" + antedecent[2] + "w+" + antedecent[3] + "w ";
-//
-//
-////            String arpegi[] = new String[]{ chords.get(chordProgression.get(i))[0] + "s",
-////                    chords.get(chordProgression.get(i))[1] + "s",
-////                    chords.get(chordProgression.get(i))[2] + "s",
-////                    chords.get(chordProgression.get(i))[3] + "s"
-////            };
-//            arpeggios.arpegiateUpDown(arpegi,8);
+           Key key = new Key(strInput);
+
+//            for (int i = 0; i < 32; i++){
+//                Integer[] a = key.generateKeyTest(i);
+//                Harmony harmony = new Harmony(a,strInput);
+//                harmony.printChords();
+//                System.out.println();
 //            }
-////
-//            String toplay = arpeggios.getPatternString();
-//            patternString += toplay;
-//            String melodyString = "";
-//            Melody melody = new Melody(a);
-//            for(int i = 0; i < 60; i++) {
-//                melody.addRandomMelody(melodyString, new Instrument("Piano"), strInput);
-//                strInput = melody.getStrInput();
-//                melodyString=melody.getPatternString();
-//            }
-//            Integer[] parsedMelody = melody.parseMelody();
-//            Rhytm mainRhytm = new Rhytm(strInput);
-//            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,2,chords, chordProgression,2);
-//            strInput= mainRhytm.getStrInput();
-//            melodyString = String.join("", rhytmisisedMelody);
-//            melodyString = "V1 I[Violin] " + melodyString;
-//            Pattern pattern = new Pattern(patternString + melodyString + bass);
 //
-//            System.out.println(patternString + melodyString);
+            Integer[] a  = key.generateKey();
+            strInput = key.getStrInput();
+
+            Harmony harmony = new Harmony(a,strInput);
+
+            harmony.createFunctionalHarmony(10);
+            strInput = harmony.getStrInput();
+            List<Integer> chordProgression = harmony.getChordProgression();
+            List<Integer[]> chords = harmony.getChords();
+
+
+            String bass = "V2 I[ELECTRIC_BASS_PICK] ";
+            String patternString = "V0 ";
+//            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
+            Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
+            Arpeggios arpeggios = new Arpeggios(patternString);
+
+            for(int i = 1; i < chordProgression.size(); i++){
+                String arpegi[] = new String[]{antedecent[0]+"s",antedecent[1]+"s",antedecent[2]+"s",antedecent[3]+"s"};
+                bass += (chords.get(chordProgression.get(i))[0]-24)+"q " + (chords.get(chordProgression.get(i))[1]-24)+"q " + (chords.get(chordProgression.get(i))[2]-24)+"q " + (chords.get(chordProgression.get(i))[3]-24)+"q ";
+                antedecent = harmony.findClosestInversion(antedecent, chordProgression.get(i));
+//                patternString += antedecent[0] + "w+" + antedecent[1] + "w+" + antedecent[2] + "w+" + antedecent[3] + "w ";
+
+
+//            String arpegi[] = new String[]{ chords.get(chordProgression.get(i))[0] + "s",
+//                    chords.get(chordProgression.get(i))[1] + "s",
+//                    chords.get(chordProgression.get(i))[2] + "s",
+//                    chords.get(chordProgression.get(i))[3] + "s"
+//            };
+            arpeggios.arpegiateRandom(arpegi,8);
+            }
+//
+            String toplay = arpeggios.getPatternString();
+            patternString += toplay;
+            String melodyString = "";
+            Melody melody = new Melody(a);
+            for(int i = 0; i < 8; i++) {
+                melody.addRandomMelody(melodyString, new Instrument("Piano"), strInput);
+                strInput = melody.getStrInput();
+                melodyString=melody.getPatternString();
+            }
+            Integer[] parsedMelody = melody.parseMelody();
+            Rhytm mainRhytm = new Rhytm(strInput);
+            String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,1,chords, chordProgression,2);
+            strInput= mainRhytm.getStrInput();
+            melodyString = String.join("", rhytmisisedMelody);
+            melodyString = "V1 I[Violin] " + melodyString;
+            Pattern pattern = new Pattern( "T[Adagio] " +
+                    patternString
+//            + melodyString
+//            + bass
+            );
+
+            System.out.println(patternString + melodyString);
 //            harmony.decodeFunctionalHarmony(chordProgression);
-//            pattern.add(patternString);
-//
-//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-//            System.out.println(mainPattern.toString());
-//            System.out.println(midiUtils.parseIncomingNotes(mainPattern.toString())) ;
+
+            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+            System.out.println(mainPattern.toString());
+            System.out.println(midiUtils.parseIncomingNotes(mainPattern.toString())) ;
 //-------------------------------------------------------------------------------------------------------------------
 
 

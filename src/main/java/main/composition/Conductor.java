@@ -55,7 +55,6 @@ public class Conductor {
 
 
 
-
     public int getChoice(int length){
         String a = strInput.substring(0,length);
         strInput = strInput.substring(length);

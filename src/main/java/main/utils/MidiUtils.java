@@ -111,6 +111,8 @@ public class MidiUtils {
         StringBuilder parsedMelody=new StringBuilder();
         int c= 0;
         for (int i = 1; i < tokenizedNotes.length; i++){
+            if(tokenizedNotes[i].startsWith("T"))
+                continue;
             if(tokenizedNotes[i].startsWith("V")) {
                 structuredMelody.add(layer);
                 layer = new ArrayList<>();

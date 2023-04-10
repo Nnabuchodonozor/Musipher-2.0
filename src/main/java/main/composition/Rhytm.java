@@ -41,7 +41,7 @@ public class Rhytm {
 
                 if(determineSync(beatCounter,syncopationStrength)){
                     int choice1 = getChoice(2);
-                    resultList.add( chords.get(progression.get(chordCounter) )[choice1]  + "q ");
+                    resultList.add( chords.get(progression.get(chordCounter) )[choice1]  + "i ");
 
 //                    resultList.add( melody[i]  + "q ");
 //                    i++;
@@ -53,18 +53,18 @@ public class Rhytm {
                             i++;
                             resultList.add( melody[i] + "s ");
                             i++;
-                            resultList.add( melody[i] + "s ");
-                            i++;
+//                            resultList.add( melody[i] + "s ");
+//                            i++;
                             break;
                         case 1:
-                            resultList.add( melody[i] + "i. ");
+                            resultList.add( melody[i] + "s ");
                             i++;
                             resultList.add( melody[i] + "s ");
                             i++;
                             break;
                         case 2:
-                            resultList.add( melody[i] + "s ");
-                            i++;
+//                            resultList.add( melody[i] + "s ");
+//                            i++;
                             resultList.add( melody[i] + "s ");
                             i++;
                             resultList.add( melody[i] + "i ");
@@ -73,14 +73,14 @@ public class Rhytm {
                         case 3:
                             resultList.add( melody[i] + "i ");
                             i++;
-                            resultList.add( melody[i] + "i ");
-                            i++;
+//                            resultList.add( melody[i] + "i ");
+//                            i++;
                             break;
                         default:
                             break;
                     }
                 }
-                beatCounter+=4;
+                beatCounter+=2;
                 if (beatCounter==16) {
                     beatCounter = 0;
                     measureCounter++;

@@ -95,6 +95,14 @@ public class Melody {
         return intMelody;
     }
 
+    public Integer getLastNote() {
+        return lastNote;
+    }
+
+    public void setLastNote(Integer lastNote) {
+        this.lastNote = lastNote;
+    }
+
     public int getChoice(int length){
         String a = strInput.substring(0,length);
         strInput = strInput.substring(length);
