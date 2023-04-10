@@ -109,7 +109,7 @@ public class test {
                 melodyString=melody.getPatternString();
             }
             Integer[] parsedMelody = melody.parseMelody();
-            Rhytm mainRhytm = new Rhytm(strInput);
+            Rhytm mainRhytm = new Rhytm(strInput, a);
             String[] rhytmisisedMelody = mainRhytm.createRhytmValues(parsedMelody,1,chords, chordProgression,2);
             strInput= mainRhytm.getStrInput();
             melodyString = String.join("", rhytmisisedMelody);
@@ -117,7 +117,7 @@ public class test {
             Pattern pattern = new Pattern( "T[Adagio] " +
                     patternString
 //            + melodyString
-//            + bass
+            + bass
             );
 
             System.out.println(patternString + melodyString);

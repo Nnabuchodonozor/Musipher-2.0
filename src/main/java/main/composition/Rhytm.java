@@ -9,9 +9,12 @@ public class Rhytm {
 
     String strInput;
     String strOutput;
+    Integer [] key;
 
-    public Rhytm(String strInput) {
+    public Rhytm(String strInput, Integer[] key) {
+
         this.strInput = strInput;
+        this.key = key;
     }
 
     public String getStrInput() {
@@ -30,6 +33,11 @@ public class Rhytm {
         this.strOutput = strOutput;
     }
     // there has to be rule that only melody of sizes of measures will be added, not more not less.
+    // q = 4
+    // i = 2
+    // i. = 3
+    // s = 1
+
     public String[] createRhytmValues(Integer[] melody, int syncopationStrength, List <Integer[]> chords, List<Integer> progression, int chordLength){
         int measureCounter = 0;
         int chordCounter = 0;
@@ -94,6 +102,68 @@ public class Rhytm {
 
         return resultList.toArray(new String[0]);
     }
+
+    public String[] createRhytmicisedMelody(int beats,int syncopationStrength, List <Integer[]> chords, List<Integer> progression, int chordLength){
+        Melody melody = new Melody();
+        int measureCounter = 0;
+        int chordCounter = 0;
+
+        List<String> resultList = new ArrayList<>();
+        int beatCounter = 0;
+        for (int i = 0; i < beats;i++){
+
+            if(determineSync(beatCounter,syncopationStrength)){
+                int choice1 = getChoice(2);
+                resultList.add( chords.get(progression.get(chordCounter) )[choice1]  + "i ");
+                beatCounter += 2;
+                continue;
+//                    resultList.add( melody[i]  + "q ");
+//                    i++;
+            }else {
+                int choice = getChoice(2);
+                switch (choice){
+                    case 0:
+                        resultList.add( melody[i] + "i ");
+
+                        resultList.add( melody[i] + "s ");
+
+                        break;
+                    case 1:
+                        resultList.add( melody[i] + "s ");
+
+                        resultList.add( melody[i] + "s ");
+
+                        break;
+                    case 2:
+
+                        resultList.add( melody[i] + "s ");
+
+                        resultList.add( melody[i] + "i ");
+                        break;
+                    case 3:
+                        resultList.add( melody[i] + "i ");
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+            beatCounter+=2;
+            if (beatCounter==16) {
+                beatCounter = 0;
+                measureCounter++;
+                if(measureCounter==chordLength){
+                    chordCounter++;
+                    chordLength = chordLength + chordLength;
+                }
+            }x
+
+
+        }
+        return  null;
+
+    }
+
 
     private boolean determineSync(int beatCounter ,int s){
         if(s == 0){
