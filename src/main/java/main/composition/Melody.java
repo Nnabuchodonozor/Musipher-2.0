@@ -12,16 +12,16 @@ public class Melody {
     this.lastNote= key[35];
     }
     //random melody meaning generated based on some random input
-    public void addRandomMelody(String pattern, Instrument instrument, String input) {
+    public String addRandomMelody(String pattern, Instrument instrument, String input) {
         this.patternString = pattern;
         this.strInput = input;
         if(lastNote > instrument.getUpperRange()){
 //            patternString += key[this.returnIndex(lastNote)-1] + " ";
-            patternString += key[this.returnIndex(lastNote)-1] + " ";
+            patternString += key[this.returnIndex(lastNote)-1];
             lastNote = key[returnIndex(lastNote)-1];
         }
          else if(lastNote < instrument.getLowerRange()){
-            patternString += key[this.returnIndex(lastNote)+1] + " ";
+            patternString += key[this.returnIndex(lastNote)+1];
             lastNote = key[returnIndex(lastNote)+1];
         }else { // melody is in listenable interval
             boolean ascending = (this.getChoice(1) == 1 );
@@ -32,15 +32,16 @@ public class Melody {
                 this.addLeap(ascending);
             }
         }
+         return patternString;
     }
 
     private void addStep( boolean ascending){
         int indexOfLastNote = this.returnIndex(lastNote);
         if(ascending){
-            patternString += key[indexOfLastNote+1] + " ";
+            patternString += key[indexOfLastNote+1];
             lastNote = key[indexOfLastNote+1];
         }else {
-            patternString += key[indexOfLastNote-1] + " ";
+            patternString += key[indexOfLastNote-1];
             lastNote = key[indexOfLastNote-1];
         }
     }
@@ -49,10 +50,10 @@ public class Melody {
         int indexOfLastNote = this.returnIndex(lastNote);
         int choice = this.getChoice(2);
         if(ascending){
-            patternString += key[indexOfLastNote+1+choice] + " ";
+            patternString += key[indexOfLastNote+1+choice];
             lastNote = key[indexOfLastNote+1+choice];
         }else {
-            patternString += key[indexOfLastNote-1-choice] + " ";
+            patternString += key[indexOfLastNote-1-choice];
             lastNote = key[indexOfLastNote-1-choice];
         }
     }

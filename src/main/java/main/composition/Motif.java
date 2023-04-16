@@ -3,13 +3,26 @@ package main.composition;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Motif {
 
 
     //todo Present - Repeat - Vary - Deminish
     //todo reasoner which decides which motivic
+
+    Map<String, Double> lenghtsMap = new HashMap<String, Double>() {{
+        put("q",4.0);
+        put("i.",3.0);
+        put("i",2.0);
+        put("s.",1.5);
+        put("s",1.0);
+        put("t",0.5);
+    }};
+
+
     String mainMotif;
     //half
     String[] possibleLengths = new String[] {
@@ -110,7 +123,7 @@ public class Motif {
         String length = "";
         Integer pitch;
         for(String s : tokenised){
-            if(s.startsWith("V")||s.startsWith("I"))
+            if(s.startsWith("V")||s.startsWith("I")||s.startsWith("T")||s.startsWith("R"))
                 continue;
             if(s.endsWith(".")){
                 length = s.substring(s.length() - 2);
@@ -129,15 +142,22 @@ public class Motif {
     //sequence = changing pitches in melody, for example for using same motif in different chord
     // how do i encode shit in sequence, relative distance is the key-.
 
-    public String createSequence(int relativeDistance){
+    public void createSequence(int relativeDistance){
         StringBuilder resultMotif = new StringBuilder();
+        int choice = getChoice(1);
+        if(choice==0){
+            relativeDistance = relativeDistance*(-1);
+        }
+
         for( int i = 0; i < parsedMotif.size(); i++){
+
             int notePos= this.getPositionInKey(parsedMotif.get(i).getValue0());
-            resultMotif.append( key[notePos] + relativeDistance);
+
+            resultMotif.append( key[notePos+ relativeDistance] );
             resultMotif.append(parsedMotif.get(i).getValue1()).append(" ");
 
         }
-        return resultMotif.toString();
+        this.patternString += resultMotif.toString();
     }
 
     private int getPositionInKey(Integer note){
@@ -450,8 +470,8 @@ public class Motif {
         int divisorLength = parsedMotif.size() / 3;
         StringBuilder stringBuilder = new StringBuilder(patternString);
         List<Pair<Integer, String>> firstPart = parsedMotif.subList(0,divisorLength);
-        List<Pair<Integer, String>> secondPart = parsedMotif.subList(divisorLength,parsedMotif.size());
-        List<Pair<Integer, String>> thirdPart = parsedMotif.subList(divisorLength,parsedMotif.size());
+        List<Pair<Integer, String>> secondPart = parsedMotif.subList(divisorLength,2*divisorLength);
+        List<Pair<Integer, String>> thirdPart = parsedMotif.subList(2*divisorLength,parsedMotif.size());
         int choice = getChoice(3);
         switch (choice){
             case 0: //aabb
@@ -567,16 +587,57 @@ public class Motif {
         return null;
     }
 
+    //q = 4. i = 2. s = i.
+    public void deconstructMotif(int end){
+        double beatCounter=0;
+        int motifCounter= 0;
+        StringBuilder stringBuilder = new StringBuilder("");
+        while(beatCounter < 6.0){
+            beatCounter =  beatCounter + lenghtsMap.get(parsedMotif.get(motifCounter).getValue1());
+            patternString += parsedMotif.get(motifCounter).getValue0() + parsedMotif.get(motifCounter).getValue1() + " ";
+            motifCounter++;
+        }
+
+        int lastPos = this.getPositionInKey(parsedMotif.get(motifCounter-1).getValue0());
+        if(end == 1){
+            if(lastPos >35){
+                patternString+= key[lastPos -1] + "s ";
+                patternString+= key[lastPos -2] + "s ";
+                patternString+= key[35] + "i ";
+            }else {
+                patternString+= key[lastPos +1] + "s ";
+                patternString+= key[lastPos +2] + "s ";
+                patternString+= key[35] + "i ";
+            }
+
+        }else {
+
+            if(lastPos >41){
+                patternString+= key[lastPos -1] + "s ";
+                patternString+= key[lastPos -2] + "s ";
+                patternString+= key[41] + "i ";
+            }else {
+                patternString+= key[lastPos +1] + "s ";
+                patternString+= key[lastPos +2] + "s ";
+                patternString+= key[41] + "i ";
+            }
+        }
+
+    }
+
     public void developPattern(){
 
-//        String motifToAdd = this.createSequence(3);
+        patternString += "Rw ";
+        this.createSequence(0);
+        patternString += "Rw ";
+        this.createAugment();
+        patternString += "Rw ";
+        this.deconstructMotif(1);
+//        this.createDivide();
+//          String motifToAdd = this.createSequence(3);
 //        this.patternString += motifToAdd;
 
-        this.createAugment();
-        this.createAugment();
-        this.createAugment();
-        this.createAugment();
-//        this.createAugment();
+
 //        this.createDimunation();
 //        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
 //        this.createExpand(chord);
@@ -586,7 +647,7 @@ public class Motif {
 
     public void decodePattern(){
 
-        this.decodeContract(songToDecode,4);
+        this.decodeContract(songToDecode,2);
     }
 
     public int getChoice(int length){

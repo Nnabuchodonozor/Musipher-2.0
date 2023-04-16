@@ -301,6 +301,17 @@ public class Harmony {
     }
 
 
+    public String createBassline(int measureLength){
+        String resultString = "";
+        for (int i = 0; i < chordProgression.size(); i++){
+
+            for (int j = 0; j < (measureLength*4); j++){
+                int c = getChoice(2);
+                resultString += this.chords.get(chordProgression.get(i))[c] - 24 + "q ";
+                }
+        }
+        return  resultString;
+    }
 
     public int getChoice(int length){
         String a = strInput.substring(0,length);
