@@ -18,7 +18,8 @@ import static org.jfugue.midi.MidiFileManager.loadPatternFromMidi;
 
 public class MidiUtils {
 
-    private static final String[] jfugueMelodyNotes = {"C0","C#0","D0", "Eb0", "E0" ,"F0", "F#0", "G0", "G#0", "A0", "Bb0", "B0",
+    private static final String[] jfugueMelodyNotes = {
+            "C0","C#0","D0", "Eb0", "E0" ,"F0", "F#0", "G0", "G#0", "A0", "Bb0", "B0",
             "C1","C#1","D1", "Eb1", "E1" ,"F1", "F#1", "G1", "G#1", "A1", "Bb1", "B1",
             "C2","C#2","D2", "Eb2", "E2" ,"F2", "F#2", "G2", "G#2", "A2", "Bb2", "B2",
             "C3","C#3","D3", "Eb3", "E3" ,"F3", "F#3", "G3", "G#3", "A3", "Bb3", "B3",

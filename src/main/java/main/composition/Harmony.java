@@ -301,8 +301,11 @@ public class Harmony {
     }
 
 
+//    reset "\u001B[0m";
+//    red "\u001B[31m";
     public String createBassline(int measureLength){
         String resultString = "";
+        System.out.println(" bassline choices ");
         for (int i = 0; i < chordProgression.size(); i++){
 
             for (int j = 0; j < (measureLength*4); j++){
@@ -310,15 +313,47 @@ public class Harmony {
                 resultString += this.chords.get(chordProgression.get(i))[c] - 24 + "q ";
                 }
         }
+        System.out.println("end of bass");
         return  resultString;
+
+    }
+
+    public String decodeBassline(List<String> layer, int measureLength){
+        String resultString = "";
+        int layerCounter = 0;
+
+        for(int i = 0; i < this.chordProgression.size(); i++){
+            for (int j = 0; j < (measureLength*4); j++){
+                   if (layer.get(layerCounter).startsWith("I")||layer.get(layerCounter).startsWith("R")){
+                       layerCounter++;
+                   }else {
+                       Integer compare = Integer.parseInt(layer.get(layerCounter).substring(0,2)) + 24 ;
+                       for (int c = 0; c < 4; c++){
+                            if(this.chords.get(chordProgression.get(i))[c].equals(compare)){
+                                resultString += getChoiceString(c,2);
+                                layerCounter++;
+                                break;
+                            }
+                       }
+                   }
+            }
+        }
+        return resultString;
     }
 
     public int getChoice(int length){
         String a = strInput.substring(0,length);
-//        System.out.print(a);
+        System.out.print(a);
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
     }
 
+    private String getChoiceString(int choice, int length){
+        String s= Integer.toBinaryString(choice);
+        while (s.length()<length){
+            s = "0"+s;
+        }
+        return s;
+    }
 
 }

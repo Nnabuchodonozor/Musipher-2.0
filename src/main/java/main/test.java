@@ -122,12 +122,20 @@ public class test {
             patternString += toplay;
 
 
-            Pattern pattern = new Pattern( " " +
-                    patternString
-             + bass
+            Pattern pattern = new Pattern(
+//                    patternString
+              bass
             );
 
-            System.out.println(patternString);
+
+
+//            Drums drums = new Drums(strInput);
+//            Rhythm rhythm = drums.generateDrums();
+//            strInput = drums.getStrInput();
+//            pattern.add(rhythm);
+
+
+            System.out.println(bass);
 
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
@@ -137,6 +145,8 @@ public class test {
             for (ArrayList<String> voice : voices){
                 System.out.println(voice);
             }
+
+            System.out.println( harmony.decodeBassline(voices.get(0),3));
 
 //-------------------------------------------------------------------------------------------------------------------
 
