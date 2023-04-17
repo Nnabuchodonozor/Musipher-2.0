@@ -18,6 +18,7 @@ import static org.jfugue.midi.MidiFileManager.loadPatternFromMidi;
 
 public class MidiUtils {
 
+    String unparsedDrums;
     private static final String[] jfugueMelodyNotes = {
             "C0","C#0","D0", "Eb0", "E0" ,"F0", "F#0", "G0", "G#0", "A0", "Bb0", "B0",
             "C1","C#1","D1", "Eb1", "E1" ,"F1", "F#1", "G1", "G#1", "A1", "Bb1", "B1",
@@ -115,8 +116,13 @@ public class MidiUtils {
             if(tokenizedNotes[i].startsWith("T"))
                 continue;
             if(tokenizedNotes[i].startsWith("V")) {
-                structuredMelody.add(layer);
-                layer = new ArrayList<>();
+                if (tokenizedNotes[i].equals("V9")){
+                    this.unparsedDrums = this.parseDrums(tokenizedNotes,i);
+                    break;
+                }else {
+                    structuredMelody.add(layer);
+                    layer = new ArrayList<>();
+                }
                 continue;
             }else if(tokenizedNotes[i].startsWith("I")||tokenizedNotes[i].startsWith("R")){
                 layer.add(tokenizedNotes[i]);
@@ -142,6 +148,20 @@ public class MidiUtils {
         return structuredMelody;
     }
 
+    private  String parseDrums(String[] tokenizedNotes, int index){
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = index; i  < tokenizedNotes.length; i++){
+            stringBuilder.append(tokenizedNotes[i]).append(" ");
+        }
+        return stringBuilder.toString();
+    }
 
 
+    public String getUnparsedDrums() {
+        return unparsedDrums;
+    }
+
+    public void setUnparsedDrums(String unparsedDrums) {
+        this.unparsedDrums = unparsedDrums;
+    }
 }

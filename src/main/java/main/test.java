@@ -145,6 +145,8 @@ public class test {
             for (ArrayList<String> voice : voices){
                 System.out.println(voice);
             }
+            drums.parseDrums(midiUtils.getUnparsedDrums());
+            String strOutput = drums.getStroutput();
 
 //            System.out.println( harmony.decodeBassline(voices.get(0),3));
 
