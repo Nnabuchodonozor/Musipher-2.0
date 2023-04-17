@@ -326,6 +326,7 @@ public class Harmony {
             for (int j = 0; j < (measureLength*4); j++){
                    if (layer.get(layerCounter).startsWith("I")||layer.get(layerCounter).startsWith("R")){
                        layerCounter++;
+                       j = j -1;
                    }else {
                        Integer compare = Integer.parseInt(layer.get(layerCounter).substring(0,2)) + 24 ;
                        for (int c = 0; c < 4; c++){
@@ -334,7 +335,9 @@ public class Harmony {
                                 layerCounter++;
                                 break;
                             }
+
                        }
+
                    }
             }
         }

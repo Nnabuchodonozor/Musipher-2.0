@@ -92,7 +92,7 @@ public class test {
 //            pattern.add("T[Adagio] " + mainPatern);
 
 
-            String bass = "V2 I[ELECTRIC_BASS_FINGER] Rw Rw Rw ";
+            String bass = "V2 I[Cello] Rw Rw Rw ";
             String patternString = "V0 ";
 //            patternString += chords.get(0)[0] + "w+" + chords.get(0)[1] + "w+" + chords.get(0)[2] + "w+" + chords.get(0)[3] + "w ";
             Integer[] antedecent = new Integer[]{chords.get(0)[0],chords.get(0)[1],chords.get(0)[2],chords.get(0)[3]};
@@ -123,16 +123,16 @@ public class test {
 
 
             Pattern pattern = new Pattern(
-//                    patternString
+                    patternString +
               bass
             );
 
 
 
-//            Drums drums = new Drums(strInput);
-//            Rhythm rhythm = drums.generateDrums();
-//            strInput = drums.getStrInput();
-//            pattern.add(rhythm);
+            Drums drums = new Drums(strInput);
+            Rhythm rhythm = drums.generateDrums();
+            strInput = drums.getStrInput();
+            pattern.add(rhythm);
 
 
             System.out.println(bass);
@@ -146,7 +146,7 @@ public class test {
                 System.out.println(voice);
             }
 
-            System.out.println( harmony.decodeBassline(voices.get(0),3));
+//            System.out.println( harmony.decodeBassline(voices.get(0),3));
 
 //-------------------------------------------------------------------------------------------------------------------
 
