@@ -112,7 +112,7 @@ public class MidiUtils {
         String[] tokenizedNotes = incomingNotes.split(" ");
         StringBuilder parsedMelody=new StringBuilder();
         int c= 0;
-        for (int i = 1; i < tokenizedNotes.length; i++){
+        for (int i = 0; i < tokenizedNotes.length; i++){
             if(tokenizedNotes[i].startsWith("T"))
                 continue;
             if(tokenizedNotes[i].startsWith("V")) {

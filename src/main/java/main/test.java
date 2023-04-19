@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Stream;
 
 public class test {
 
@@ -35,7 +36,7 @@ public class test {
                 }
 
 
-                String strInput = "00001"+randomBinaryString;
+                String strInput = randomBinaryString;
 //                Conductor conductor = new Conductor(strInput);
 //                Pattern pattern = new Pattern(conductor.composeSong());
 //
@@ -79,18 +80,18 @@ public class test {
             List<Integer> chordProgression = harmony.getChordProgression();
             List<Integer[]> chords = harmony.getChords();
 
-            Pattern pattern = new Pattern("");
-            Rhytm rhytm = new Rhytm(strInput,a);
-            String[] rhytmisisedMelody = rhytm.createRhytmicisedMelody(8,2,chords,chordProgression,2,new Instrument("Piano"));
-            String mainPatern = String.join("",rhytmisisedMelody);
-
-            System.out.println("random melody"  + mainPatern);
-
-            Motif motif = new Motif(mainPatern,mainPatern,a,strInput);
-            motif.setExpandChord(chords.get(chordProgression.get(0)));
-            motif.developPattern();
-            mainPatern = motif.getPatternString();
-            pattern.add("T[Adagio] " + mainPatern);
+//            Pattern pattern = new Pattern("");
+//            Rhytm rhytm = new Rhytm(strInput,a);
+//            String[] rhytmisisedMelody = rhytm.createRhytmicisedMelody(8,2,chords,chordProgression,2,new Instrument("Piano"));
+//            String mainPatern = String.join("",rhytmisisedMelody);
+//
+//            System.out.println("random melody"  + mainPatern);
+//
+//            Motif motif = new Motif(mainPatern,mainPatern,a,strInput);
+//            motif.setExpandChord(chords.get(chordProgression.get(0)));
+//            motif.developPattern();
+//            mainPatern = motif.getPatternString();
+//            pattern.add("T[Adagio] " + mainPatern);
 
 
 
@@ -122,21 +123,28 @@ public class test {
 //            String toplay = arpeggios.getPatternString();
 //            patternString += toplay;
 //
-//
-//            Pattern pattern = new Pattern( "T60 "+
+
+            Pattern pattern = new Pattern(
+//                    " "+
 //                    patternString +
 //              bass
-//            );
-//
-//
-//
-//            Drums drums = new Drums(strInput);
-//            Rhythm rhythm = drums.generateDrums();
-//            strInput = drums.getStrInput();
-//            pattern.add(rhythm);
-//
-//
-//            System.out.println(bass);
+            );
+
+
+            String previous = strInput;
+            Drums drums = new Drums(strInput);
+            Rhythm rhythm1 = drums.generateDrums(8,2); // 32 0, 16 1, 8 2
+            Rhythm rhythm2 = drums.generateDrums(16,1);
+            Rhythm rhythm3 = drums.generateDrums(32,0); // 32 0, 16 1, 8 2
+            Rhythm r =  drums.concatRhytm(rhythm1,rhythm2);
+            Rhythm r2 = drums.concatRhytm(r,rhythm3);
+
+
+            strInput = drums.getStrInput();
+//            pattern.add(rhythm.getPattern().repeat(3));
+            pattern.add(r2);
+
+
 
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
@@ -146,8 +154,11 @@ public class test {
             for (ArrayList<String> voice : voices){
                 System.out.println(voice);
             }
-//            drums.parseDrums(midiUtils.getUnparsedDrums());
-//            String strOutput = drums.getStroutput();
+            System.out.println(previous);
+
+            drums.parseDrums(midiUtils.getUnparsedDrums());
+            String strOutput = drums.getStroutput();
+            midiUtils.evaluateDeciphering(previous,strOutput);
 
 //            System.out.println( harmony.decodeBassline(voices.get(0),3));
 
