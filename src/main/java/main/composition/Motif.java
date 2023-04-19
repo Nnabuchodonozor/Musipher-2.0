@@ -40,7 +40,7 @@ public class Motif {
     public void setStrOutput(String strOutput) {
         this.strOutput = strOutput;
     }
-
+    Integer[] expandChord;
     String strOutput;
     Integer[] key;
 
@@ -416,7 +416,10 @@ public class Motif {
             int choice = getChoice(1);
             if(choice==0){
                 stringBuilder.append(p.getValue0()).append(p.getValue1()).append(" ");
-            }else {
+//                stringBuilder.append( "R").append(p.getValue1()).append(" ");
+
+            }
+            else {
                 //here i should add something that sounds good, so what about chord note?
                 choice=getChoice(3);
                 stringBuilder.append(p.getValue0()).append(p.getValue1()).append(" ");
@@ -627,22 +630,19 @@ public class Motif {
 
     public void developPattern(){
 
-        patternString += "Rw ";
-        this.createSequence(0);
-        patternString += "Rw ";
-        this.createAugment();
-        patternString += "Rw ";
+
+        this.createSequence(1);
+        this.createSequence(2);
         this.deconstructMotif(1);
-//        this.createDivide();
-//          String motifToAdd = this.createSequence(3);
-//        this.patternString += motifToAdd;
+//           this.createDivide();
 
-
+//        this.createExpand(expandChord);
 //        this.createDimunation();
-//        Integer chord[] = new Integer[]{60, 64, 67, 69, 72, 74, 76, 69};
-//        this.createExpand(chord);
-//          this.createContract();
-//    this.createDivide();
+//        this.createAugment();
+//        this.deconstructMotif(1);
+
+//        this.createExpand(expandChord);
+
     }
 
     public void decodePattern(){
@@ -656,4 +656,11 @@ public class Motif {
         return Integer.parseInt(a, 2);
     }
 
+    public Integer[] getExpandChord() {
+        return expandChord;
+    }
+
+    public void setExpandChord(Integer[] expandChord) {
+        this.expandChord = expandChord;
+    }
 }

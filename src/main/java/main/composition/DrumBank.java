@@ -76,7 +76,7 @@ public class DrumBank {
             while(newLayer.length()< 64){
                 newLayer.append(".");
             }
-            finalLayers[i] = newLayer.toString();
+            finalLayers[i] = "...................................................." + newLayer.toString();
         }
         return finalLayers;
     }
