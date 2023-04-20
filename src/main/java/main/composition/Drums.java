@@ -228,7 +228,33 @@ public class Drums {
             }
         }
 
-        for (String s : drumStreams){
+        List<String> correctlyConnectedDrums = Arrays.asList("","","","","","","","","","","","","","","");
+            //necessary evil
+
+        // o O
+            correctlyConnectedDrums.set(0, drumStreams.get(0).substring(0,8));
+            correctlyConnectedDrums.set(5, drumStreams.get(0).substring(8,24));
+            correctlyConnectedDrums.set(10, drumStreams.get(0).substring(24,56));
+        // s S
+        correctlyConnectedDrums.set(1, drumStreams.get(1).substring(0,8));
+        correctlyConnectedDrums.set(6, drumStreams.get(1).substring(8,24));
+        correctlyConnectedDrums.set(11, drumStreams.get(1).substring(24,56));
+    //  x X
+        correctlyConnectedDrums.set(2, drumStreams.get(2).substring(0,4));
+        correctlyConnectedDrums.set(7, drumStreams.get(2).substring(4,12));
+        correctlyConnectedDrums.set(12, drumStreams.get(2).substring(12,28));
+  //  * +
+        correctlyConnectedDrums.set(3, drumStreams.get(3).substring(0,2));
+        correctlyConnectedDrums.set(8, drumStreams.get(3).substring(2,6));
+        correctlyConnectedDrums.set(13, drumStreams.get(3).substring(6,14));
+//    ^ `
+        correctlyConnectedDrums.set(4, drumStreams.get(4).substring(0,8));
+        correctlyConnectedDrums.set(9, drumStreams.get(4).substring(8,24));
+        correctlyConnectedDrums.set(14, drumStreams.get(4).substring(24,56));
+
+
+
+        for (String s : correctlyConnectedDrums){
             if (!s.isEmpty()) {
                 System.out.println(s);
                 this.outputBasedOnDrums(s, s.substring(0, 1).toLowerCase(),s.length());
