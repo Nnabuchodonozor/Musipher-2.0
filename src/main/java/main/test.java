@@ -145,7 +145,6 @@ public class test {
             pattern.add(r2);
 
 
-
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
             System.out.println(mainPattern.toString());
