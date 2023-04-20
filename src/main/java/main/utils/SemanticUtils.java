@@ -110,7 +110,7 @@ public class SemanticUtils {
 
         byte[] result = Arrays.copyOf(enc, enc.length + iVString.length);
         System.arraycopy(iVString, 0, result, enc.length, iVString.length);
-
+        //todo salt
 
 //        midiUtils.composeMIDI(enc);
 

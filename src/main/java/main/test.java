@@ -36,7 +36,7 @@ public class test {
                 }
 
 
-                String strInput = randomBinaryString;
+                String strInput = "00000" + randomBinaryString;
                 Conductor conductor = new Conductor(strInput);
                 Pattern pattern = conductor.composeSong();
 
