@@ -35,16 +35,19 @@ public class test {
                     randomBinaryString += bit;
                 }
 
-
-                String strInput = "00000" + randomBinaryString;
+                String previous = randomBinaryString;
+                String strInput = randomBinaryString;
                 Conductor conductor = new Conductor(strInput);
                 Pattern pattern = conductor.composeSong();
 
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
             System.out.println(mainPattern.toString());
-////            Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
-////            analyst.analyzeSong();
+            Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
+            String returnedString = analyst.analyzeSong(midiUtils);
+            midiUtils.evaluateDeciphering(previous,returnedString);
+
+
 
 
 

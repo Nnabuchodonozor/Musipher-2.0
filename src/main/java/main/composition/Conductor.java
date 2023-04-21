@@ -1,5 +1,6 @@
 package main.composition;
 
+import main.utils.MidiUtils;
 import org.jfugue.pattern.Pattern;
 import org.jfugue.rhythm.Rhythm;
 
@@ -73,7 +74,8 @@ public class Conductor {
             arpeggios.arpegiateRandom(arpegi,8);
             }
             this.voices[0]=arpeggios.getPatternString();
-            this.voices[2] += harmony.createBassline(2);
+            this.voices[2] += "Rw Rw Rw Rw " + harmony.createBassline(2);
+            strInput = harmony.getStrInput();
     }
 
     private void encodeKey( Key key,Integer[] a){
@@ -81,14 +83,14 @@ public class Conductor {
         System.out.println("Key was: " + whatKey +" : " + a[0]);
 
         switch (whatKey) {
-            case 0 -> this.voices[1] += a[35] + "i Ri";
-            case 1 -> this.voices[1] += a[35] + "i " + a[36] + "i " + "Ri";
-            case 2 -> this.voices[1] += a[35] + "i " + a[34] + "i " + "Ri";
-            case 3 -> this.voices[1] += a[35] + "i " + a[35] + "i " + "Ri";
+            case 0 -> this.voices[1] += a[35] + "i Ri ";
+            case 1 -> this.voices[1] += a[35] + "i " + a[36] + "i " + "Ri ";
+            case 2 -> this.voices[1] += a[35] + "i " + a[34] + "i " + "Ri ";
+            case 3 -> this.voices[1] += a[35] + "i " + a[35] + "i " + "Ri ";
             default -> {
             }
         }
-//        this.voices[1] +=  " 43i";
+        this.voices[1] +=  a[35] + "i ";
     }
 
     private String connectAllVoices(){

@@ -145,6 +145,8 @@ public class Harmony {
                     default:
                         throw new Exception("unknown choice");
                 }
+
+//
             case 1,3:
                 choice = this.getChoice(2);
                 switch (choice){
@@ -305,7 +307,7 @@ public class Harmony {
 //    red "\u001B[31m";
     public String createBassline(int measureLength){
         String resultString = "";
-        System.out.println(" bassline choices ");
+//        System.out.println(" bassline choices ");
         for (int i = 0; i < chordProgression.size(); i++){
 
             for (int j = 0; j < (measureLength*4); j++){
@@ -313,7 +315,7 @@ public class Harmony {
                 resultString += this.chords.get(chordProgression.get(i))[c] - 24 + "q ";
                 }
         }
-        System.out.println("end of bass");
+//        System.out.println("end of bass");
         return  resultString;
 
     }
@@ -346,7 +348,7 @@ public class Harmony {
 
     public int getChoice(int length){
         String a = strInput.substring(0,length);
-        System.out.print(a);
+//        System.out.print(a);
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
     }
