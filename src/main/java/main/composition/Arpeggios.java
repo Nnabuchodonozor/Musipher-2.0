@@ -1,12 +1,13 @@
 package main.composition;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class Arpeggios {
     String patternString = "";
 
+
+
+    String strInput;
     public Arpeggios(String patternString) {
 
         this.patternString = patternString;
@@ -79,5 +80,54 @@ public class Arpeggios {
 
     }
 
+    public void arpegiateRandomInput(String[] notes, int length){  // half the length because pattern should be repeated
+        List<Integer[]> perms = Arrays.asList(
+                new Integer[]{0,1,2,3},
+                new Integer[]{0,1,3,2},
+                new Integer[]{0,2,1,3},
+                new Integer[]{0,2,3,1},
+                new Integer[]{0,3,1,2},
+                new Integer[]{0,3,2,1},
+                new Integer[]{1,0,2,3},
+                new Integer[]{1,0,3,2},
+                new Integer[]{1,2,0,3},
+                new Integer[]{1,2,3,0},
+                new Integer[]{1,3,0,2},
+                new Integer[]{3,0,1,2},
+                new Integer[]{3,0,2,1},
+                new Integer[]{3,1,2,0},
+                new Integer[]{3,2,0,1},
+                new Integer[]{3,2,1,0}
+        );
+        for (int i = 0; i < length;i++){
+            int choice = this.getChoice(4);
+            for(Integer a : perms.get(choice)){
+                patternString += notes[a]+" ";
+            }
+            for(Integer a : perms.get(choice)){
+                patternString += notes[a]+" ";
+            }
+        }
+
+
+
+    }
+
+
+
+    public String getStrInput() {
+        return strInput;
+    }
+
+    public void setStrInput(String strInput) {
+        this.strInput = strInput;
+    }
+
+    public int getChoice(int length){
+        String a = strInput.substring(0,length);
+//        System.out.print(a);
+        strInput = strInput.substring(length);
+        return Integer.parseInt(a, 2);
+    }
 
 }

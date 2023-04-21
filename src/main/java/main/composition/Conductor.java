@@ -57,8 +57,8 @@ public class Conductor {
             voices[i] += "Rh ".repeat(chordProgression.size());
         }
         encodeKey(key,a);
-                    Arpeggios arpeggios = new Arpeggios(voices[0]);
-
+        Arpeggios arpeggios = new Arpeggios(voices[0]);
+        arpeggios.setStrInput(strInput);
         for(int i = 0; i < chordProgression.size(); i++){
 //                String arpegi[] = new String[]{antedecent[0]+"s",antedecent[1]+"s",antedecent[2]+"s",antedecent[3]+"s"};
 
@@ -71,7 +71,8 @@ public class Conductor {
                     chords.get(chordProgression.get(i))[3] + "s"
             };
 
-            arpeggios.arpegiateRandom(arpegi,8);
+            arpeggios.arpegiateRandomInput(arpegi,4);
+            strInput = arpeggios.getStrInput();
             }
             this.voices[0]=arpeggios.getPatternString();
             this.voices[2] += "Rw Rw Rw Rw " + harmony.createBassline(2);
