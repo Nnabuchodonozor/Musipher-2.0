@@ -196,7 +196,7 @@ public class Harmony {
     public void decodeFunctionalHarmony(List<Integer> chordProgression) throws Exception{
         StringBuilder stringBuilder = new StringBuilder(strOutput);
         int current = 0;
-     while (current<chordProgression.size()-1){
+     while (current<chordProgression.size()-3){
          switch (chordProgression.get(current)){
 
          case 0,2,5:
