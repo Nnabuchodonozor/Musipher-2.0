@@ -66,8 +66,15 @@ public class Analyst {
     private void decomposeHarmony() throws Exception{
         Harmony harmony = new Harmony(a,"");
         List<Integer> chordProgression = getChordProgression(harmony);
+        harmony.setChordProgression(chordProgression);
         harmony.decodeFunctionalHarmony(chordProgression);
         this.strOutput += harmony.getStrOutput();
+        this.strOutput += decodeBass(harmony);
+    }
+
+    private String decodeBass(Harmony harmony){
+        System.out.println();
+        return harmony.decodeBassline(parsedSong.get(3),2);
     }
 
     private List<Integer> getChordProgression(Harmony harmony){

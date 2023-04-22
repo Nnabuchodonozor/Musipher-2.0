@@ -35,6 +35,7 @@ public class Conductor {
         Pattern lastPattern = new Pattern();
         lastPattern.add(pattern);
         lastPattern.add(connectAllVoices());
+        System.out.println(" velkost zasif " + this.strInput.length());
         return lastPattern;
     }
 
@@ -57,6 +58,8 @@ public class Conductor {
             voices[i] += "Rh ".repeat(chordProgression.size());
         }
         encodeKey(key,a);
+        this.voices[2] += "Rw Rw Rw Rw " + harmony.createBassline(2);
+        strInput = harmony.getStrInput();
         Arpeggios arpeggios = new Arpeggios(voices[0]);
         arpeggios.setStrInput(strInput);
         for(int i = 0; i < chordProgression.size(); i++){
@@ -75,8 +78,7 @@ public class Conductor {
             strInput = arpeggios.getStrInput();
             }
             this.voices[0]=arpeggios.getPatternString();
-            this.voices[2] += "Rw Rw Rw Rw " + harmony.createBassline(2);
-            strInput = harmony.getStrInput();
+
     }
 
     private void encodeKey( Key key,Integer[] a){

@@ -108,6 +108,7 @@ public class Arpeggios {
                 patternString += notes[a]+" ";
             }
         }
+        patternString += "Rq ";
 
 
 

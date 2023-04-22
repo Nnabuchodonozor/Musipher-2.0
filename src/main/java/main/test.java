@@ -40,6 +40,7 @@ public class test {
                 Conductor conductor = new Conductor(strInput);
                 Pattern pattern = conductor.composeSong();
 
+
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
             System.out.println(mainPattern.toString());
