@@ -35,6 +35,42 @@ public class Melody {
          return patternString;
     }
 
+    public String decodeRandomMelody(Integer note){
+        String result = "";
+        if(note < lastNote){
+            result+= "1";
+            int a = this.returnIndex(lastNote);
+            int b = this.returnIndex(note);
+            if(a - b < 2){
+                result +="0";
+                lastNote = note;
+            }else {
+                result+= "1";
+                result+= getChoiceString( (a - b - 1)   ,2);
+                lastNote = note;
+            }
+
+
+        }else {
+            result+= "0";
+            int a = this.returnIndex(lastNote);
+            int b = this.returnIndex(note);
+            if(b - a < 2){
+                result +="0";
+                lastNote = note;
+            }else {
+                result+= "1";
+                result+= getChoiceString( (b - a - 1)   ,2);
+                lastNote = note;
+            }
+        }
+
+
+        return result;
+    }
+
+
+
     private void addStep( boolean ascending){
         int indexOfLastNote = this.returnIndex(lastNote);
         if(ascending){
@@ -108,6 +144,14 @@ public class Melody {
         String a = strInput.substring(0,length);
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
+    }
+
+    private String getChoiceString(int choice, int length){
+        String s= Integer.toBinaryString(choice);
+        while (s.length()<length){
+            s = "0"+s;
+        }
+        return s;
     }
 
 }

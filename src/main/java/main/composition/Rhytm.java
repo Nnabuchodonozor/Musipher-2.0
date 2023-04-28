@@ -117,45 +117,48 @@ public class Rhytm {
                 int choice1 = getChoice(2);
                 Integer note = chords.get(progression.get(chordCounter) )[choice1];
                 melody.setLastNote(note);
-                resultList.add(  note + "i ");
-                beatCounter += 2;
+                resultList.add(  note + "q ");
+                beatCounter += 4;
                 continue;
 //                    resultList.add( melody[i]  + "q ");
 //                    i++;
             }else {
-                int choice = getChoice(2);
+                int choice = getChoice(1);
                 switch (choice){
                     case 0:
-                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
-                        this.strInput= melody.getStrInput();
-
-                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
-                        this.strInput= melody.getStrInput();
-                        break;
-                    case 1:
-                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s. ") );
-                        this.strInput= melody.getStrInput();
-
-                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "t ") );
-                        this.strInput= melody.getStrInput();
-                        break;
-                    case 2:
-                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "t ") );
-                        this.strInput= melody.getStrInput();
-
-                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s. ") );
-                        this.strInput= melody.getStrInput();
-                        break;
-                    case 3:
                         resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "i ") );
                         this.strInput= melody.getStrInput();
 
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "i ") );
+                        this.strInput= melody.getStrInput();
                         break;
+                    case 1:
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "i ") );
+                        this.strInput= melody.getStrInput();
+
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
+                        this.strInput= melody.getStrInput();
+
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
+                        this.strInput= melody.getStrInput();
+                        break;
+//                    case 2:
+//                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "t ") );
+//                        this.strInput= melody.getStrInput();
+//
+//                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s. ") );
+//                        this.strInput= melody.getStrInput();
+//                        break;
+//                    case 3:
+//                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "i ") );
+//                        this.strInput= melody.getStrInput();
+//
+//                        break;
                     default:
                         break;
                 }
             }
-            beatCounter+=2;
+            beatCounter+=4;
             if (beatCounter==16) {
                 beatCounter = 0;
                 measureCounter++;
@@ -164,13 +167,81 @@ public class Rhytm {
                     chordLength = chordLength + chordLength;
                 }
             }
-
-
         }
         return  resultList.toArray(new String[0]);
 
     }
 
+    public String decodeRhytmicisedMelody(int beats, int syncopationStrength, Integer[] chord, ArrayList<String> melody){
+        Melody melody1 = new Melody(key);
+        List<ArrayList<Integer>> notes = this.divideMelody(melody,beats);
+        String result = "";
+        int beatCounter = 0;
+        int noteCounter = 0;
+
+        for (int i = 0; i < beats; i++) {
+
+            if (determineSync(beatCounter, syncopationStrength)) {
+                Integer note = notes.get(i).get(0);
+                result += this.getChoiceString(this.chordChoice(note, chord), 2);
+                melody1.setLastNote(note);
+                continue;
+//
+            } else {
+                if (notes.get(i).size() == 2) {
+                    result += "0";
+                    result += melody1.decodeRandomMelody(notes.get(i).get(0));
+                    result += melody1.decodeRandomMelody(notes.get(i).get(1));
+
+                } else {
+                    result += "1";
+                    result += melody1.decodeRandomMelody(notes.get(i).get(0));
+                    result += melody1.decodeRandomMelody(notes.get(i).get(1));
+                    result += melody1.decodeRandomMelody(notes.get(i).get(2));
+
+                }
+
+            }
+            beatCounter += 4;
+            if (beatCounter == 16) {
+                beatCounter = 0;
+            }
+        }
+        return result;
+    }
+
+
+    private List<ArrayList<Integer>> divideMelody(ArrayList<String> melody, int beats){
+        List<ArrayList<Integer>> result = new ArrayList<>();
+        int c = 0;
+        int noteCounter = 0;
+        for (int i = 0; i < beats; i++){
+            c=0;
+            ArrayList<Integer> beat = new ArrayList<>();
+            while (c < 4){
+                String s = melody.get(noteCounter).substring(2,3);
+                switch (s){
+                    case "q":
+                        c = c + 4;
+                        beat.add(Integer.parseInt(melody.get(noteCounter).substring(0,2)));
+                        break;
+                    case "i":
+                        c = c + 2;
+                        beat.add(Integer.parseInt(melody.get(noteCounter).substring(0,2)));
+                        break;
+                    case "s":
+                        c = c + 1;
+                        beat.add(Integer.parseInt(melody.get(noteCounter).substring(0,2)));
+                        break;
+                }
+
+            }
+            result.add(beat);
+
+        }
+
+        return result;
+    }
 
     private boolean determineSync(int beatCounter ,int s){
         if(s == 0){
@@ -203,5 +274,21 @@ public class Rhytm {
         return Integer.parseInt(a, 2);
     }
 
+    private int chordChoice(Integer note, Integer[] chord){
+        for (int i = 0; i< chord.length; i++){
+            if(note==chord[i])
+                return i;
+        }
+        return -1;
+    }
+
+
+    private String getChoiceString(int choice, int length){
+        String s= Integer.toBinaryString(choice);
+        while (s.length()<length){
+            s = "0"+s;
+        }
+        return s;
+    }
 
 }

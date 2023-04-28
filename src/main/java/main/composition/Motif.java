@@ -421,7 +421,7 @@ public class Motif {
             }
             else {
                 //here i should add something that sounds good, so what about chord note?
-                choice=getChoice(3);
+                choice=getChoice(2);
                 stringBuilder.append(p.getValue0()).append(p.getValue1()).append(" ");
                 stringBuilder.append(chordNotes[choice]).append(p.getValue1()).append(" ");
             }
@@ -432,9 +432,10 @@ public class Motif {
     public String decodeExpand(){
         return null;
     }
+
+
+
     // contract = reduce some notes
-
-
     //how to get some bits into deleting notes?
     // if 0 delete note from motif, if 1 keep it
     public void createContract(){
@@ -470,12 +471,11 @@ public class Motif {
     //if i can devide motif to abc then we can make abc
     // smallest part of devision should be
     public void createDivide(){
-        int divisorLength = parsedMotif.size() / 3;
+        int divisorLength = parsedMotif.size() / 2;
         StringBuilder stringBuilder = new StringBuilder(patternString);
         List<Pair<Integer, String>> firstPart = parsedMotif.subList(0,divisorLength);
-        List<Pair<Integer, String>> secondPart = parsedMotif.subList(divisorLength,2*divisorLength);
-        List<Pair<Integer, String>> thirdPart = parsedMotif.subList(2*divisorLength,parsedMotif.size());
-        int choice = getChoice(3);
+        List<Pair<Integer, String>> secondPart = parsedMotif.subList(divisorLength,parsedMotif.size());
+        int choice = getChoice(2);
         switch (choice){
             case 0: //aabb
                 stringBuilder.append(appendAll(firstPart))
@@ -501,79 +501,6 @@ public class Motif {
                         .append(appendAll(secondPart))
                         .append(appendAll(firstPart));
                 break;
-            case 4: //aacc
-                stringBuilder.append(appendAll(firstPart))
-                        .append(appendAll(firstPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(thirdPart));
-                break;
-            case 5: //acac
-                stringBuilder.append(appendAll(firstPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(firstPart))
-                        .append(appendAll(thirdPart));
-                break;
-            case 6: //ccaa
-                stringBuilder.append(appendAll(thirdPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(firstPart))
-                        .append(appendAll(firstPart));
-                break;
-            case 7: //caca
-                stringBuilder.append(appendAll(thirdPart))
-                        .append(appendAll(firstPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(firstPart));
-                break;
-            case 8: //bbcc
-                stringBuilder.append(appendAll(secondPart))
-                        .append(appendAll(secondPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(thirdPart));
-                break;
-            case 9: //bcbc
-                stringBuilder.append(appendAll(secondPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(secondPart))
-                        .append(appendAll(thirdPart));
-                break;
-            case 10: //ccbb
-                stringBuilder.append(appendAll(thirdPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(secondPart))
-                        .append(appendAll(secondPart));
-                break;
-            case 11: //cbcb
-                stringBuilder.append(appendAll(thirdPart))
-                        .append(appendAll(secondPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(secondPart));
-                break;
-            case 12: //abca
-                stringBuilder.append(appendAll(firstPart))
-                        .append(appendAll(secondPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(firstPart));
-                break;
-            case 13: //abcb
-                stringBuilder.append(appendAll(firstPart))
-                        .append(appendAll(secondPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(secondPart));
-                break;
-            case 14: //abcc
-                stringBuilder.append(appendAll(firstPart))
-                        .append(appendAll(secondPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(thirdPart));
-                break;
-            case 15: //ccab
-                stringBuilder.append(appendAll(thirdPart))
-                        .append(appendAll(thirdPart))
-                        .append(appendAll(firstPart))
-                        .append(appendAll(secondPart));
-                break;
-
         }
         this.patternString = stringBuilder.toString();
     }
@@ -604,25 +531,25 @@ public class Motif {
         int lastPos = this.getPositionInKey(parsedMotif.get(motifCounter-1).getValue0());
         if(end == 1){
             if(lastPos >35){
-                patternString+= key[lastPos -1] + "s ";
-                patternString+= key[lastPos -2] + "s ";
-                patternString+= key[35] + "i ";
+                patternString+= key[lastPos -1] + "i ";
+                patternString+= key[lastPos -2] + "i ";
+                patternString+= key[35] + "q ";
             }else {
-                patternString+= key[lastPos +1] + "s ";
-                patternString+= key[lastPos +2] + "s ";
-                patternString+= key[35] + "i ";
+                patternString+= key[lastPos +1] + "i ";
+                patternString+= key[lastPos +2] + "i ";
+                patternString+= key[35] + "q ";
             }
 
         }else {
 
             if(lastPos >41){
-                patternString+= key[lastPos -1] + "s ";
-                patternString+= key[lastPos -2] + "s ";
-                patternString+= key[41] + "i ";
+                patternString+= key[lastPos -1] + "i ";
+                patternString+= key[lastPos -2] + "i ";
+                patternString+= key[41] + "q ";
             }else {
-                patternString+= key[lastPos +1] + "s ";
-                patternString+= key[lastPos +2] + "s ";
-                patternString+= key[41] + "i ";
+                patternString+= key[lastPos +1] + "i ";
+                patternString+= key[lastPos +2] + "i ";
+                patternString+= key[41] + "q ";
             }
         }
 
@@ -631,11 +558,14 @@ public class Motif {
     public void developPattern(){
 
 
-        this.createSequence(1);
-        this.createSequence(2);
-        this.deconstructMotif(1);
-//           this.createDivide();
+//        this.createSequence(1);
+//        this.createSequence(2);
+//        this.deconstructMotif(0);
 
+
+//
+//           this.createDivide();
+this.createContract();
 //        this.createExpand(expandChord);
 //        this.createDimunation();
 //        this.createAugment();
