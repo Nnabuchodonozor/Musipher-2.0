@@ -12,6 +12,7 @@ public class Conductor {
     String[] voices = new String[10];
     Harmony harmony;
     Key key;
+    Integer[] a;
     //Voices
     //V0 Harmonic acompaniment
     //V1 main melody
@@ -29,19 +30,34 @@ public class Conductor {
 
         drums();
         harmony();
-
+        melody();
 
 
         Pattern lastPattern = new Pattern();
-        lastPattern.add(pattern);
+        lastPattern.add("T[Moderato] "+ pattern);
         lastPattern.add(connectAllVoices());
         System.out.println(" velkost zasif " + this.strInput.length());
         return lastPattern;
     }
 
+
+    private void melody(){ //voices 4
+        Melody melody = new Melody(a);
+        melody.setStrInput(strInput);
+        Rhytm rhytm = new Rhytm(strInput,a);
+
+        String[] rhytmisisedMelody = rhytm.createRhytmicisedMelody(16,1,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"));
+        String mainPatern = String.join("",rhytmisisedMelody);
+//        this.voices[4] += mainPatern;
+//
+//        melody.addRandomMelody(this.voices[4],new Instrument("Violin"),strInput);
+//        strInput= melody.getStrInput();
+
+    }
+
     private void harmony() throws Exception{
         key = new Key(strInput);
-        Integer[] a  = key.generateKey();
+        a  = key.generateKey();
         strInput = key.getStrInput();
 //        encodeKey(key,a);
         harmony = new Harmony(a,strInput);
@@ -51,6 +67,7 @@ public class Conductor {
         strInput = harmony.getStrInput();
         this.voices[3] += " I74 ";
         this.voices[2] += " I34 ";
+        this.voices[4] += " I40 ";
         for (int i = 0; i < chordProgression.size(); i++){
             this.voices[3] += (chords.get(chordProgression.get(i))[0]+24) + "h ";
         }
@@ -108,9 +125,9 @@ public class Conductor {
     private void drums(){
         String previous = strInput;
         Drums drums = new Drums(strInput);
-        Rhythm rhythm1 = drums.generateDrums(8,2); // 32 0, 16 1, 8 2
-        Rhythm rhythm2 = drums.generateDrums(16,1);
-        Rhythm rhythm3 = drums.generateDrums(32,0); // 32 0, 16 1, 8 2
+        Rhythm rhythm1 = drums.generateDrums(8,2,1); // 32 0, 16 1, 8 2
+        Rhythm rhythm2 = drums.generateDrums(16,1,0);
+        Rhythm rhythm3 = drums.generateDrums(32,0,0); // 32 0, 16 1, 8 2
         Rhythm r =  drums.concatRhytm(rhythm1,rhythm2);
         Rhythm r2 = drums.concatRhytm(r,rhythm3);
         strInput = drums.getStrInput();

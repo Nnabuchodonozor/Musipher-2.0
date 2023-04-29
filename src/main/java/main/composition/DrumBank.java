@@ -27,7 +27,7 @@ public class DrumBank {
 
 //    public static
 
-    public String[] fillLayers(String[] layers, int version){
+    public String[] fillLayers(String[] layers, int version, int first){
         String[] finalLayers = new String[layers.length];
         int layerLength=0;
         for(int i = 0; i < layers.length; i++){
@@ -65,8 +65,12 @@ public class DrumBank {
                 newLayer.append(".");
             }
 //            finalLayers[i] = "...................................................." + newLayer.toString();
-                        finalLayers[i] = "........" + newLayer.toString();
 
+            if (first==1){
+                finalLayers[i] = ".".repeat(64) + newLayer.toString();
+            }else {
+                finalLayers[i] = "........" + newLayer.toString();
+            }
         }
         return finalLayers;
     }

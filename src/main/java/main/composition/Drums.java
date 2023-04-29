@@ -70,7 +70,7 @@ public class Drums {
         return strOutput.toString();
     }
 
-    public Rhythm generateDrums(int layerStrength,int version){
+    public Rhythm generateDrums(int layerStrength,int version, int first){
         String layer1 = this.kicks(layerStrength);
         String layer2 = this.snares(layerStrength);
         String layer3 = this.clap(layerStrength);
@@ -82,7 +82,7 @@ public class Drums {
         layers[2] = layer3;
         layers[3] = layer4;
         layers[4] = layer5;
-        String[] finalLayers = drumBank.fillLayers(layers,version);
+        String[] finalLayers = drumBank.fillLayers(layers,version,first);
         Rhythm rhythm = new Rhythm();
 
         for(String s : finalLayers){
