@@ -3,6 +3,7 @@ package main.composition;
 import main.utils.MidiUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Analyst {
@@ -70,6 +71,34 @@ public class Analyst {
         harmony.decodeFunctionalHarmony(chordProgression);
         this.strOutput += harmony.getStrOutput();
         this.strOutput += decodeBass(harmony);
+        this.strOutput += decodeHarmonicSupport(harmony,4);
+    }
+
+    private String decodeHarmonicSupport(Harmony harmony,int length){
+        String result = "";
+        Arpeggios arpeggios = new Arpeggios("");
+        ArrayList<String> harmonicSupport = parsedSong.get(1);
+        harmonicSupport.remove(0);
+
+
+//        String[] objects = harmonicSupport.toArray();
+        int harmonicIndex=0;
+        String[] notes = new String[4];
+        for (int i = 0; i < harmony.getChordProgression().size(); i++){
+              Integer[] chord = Arrays.copyOfRange(harmony.getChords().get(harmony.getChordProgression().get(i)),
+                                      0, 4);
+
+
+              for(int j = 0; j < length; j++){
+                  notes[0]= harmonicSupport.get(harmonicIndex).substring(0,2);
+                  notes[1]= harmonicSupport.get(harmonicIndex + 1).substring(0,2);
+                  notes[2]= harmonicSupport.get(harmonicIndex + 2).substring(0,2);
+                  notes[3]= harmonicSupport.get(harmonicIndex + 3).substring(0,2);
+                  result += arpeggios.decodeRandomInput(notes,chord);
+                  harmonicIndex = harmonicIndex + 8;
+              }
+        }
+        return result;
     }
 
     private String decodeBass(Harmony harmony){

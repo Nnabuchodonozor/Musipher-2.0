@@ -558,9 +558,10 @@ public class Motif {
     public void developPattern(){
 
 
-//        this.createSequence(1);
+        this.createSequence(1);
 //        this.createSequence(2);
-//        this.deconstructMotif(0);
+        this.createAugment();
+        this.deconstructMotif(1);
 
 
 //

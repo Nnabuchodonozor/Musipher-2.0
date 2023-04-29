@@ -25,8 +25,8 @@ public class test {
 
     public static void main(String[] args) {
         try {
-//            MidiUtils midiUtils = new MidiUtils();
-//
+            MidiUtils midiUtils = new MidiUtils();
+
                 String randomBinaryString = "";
                 Random random = new Random();
 
@@ -37,55 +37,55 @@ public class test {
 
                 String previous = randomBinaryString;
                 String strInput = randomBinaryString;
-//                Conductor conductor = new Conductor(strInput);
-//                Pattern pattern = conductor.composeSong();
-//
-//
-//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
-//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
-//            System.out.println(mainPattern.toString());
-//            Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
-//            String returnedString = analyst.analyzeSong(midiUtils);
-//            midiUtils.evaluateDeciphering(previous,returnedString);
-
-
-
-
-
-
-           Key key = new Key(strInput);
-
-
-            Integer[] a  = key.generateKey();
-            strInput = key.getStrInput();
-
-            Harmony harmony = new Harmony(a,strInput);
-
-            harmony.createFunctionalHarmony(10);
-            strInput = harmony.getStrInput();
-            List<Integer> chordProgression = harmony.getChordProgression();
-            List<Integer[]> chords = harmony.getChords();
-
-            Pattern pattern = new Pattern("");
-            Rhytm rhytm = new Rhytm(strInput,a);
-
-
-            String[] rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,1,chords,chordProgression,2,new Instrument("Piano"));
-            String mainPatern = String.join("",rhytmisisedMelody);
-
-            System.out.println("random melody"  + mainPatern);
-
-//            Motif motif = new Motif(mainPatern,mainPatern,a,strInput);
-//            motif.setExpandChord(chords.get(chordProgression.get(0)));
-//            motif.developPattern();
-//            mainPatern = motif.getPatternString();
-//            pattern.add(mainPatern);
-
+                Conductor conductor = new Conductor(strInput);
+                Pattern pattern = conductor.composeSong();
 
 
             MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
             Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
             System.out.println(mainPattern.toString());
+            Analyst analyst = new Analyst(midiUtils.parseIncomingNotes(mainPattern.toString()));
+            String returnedString = analyst.analyzeSong(midiUtils);
+            midiUtils.evaluateDeciphering(previous,returnedString);
+
+
+
+
+//
+//
+//           Key key = new Key(strInput);
+//
+//
+//            Integer[] a  = key.generateKey();
+//            strInput = key.getStrInput();
+//
+//            Harmony harmony = new Harmony(a,strInput);
+//
+//            harmony.createFunctionalHarmony(10);
+//            strInput = harmony.getStrInput();
+//            List<Integer> chordProgression = harmony.getChordProgression();
+//            List<Integer[]> chords = harmony.getChords();
+//
+//            Pattern pattern = new Pattern("");
+//            Rhytm rhytm = new Rhytm(strInput,a);
+//
+//
+//            String[] rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,1,chords,chordProgression,2,new Instrument("Piano"));
+//            String mainPatern = String.join("",rhytmisisedMelody);
+//
+//            System.out.println("random melody"  + mainPatern);
+//
+//            Motif motif = new Motif(mainPatern,mainPatern,a,strInput);
+//            motif.setExpandChord(chords.get(chordProgression.get(0)));
+//            motif.developPattern();
+//            mainPatern = motif.getPatternString();
+//            pattern.add(mainPatern);
+//
+//
+//
+//            MidiFileManager.savePatternToMidi(pattern, new File("miusik.mid"));
+//            Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File("miusik.mid"));
+//            System.out.println(mainPattern.toString());
 //            List<ArrayList<String>> voices = midiUtils.parseIncomingNotes(mainPattern.toString());
 //
 //            for (ArrayList<String> voice : voices){

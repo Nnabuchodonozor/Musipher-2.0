@@ -169,7 +169,6 @@ public class Rhytm {
             }
         }
         return  resultList.toArray(new String[0]);
-
     }
 
     public String decodeRhytmicisedMelody(int beats, int syncopationStrength, Integer[] chord, ArrayList<String> melody){
@@ -180,7 +179,6 @@ public class Rhytm {
         int noteCounter = 0;
 
         for (int i = 0; i < beats; i++) {
-
             if (determineSync(beatCounter, syncopationStrength)) {
                 Integer note = notes.get(i).get(0);
                 result += this.getChoiceString(this.chordChoice(note, chord), 2);
@@ -198,9 +196,7 @@ public class Rhytm {
                     result += melody1.decodeRandomMelody(notes.get(i).get(0));
                     result += melody1.decodeRandomMelody(notes.get(i).get(1));
                     result += melody1.decodeRandomMelody(notes.get(i).get(2));
-
                 }
-
             }
             beatCounter += 4;
             if (beatCounter == 16) {

@@ -80,6 +80,42 @@ public class Arpeggios {
 
     }
 
+
+    public String decodeRandomInput(String[] notes, Integer[] originalChord){
+        List<Integer[]> perms = Arrays.asList(
+                new Integer[]{0,1,2,3},
+                new Integer[]{0,1,3,2},
+                new Integer[]{0,2,1,3},
+                new Integer[]{0,2,3,1},
+                new Integer[]{0,3,1,2},
+                new Integer[]{0,3,2,1},
+                new Integer[]{1,0,2,3},
+                new Integer[]{1,0,3,2},
+                new Integer[]{1,2,0,3},
+                new Integer[]{1,2,3,0},
+                new Integer[]{1,3,0,2},
+                new Integer[]{3,0,1,2},
+                new Integer[]{3,0,2,1},
+                new Integer[]{3,1,2,0},
+                new Integer[]{3,2,0,1},
+                new Integer[]{3,2,1,0}
+        );
+            //original 7 8 3 2    (0 1 2 3)
+            // permuted 3 8 2 7   (2 1 3 0)
+           //
+        for (int i = 0; i< perms.size(); i++){
+            if((Integer.parseInt(notes[0])==originalChord[perms.get(i)[0]]) &&
+                    (Integer.parseInt(notes[1])==originalChord[perms.get(i)[1]]) &&
+                    (Integer.parseInt(notes[2])==originalChord[perms.get(i)[2]]) &&
+                    (Integer.parseInt(notes[3])==originalChord[perms.get(i)[3]])
+            ){
+                return this.getChoiceString(i,4);
+            }
+        }
+
+        return "2";
+    }
+
     public void arpegiateRandomInput(String[] notes, int length){  // half the length because pattern should be repeated
         List<Integer[]> perms = Arrays.asList(
                 new Integer[]{0,1,2,3},
@@ -109,9 +145,6 @@ public class Arpeggios {
             }
         }
 //        patternString += "Rq ";
-
-
-
     }
 
 
@@ -129,6 +162,14 @@ public class Arpeggios {
 //        System.out.print(a);
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
+    }
+
+    private String getChoiceString(int choice, int length){
+        String s= Integer.toBinaryString(choice);
+        while (s.length()<length){
+            s = "0"+s;
+        }
+        return s;
     }
 
 }
