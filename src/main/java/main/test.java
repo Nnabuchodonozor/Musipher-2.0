@@ -75,10 +75,10 @@ public class test {
 //
 //            System.out.println("random melody"  + mainPatern);
 //
-//            Motif motif = new Motif(mainPatern,mainPatern,a,strInput);
-//            motif.setExpandChord(chords.get(chordProgression.get(0)));
-//            motif.developPattern();
-//            mainPatern = motif.getPatternString();
+////            Motif motif = new Motif(mainPatern,mainPatern,a,strInput);
+////            motif.setExpandChord(chords.get(chordProgression.get(0)));
+////            motif.developPattern();
+////            mainPatern = motif.getPatternString();
 //            pattern.add(mainPatern);
 //
 //
@@ -92,7 +92,7 @@ public class test {
 //                System.out.println(voice);
 //            }
 //            System.out.println(previous);
-//
+
 //            drums.parseDrums(midiUtils.getUnparsedDrums());
 //            String strOutput = drums.getStroutput();
 //            midiUtils.evaluateDeciphering(previous,strOutput);

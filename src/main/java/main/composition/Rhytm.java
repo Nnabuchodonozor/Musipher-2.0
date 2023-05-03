@@ -103,10 +103,9 @@ public class Rhytm {
         return resultList.toArray(new String[0]);
     }
 
-    public String[] createRhytmicisedMelody(int beats,int syncopationStrength, List <Integer[]> chords, List<Integer> progression, int chordLength, Instrument instrument){
+    public String[] createRhytmicisedMelody(int beats,int syncopationStrength, List <Integer[]> chords, List<Integer> progression, int chordLength, Instrument instrument, int chordCounter){
         Melody melody = new Melody(key);
         int measureCounter = 0;
-        int chordCounter = 0;
 
         List<String> resultList = new ArrayList<>();
         int beatCounter = 0;
@@ -163,8 +162,8 @@ public class Rhytm {
                 beatCounter = 0;
                 measureCounter++;
                 if(measureCounter==chordLength){
-                    chordCounter++;
-                    chordLength = chordLength + chordLength;
+//                    chordCounter++;
+//                    chordLength = chordLength + chordLength;
                 }
             }
         }

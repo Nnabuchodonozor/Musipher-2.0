@@ -522,7 +522,7 @@ public class Motif {
         double beatCounter=0;
         int motifCounter= 0;
         StringBuilder stringBuilder = new StringBuilder("");
-        while(beatCounter < 6.0){
+        while(beatCounter < 8.0){
             beatCounter =  beatCounter + lenghtsMap.get(parsedMotif.get(motifCounter).getValue1());
             patternString += parsedMotif.get(motifCounter).getValue0() + parsedMotif.get(motifCounter).getValue1() + " ";
             motifCounter++;
@@ -555,26 +555,32 @@ public class Motif {
 
     }
 
-    public void developPattern(){
-
-
-        this.createSequence(1);
-//        this.createSequence(2);
-        this.createAugment();
-        this.deconstructMotif(1);
-
-
-//
-//           this.createDivide();
-this.createContract();
-//        this.createExpand(expandChord);
-//        this.createDimunation();
-//        this.createAugment();
-//        this.deconstructMotif(1);
-
-//        this.createExpand(expandChord);
-
+    public void developPattern0(){
+        this.deconstructMotif(0);
     }
+
+    public void developPattern1(){
+        this.deconstructMotif(1);
+    }
+    public void developPattern2(){
+        this.createSequence(1);
+    }
+    public void developPattern3(){
+        this.createAugment();
+    }
+    public void developPattern4(){
+        this.createExpand(this.expandChord);
+    }
+    public void developPattern5(){
+        this.createDimunation();
+    }
+    public void developPattern6(){
+        this.createContract();
+    }
+    public void developPattern7(){
+        this.createDivide();
+    }
+
 
     public void decodePattern(){
 
