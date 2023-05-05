@@ -103,7 +103,7 @@ public class Rhytm {
         return resultList.toArray(new String[0]);
     }
 
-    public String[] createRhytmicisedMelody(int beats,int syncopationStrength, List <Integer[]> chords, List<Integer> progression, int chordLength, Instrument instrument, int chordCounter){
+    public String[] createRhytmicisedMelody(int beats,int syncopationStrength, List <Integer[]> chords, List<Integer> progression, int chordLength, Instrument instrument, int chordCounter,  int rhytmStrength){
         Melody melody = new Melody(key);
         int measureCounter = 0;
 
@@ -122,7 +122,7 @@ public class Rhytm {
 //                    resultList.add( melody[i]  + "q ");
 //                    i++;
             }else {
-                int choice = getChoice(1);
+                int choice = getChoice(rhytmStrength);
                 switch (choice){
                     case 0:
                         resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "i ") );
@@ -141,18 +141,26 @@ public class Rhytm {
                         resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
                         this.strInput= melody.getStrInput();
                         break;
-//                    case 2:
-//                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "t ") );
-//                        this.strInput= melody.getStrInput();
-//
-//                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s. ") );
-//                        this.strInput= melody.getStrInput();
-//                        break;
-//                    case 3:
-//                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "i ") );
-//                        this.strInput= melody.getStrInput();
-//
-//                        break;
+                    case 2:
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
+                        this.strInput= melody.getStrInput();
+
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
+                        this.strInput= melody.getStrInput();
+
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
+                        this.strInput= melody.getStrInput();
+
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
+                        this.strInput= melody.getStrInput();
+                        break;
+                    case 3:
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "i. ") );
+                        this.strInput= melody.getStrInput();
+
+                        resultList.add(new String(melody.addRandomMelody("", instrument, this.strInput) + "s ") );
+                        this.strInput= melody.getStrInput();
+                        break;
                     default:
                         break;
                 }

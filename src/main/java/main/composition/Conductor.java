@@ -49,7 +49,9 @@ public class Conductor {
         melody.setStrInput(strInput);
         Rhytm rhytm = new Rhytm(strInput,a);
 
-        String[] rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,1,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),2);
+        // first melody ....................................................
+
+        String[] rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,1,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),2,1);
         String mainPatern = String.join("",rhytmisisedMelody);
 
         this.voices[4] += mainPatern;
@@ -59,8 +61,11 @@ public class Conductor {
             motif.developPattern0();
             this.voices[4] = motif.getPatternString();
 
+        strInput= motif.getStrInput();
 
-        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,1,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),2);
+        // second melody .........................................................
+
+        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,1,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),3,1);
         mainPatern = String.join("",rhytmisisedMelody);
 
         this.voices[4] += mainPatern;
@@ -70,6 +75,50 @@ public class Conductor {
         motif.developPattern1();
         this.voices[4] = motif.getPatternString();
 
+        strInput= motif.getStrInput();
+        // third melody ...............................................................
+
+        this.voices[5] += " Rw Rw Rw Rw Rw Rw Rw Rw Rw ";
+        this.voices[6] += " Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw ";
+
+        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),4,2);
+        mainPatern = String.join("",rhytmisisedMelody);
+
+        this.voices[5] += mainPatern;
+        strInput= melody.getStrInput();
+
+        motif = new Motif(mainPatern, this.voices[5], this.a, this.strInput);
+        motif.developPattern7();
+        this.voices[5] = motif.getPatternString();
+        strInput= motif.getStrInput();
+
+        //fourth melody
+
+
+        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),7,2);
+        mainPatern = String.join("",rhytmisisedMelody);
+
+        this.voices[6] += mainPatern;
+        strInput= melody.getStrInput();
+
+        motif = new Motif(mainPatern, this.voices[6], this.a, this.strInput);
+        motif.developPattern6();
+        this.voices[6] = motif.getPatternString();
+        strInput= motif.getStrInput();
+
+       //fifth melody
+        this.voices[5] += " Rw Rw Rw Rw ";
+
+        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),9,2);
+        mainPatern = String.join("",rhytmisisedMelody);
+
+        this.voices[5] += mainPatern;
+        strInput= melody.getStrInput();
+
+        motif = new Motif(mainPatern, this.voices[5], this.a, this.strInput);
+        motif.developPattern5();
+        this.voices[5] = motif.getPatternString();
+        strInput= motif.getStrInput();
 
     }
 
@@ -86,6 +135,9 @@ public class Conductor {
         this.voices[3] += " I74 ";
         this.voices[2] += " I34 ";
         this.voices[4] += " I40 ";
+        this.voices[5] += " I24 ";
+        this.voices[6] += " I64 ";
+        this.voices[7] += " I19 ";
         for (int i = 0; i < chordProgression.size(); i++){
             this.voices[3] += (chords.get(chordProgression.get(i))[0]+24) + "h ";
         }
@@ -111,6 +163,8 @@ public class Conductor {
 
             arpeggios.arpegiateRandomInput(arpegi,4);
             strInput = arpeggios.getStrInput();
+
+
             }
             this.voices[0]=arpeggios.getPatternString();
 

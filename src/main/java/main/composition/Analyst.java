@@ -121,6 +121,17 @@ public class Analyst {
         return chordProgression;
     }
 
+    public void removeR(int i){
+        for (int j = 0; j < this.parsedSong.get(i).size(); j++ ){
+            if ( this.parsedSong.get(i).get(j).startsWith("R")){
+                this.parsedSong.get(i).remove(j);
+                j--;
+            }
+        }
+    }
+
+
+
     private String getChoiceString(int choice, int length){
         String s= Integer.toBinaryString(choice);
         while (s.length()<length){

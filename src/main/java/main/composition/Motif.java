@@ -572,13 +572,20 @@ public class Motif {
         this.createExpand(this.expandChord);
     }
     public void developPattern5(){
-        this.createDimunation();
+        this.createSequence(3);
+        this.createContract();
+        this.createContract();
+        this.deconstructMotif(1);
+
     }
     public void developPattern6(){
-        this.createContract();
+        this.createSequence(1);
+        this.createDimunation();
+        this.deconstructMotif(1);
     }
     public void developPattern7(){
         this.createDivide();
+        this.deconstructMotif(1);
     }
 
 
