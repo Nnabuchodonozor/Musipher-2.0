@@ -483,9 +483,9 @@ public class Motif {
                         .append(appendAll(secondPart))
                         .append(appendAll(secondPart));
                 break;
-            case 1: //abab
-                stringBuilder.append(appendAll(firstPart))
-                        .append(appendAll(secondPart))
+            case 1: //baab
+                stringBuilder.append(appendAll(secondPart))
+                        .append(appendAll(firstPart))
                         .append(appendAll(firstPart))
                         .append(appendAll(secondPart));
                 break;
@@ -566,10 +566,15 @@ public class Motif {
         this.createSequence(1);
     }
     public void developPattern3(){
-        this.createAugment();
+
+        this.createSequence(1);
+        this.createSequence(2);
+        this.deconstructMotif(1);
     }
     public void developPattern4(){
+
         this.createExpand(this.expandChord);
+        this.deconstructMotif(1);
     }
     public void developPattern5(){
         this.createSequence(3);
@@ -581,7 +586,7 @@ public class Motif {
     public void developPattern6(){
         this.createSequence(1);
         this.createDimunation();
-        this.deconstructMotif(1);
+        this.deconstructMotif(0);
     }
     public void developPattern7(){
         this.createDivide();

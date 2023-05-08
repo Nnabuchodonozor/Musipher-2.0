@@ -37,10 +37,10 @@ public class Melody {
 
     public String decodeRandomMelody(Integer note){
         String result = "";
-        if(note < lastNote){
+        if(note > lastNote){
             result+= "1";
-            int a = this.returnIndex(lastNote);
-            int b = this.returnIndex(note);
+            int b = this.returnIndex(lastNote);
+            int a = this.returnIndex(note);
             if(a - b < 2){
                 result +="0";
                 lastNote = note;
@@ -53,8 +53,8 @@ public class Melody {
 
         }else {
             result+= "0";
-            int a = this.returnIndex(lastNote);
-            int b = this.returnIndex(note);
+            int b = this.returnIndex(lastNote);
+            int a = this.returnIndex(note);
             if(b - a < 2){
                 result +="0";
                 lastNote = note;

@@ -2,9 +2,7 @@ package main.composition;
 
 import main.utils.MidiUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Analyst {
 
@@ -13,18 +11,170 @@ public class Analyst {
     Key key;
     Integer [] a;
     MidiUtils midiUtils;
+    Harmony harmony;
 
+    Map<String, Integer> lenghthsMap;
     public Analyst(List<ArrayList<String>> parsedSong) {
         this.parsedSong = parsedSong;
+        lenghthsMap = new HashMap<>();
+        lenghthsMap.put("q", 4);
+        lenghthsMap.put("i", 2);
+        lenghthsMap.put("i.", 3);
+        lenghthsMap.put("s", 1);
+
+
     }
+
 
     public String analyzeSong(MidiUtils midiUtils) throws Exception {
         this.midiUtils = midiUtils;
         decomposeDrums();
         decomposeKey();
         decomposeHarmony();
-
+        decomposeMelody();
         return strOutput;
+    }
+
+    private void decomposeMelody(){
+        ArrayList<String> melody1 = divideMelody(1);
+        ArrayList<String> melody2 = divideMelody(2);
+        ArrayList<String> melody3 = divideMelody(3);
+        ArrayList<String> melody4 = divideMelody(4);
+        ArrayList<String> melody5 = divideMelody(5);
+        ArrayList<String> melody6 = divideMelody(6);
+        strOutput += this.decodeMelody1(melody1);
+
+
+        System.out.println();
+
+
+
+    }
+
+
+
+    private String decodeMelody1(ArrayList<String> melody){
+        String result = "";
+        Rhytm rhytm = new Rhytm("",a);
+        ArrayList<String> m1 = new ArrayList<>();
+        int length= 0;
+        int i = 0;
+        while(length < 16){
+            m1.add(melody.get(i));
+            i++;
+
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        result += rhytm.decodeRhytmicisedMelody(4,1,harmony.getChords().get(harmony.getChordProgression().get(2)),m1);
+
+        return result;
+    }
+    private String decodeMelody2(ArrayList<String> melody){
+        String result = "";
+
+        return result;
+    }
+    private String decodeMelody3(ArrayList<String> melody){
+        String result = "";
+
+        return result;
+    }
+    private String decodeMelody4(ArrayList<String> melody){
+        String result = "";
+
+        return result;
+    }
+    private String decodeMelody5(ArrayList<String> melody){
+        String result = "";
+
+        return result;
+    }
+    private String decodeMelody6(ArrayList<String> melody){
+        String result = "";
+
+        return result;
+    }
+
+
+
+    private ArrayList<String> divideMelody(int a)
+    {
+        ArrayList<String> result  =new ArrayList<>();
+
+        switch (a){
+            case 1:
+                //violin
+                for (int i = 2; i < parsedSong.get(5).size(); i++){
+                    if(parsedSong.get(5).get(i).startsWith("R"))
+                        return result;
+                    else
+                        result.add(parsedSong.get(5).get(i));
+                }
+                parsedSong.get(5).remove(1);
+                break;
+                //guitar
+            case 2:
+                for (int i = 2; i < parsedSong.get(6).size(); i++){
+                    if(parsedSong.get(6).get(i).startsWith("R"))
+                        return result;
+                    else
+                        result.add(parsedSong.get(6).get(i));
+                }
+                parsedSong.get(6).remove(1);
+
+                break;
+                //sax
+            case 3:
+                for (int i = 2; i < parsedSong.get(7).size(); i++){
+                    if(parsedSong.get(7).get(i).startsWith("R"))
+                        return result;
+                    else
+                        result.add(parsedSong.get(7).get(i));
+                }
+                parsedSong.get(7).remove(1);
+
+                break;
+                //quitar
+            case 4:
+                int b = 0;
+                for (int i = 2; i < parsedSong.get(6).size(); i++){
+                    if(parsedSong.get(6).get(i).startsWith("R"))
+                        b=i;
+                }
+                for (int i = b+1; i < parsedSong.get(6).size(); i++){
+                    result.add(parsedSong.get(6).get(i));
+                }
+                return result;
+
+            case 5: //vilin
+                 b = 0;
+                for (int i = 2; i < parsedSong.get(5).size(); i++){
+                    if(parsedSong.get(5).get(i).startsWith("R"))
+                        b=i;
+                }
+                for (int i = b+1; i < parsedSong.get(5).size(); i++){
+                    result.add(parsedSong.get(5).get(i));
+                }
+                return result;
+
+            case 6: //sax
+
+                 b = 0;
+                for (int i = 2; i < parsedSong.get(7).size(); i++){
+                    if(parsedSong.get(7).get(i).startsWith("R"))
+                        b=i;
+                }
+                for (int i = b+1; i < parsedSong.get(7).size(); i++){
+                    result.add(parsedSong.get(7).get(i));
+                }
+                return result;
+
+            default:
+                break;
+        }
+
+        return result;
+
     }
 
     public void decomposeKey(){
@@ -65,7 +215,7 @@ public class Analyst {
     }
 
     private void decomposeHarmony() throws Exception{
-        Harmony harmony = new Harmony(a,"");
+        harmony = new Harmony(a,"");
         List<Integer> chordProgression = getChordProgression(harmony);
         harmony.setChordProgression(chordProgression);
         harmony.decodeFunctionalHarmony(chordProgression);

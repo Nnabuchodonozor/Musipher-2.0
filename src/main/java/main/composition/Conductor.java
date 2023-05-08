@@ -80,7 +80,6 @@ public class Conductor {
 
         this.voices[5] += " Rw Rw Rw Rw Rw Rw Rw Rw Rw ";
         this.voices[6] += " Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw ";
-
         rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),4,2);
         mainPatern = String.join("",rhytmisisedMelody);
 
@@ -120,6 +119,34 @@ public class Conductor {
         this.voices[5] = motif.getPatternString();
         strInput= motif.getStrInput();
 
+        //sixth melody
+        this.voices[4] += " Rw Rw Rw Rw Rw Rw Rw Rw Rw Rw  Rw Rw Rw ";
+
+        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),11,1);
+        mainPatern = String.join("",rhytmisisedMelody);
+
+        this.voices[4] += mainPatern;
+        strInput= melody.getStrInput();
+
+        motif = new Motif(mainPatern, this.voices[4], this.a, this.strInput);
+        motif.setExpandChord(harmony.getChords().get(harmony.getChordProgression().get(11)));
+        motif.developPattern4();
+        this.voices[4] = motif.getPatternString();
+        strInput= motif.getStrInput();
+
+        //seventh melody
+        this.voices[6] += " Rw Rw Rw Rw Rw Rw Rw Rw Rw ";
+
+        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),11,2);
+        mainPatern = String.join("",rhytmisisedMelody);
+
+        this.voices[6] += mainPatern;
+        strInput= melody.getStrInput();
+
+        motif = new Motif(mainPatern, this.voices[6], this.a, this.strInput);
+        motif.developPattern3();
+        this.voices[6] = motif.getPatternString();
+        strInput= motif.getStrInput();
     }
 
     private void harmony() throws Exception{
@@ -128,7 +155,7 @@ public class Conductor {
         strInput = key.getStrInput();
 //        encodeKey(key,a);
         harmony = new Harmony(a,strInput);
-        harmony.createFunctionalHarmony(11);
+        harmony.createFunctionalHarmony(13);
         List<Integer> chordProgression = harmony.getChordProgression();
         List<Integer[]> chords = harmony.getChords();
         strInput = harmony.getStrInput();

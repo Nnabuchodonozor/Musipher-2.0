@@ -190,7 +190,6 @@ public class Rhytm {
                 Integer note = notes.get(i).get(0);
                 result += this.getChoiceString(this.chordChoice(note, chord), 2);
                 melody1.setLastNote(note);
-                continue;
 //
             } else {
                 if (notes.get(i).size() == 2) {
@@ -222,7 +221,7 @@ public class Rhytm {
             c=0;
             ArrayList<Integer> beat = new ArrayList<>();
             while (c < 4){
-                String s = melody.get(noteCounter).substring(2,3);
+                String s = melody.get(noteCounter).substring(2,melody.get(noteCounter).length()-1);
                 switch (s){
                     case "q":
                         c = c + 4;
@@ -236,8 +235,12 @@ public class Rhytm {
                         c = c + 1;
                         beat.add(Integer.parseInt(melody.get(noteCounter).substring(0,2)));
                         break;
+                    case "i.":
+                        c = c + 3;
+                        beat.add(Integer.parseInt(melody.get(noteCounter).substring(0,2)));
+                        break;
                 }
-
+                noteCounter++;
             }
             result.add(beat);
 
