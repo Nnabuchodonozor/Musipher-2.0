@@ -34,7 +34,7 @@ public class Conductor {
 
 
         Pattern lastPattern = new Pattern();
-        lastPattern.add("T[Moderato] "+ pattern);
+        lastPattern.add("T90 "+ pattern);
         lastPattern.add(connectAllVoices());
         System.out.println(" velkost zasif " + this.strInput.length());
         return lastPattern;
@@ -167,10 +167,19 @@ public class Conductor {
         this.voices[7] += " I19 ";
         for (int i = 0; i < chordProgression.size(); i++){
             this.voices[3] += (chords.get(chordProgression.get(i))[0]+24) + "h ";
+
         }
-        for( int i = 0; i < voices.length;i++){
+        for (int i = 0; i < chordProgression.size()-2; i++){
+            this.voices[0] += (chords.get(chordProgression.get(i))[2]-24) + "q ";
+            this.voices[0] += (chords.get(chordProgression.get(i))[1]-24) + "i ";
+            this.voices[0] += (chords.get(chordProgression.get(i))[3]-24) + "i ";
+        }
+        this.voices[0] += "Rw ";
+
+        for( int i = 1; i < voices.length;i++){
             voices[i] += "Rh ".repeat(chordProgression.size());
         }
+
         encodeKey(key,a);
         this.voices[2] += "Rw Rw Rw Rw " + harmony.createBassline(2);
         strInput = harmony.getStrInput();
@@ -194,7 +203,43 @@ public class Conductor {
 
             }
             this.voices[0]=arpeggios.getPatternString();
+            pianoOutro();
+    }
 
+    private void pianoOutro(){
+        String result = "";
+
+        result += a[35] + "s ";
+        result += a[37] + "s ";
+        result += a[36] + "i ";
+
+
+        result += a[38] + "s ";
+        result += a[39] + "s ";
+        result += a[40] + "i ";
+
+        result += a[41] + "i ";
+        result += a[40] + "i ";
+
+         result += a[35] + "i ";
+        result += a[36] + "i ";
+
+
+        //====================================
+        result += a[35] + "i ";
+        result += a[36] + "i ";
+        result += a[37] + "q ";
+
+        result += "Rq ";
+        result += a[35] + "q ";
+
+//====================================
+        result += a[32] + "q ";
+        result += a[30] + "q ";
+
+        result += a[28] + "h ";
+
+        this.voices[0] += result;
     }
 
     private void encodeKey( Key key,Integer[] a){

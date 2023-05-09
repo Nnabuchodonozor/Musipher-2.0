@@ -31,7 +31,7 @@ public class Analyst {
         decomposeDrums();
         decomposeKey();
         decomposeHarmony();
-        decomposeMelody();
+//        decomposeMelody();
         return strOutput;
     }
 
@@ -227,8 +227,13 @@ public class Analyst {
     private String decodeHarmonicSupport(Harmony harmony,int length){
         String result = "";
         Arpeggios arpeggios = new Arpeggios("");
+        for (int i = 0; i < 43; i++){
+            this.parsedSong.get(1).remove(0);
+        }
+
+
         ArrayList<String> harmonicSupport = parsedSong.get(1);
-        harmonicSupport.remove(0);
+//        harmonicSupport.remove(0);
 
 
 //        String[] objects = harmonicSupport.toArray();
@@ -262,7 +267,7 @@ public class Analyst {
         ArrayList<String> flutePart = this.parsedSong.get(4);
         flutePart.remove(flutePart.get(0));
 
-        for(int i = 0; i < 14; i++){
+        for(int i = 0; i < 16; i++){
             for (int j = 0; j < chords.size(); j++){
                 if(Integer.parseInt(flutePart.get(i).substring(0,2)) == (chords.get(j)[0] + 24))
                     chordProgression.add(j);

@@ -1,6 +1,7 @@
 package main.utils;
 
 
+import main.composition.Analyst;
 import main.composition.Conductor;
 import org.jfugue.midi.MidiFileManager;
 import org.jfugue.pattern.Pattern;
@@ -33,23 +34,24 @@ public class MidiUtils {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
 
-    public void composeMIDI(byte[] encryptedData) throws IOException {
+    public void composeMIDI(byte[] encryptedData) throws Exception {
         String strInput = createBinaryString(encryptedData);
         Pattern mainPattern = createMusic(strInput);
         MidiFileManager.savePatternToMidi(mainPattern, new File("miusik.mid"));
     }
 
-    public byte[] decomposeMIDI(String path) throws InvalidMidiDataException, IOException {
+    public byte[] decomposeMIDI(String path) throws InvalidMidiDataException, Exception {
         Pattern mainPattern = MidiFileManager.loadPatternFromMidi(new File(path));
         String strInput = decodeMusic(mainPattern);
-        byte[] parsedBinaryString = parseBinaryString(strInput);
 
 
-        return parsedBinaryString;
+        return parseBinaryString(strInput);
     }
 
-    private String decodeMusic(Pattern mainPattern){
-        return "1010010101010110";
+    private String decodeMusic(Pattern mainPattern) throws Exception{
+        Analyst analyst = new Analyst(this.parseIncomingNotes(mainPattern.toString()));
+
+        return analyst.analyzeSong(this);
     }
 
     public void evaluateDeciphering(String original, String deciphered){
@@ -97,9 +99,9 @@ public class MidiUtils {
         return bts;
     }
 
-    private Pattern createMusic(String strInput){
+    private Pattern createMusic(String strInput) throws Exception{
         Conductor conductor = new Conductor(strInput);
-        return new Pattern("V0 I[Piano] Eq Ch. | Eq Ch. | Dq Eq Dq Cq");
+        return conductor.composeSong();
     }
 
 

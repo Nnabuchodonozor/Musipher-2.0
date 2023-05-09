@@ -62,7 +62,9 @@ public class SemanticUtils {
      */
     public void encryptToMIDIFromText(String text, String password) throws Exception{
         generateTrueRandomIV();
-
+        if(text.length() < 200){
+            text += "a".repeat(200-text.length());
+        }
         //ascii text => base 32 alphabet string => byte array => encrypted byte array => MIDI
         String base32String = turnAsciiToBase32(text.toLowerCase(Locale.ROOT));
         byte[] openText = turnBase32ToByte(base32String);
@@ -71,11 +73,11 @@ public class SemanticUtils {
         byte[] generatedSalt = streamCipher.getSalt();
         byte[] result = this.connects3Arrays(iVString,generatedSalt,enc);
 
-//            midiUtils.composeMIDI(result);
+            midiUtils.composeMIDI(result);
 
-        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
-        fos.write(result);
-        fos.close();
+//        FileOutputStream fos = new FileOutputStream(new File("encryptedBytes"));
+//        fos.write(result);
+//        fos.close();
 
     }
 
@@ -83,8 +85,8 @@ public class SemanticUtils {
         File f1 = new File(encryptedPath);
         FileInputStream fis = new FileInputStream(f1);
         try {
-//            byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
-            byte[] cypheredBytesWithIV = fis.readAllBytes();
+            byte[] cypheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
+//            byte[] cypheredBytesWithIV = fis.readAllBytes();
             byte[] iVBytes = Arrays.copyOfRange(cypheredBytesWithIV,0,16);
             byte[] saltBytes = Arrays.copyOfRange(cypheredBytesWithIV, 16, 32);
             byte[] cypheredBytes = Arrays.copyOfRange(cypheredBytesWithIV,32,cypheredBytesWithIV.length);
