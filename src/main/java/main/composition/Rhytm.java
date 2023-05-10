@@ -275,7 +275,7 @@ public class Rhytm {
 
     public int getChoice(int length){
         String a = strInput.substring(0,length);
-        System.out.print(a);
+//        System.out.print(a);
         strInput = strInput.substring(length);
         return Integer.parseInt(a, 2);
     }

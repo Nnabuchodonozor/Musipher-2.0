@@ -103,8 +103,8 @@ public class SemanticUtils {
         generateTrueRandomIV();
 
         String[] strings = fileName.split("\\.");
-        byte[] fExtension = strings[2].getBytes();
-        Integer i = (strings[2].length());
+        byte[] fExtension = strings[strings.length-1].getBytes();
+        Integer i = (strings[strings.length-1].length());
         byte fExtensionLength = i.byteValue();
         File openDataFile = new File(fileName);
         byte[] openBytes = Files.readAllBytes(openDataFile.toPath());

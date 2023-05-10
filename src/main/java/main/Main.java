@@ -52,7 +52,7 @@ public class Main {
                     break;
                 default:
                     System.out.println("Incorrect Usage: \n" +
-                            "Available commands: import, delete, encrypt, decrypt, show");
+                            "Available commands: import, delete, encrypt, decrypt, show, quit");
                     break;
             }
                 if (splitedLine.get(0).equals("quit")){
