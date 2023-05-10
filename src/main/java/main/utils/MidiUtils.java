@@ -36,6 +36,9 @@ public class MidiUtils {
 
     public void composeMIDI(byte[] encryptedData) throws Exception {
         String strInput = createBinaryString(encryptedData);
+        if (strInput.length() < 1000){
+            strInput += "0".repeat(1000-strInput.length());
+        }
         Pattern mainPattern = createMusic(strInput);
         MidiFileManager.savePatternToMidi(mainPattern, new File("miusik.mid"));
     }

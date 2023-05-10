@@ -32,6 +32,7 @@ public class DecryptCommand extends Command{
                 case "-f":
                     if (fileManager.getEncryptionFile()!=null){
                         semanticUtils.decryptFromMIDIToFile(fileManager.getEncryptionFile().getAbsolutePath(),arguments.get(2));
+                        System.out.println("File decrypted, stored as: decryptedFile.<extension> ");
                     }else {
                         printUsage();
                     }

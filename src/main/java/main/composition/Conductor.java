@@ -36,7 +36,7 @@ public class Conductor {
         Pattern lastPattern = new Pattern();
         lastPattern.add("T90 "+ pattern);
         lastPattern.add(connectAllVoices());
-        System.out.println(" velkost zasif " + this.strInput.length());
+//        System.out.println(" velkost zasif " + this.strInput.length());
         return lastPattern;
     }
 
@@ -244,7 +244,7 @@ public class Conductor {
 
     private void encodeKey( Key key,Integer[] a){
         int whatKey = key.getWhatKey();
-        System.out.println("Key was: " + whatKey +" : " + a[0]);
+//        System.out.println("Key was: " + whatKey +" : " + a[0]);
 
         switch (whatKey) {
             case 0 -> this.voices[1] += a[35] + "i Ri ";

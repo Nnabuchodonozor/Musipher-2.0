@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         try {
-            System.out.println("Welcome to Musipher 2.0. The most incredible innovation in music cryptography");
+            System.out.println("Welcome to Musipher 2.0. The most incredible innovation in music steganography");
 //        GUI gui = new GUI();
 
             TerminalBuilder terminalBuilder = TerminalBuilder.builder();

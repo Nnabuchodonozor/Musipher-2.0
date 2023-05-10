@@ -103,18 +103,39 @@ public class SemanticUtils {
         generateTrueRandomIV();
 
         String[] strings = fileName.split("\\.");
-        byte[] fExtension = strings[1].getBytes();
-        Integer i = (strings[1].length());
+        byte[] fExtension = strings[2].getBytes();
+        Integer i = (strings[2].length());
         byte fExtensionLength = i.byteValue();
         File openDataFile = new File(fileName);
         byte[] openBytes = Files.readAllBytes(openDataFile.toPath());
         byte[] enc = streamCipher.encrypt(iVString,password,openBytes);
+        byte[] generatedSalt = streamCipher.getSalt();
 
-        byte[] result = Arrays.copyOf(enc, enc.length + iVString.length);
-        System.arraycopy(iVString, 0, result, enc.length, iVString.length);
+
         //todo salt
+        int size = 1 + fExtension.length + iVString.length + generatedSalt.length + enc.length;
 
-//        midiUtils.composeMIDI(enc);
+        byte[] result = new byte[size];
+        result[0] = fExtensionLength;
+        int a = 1;
+        for (int b = 0; b < fExtension.length; b++){
+            result[a] = fExtension[b];
+            a++;
+        }
+        for (int b = 0; b < iVString.length; b++){
+            result[a] = iVString[b];
+            a++;
+        }
+        for (int b = 0; b < generatedSalt.length; b++){
+            result[a] = generatedSalt[b];
+            a++;
+        }
+        for (int b = 0; b < enc.length; b++){
+            result[a] = enc[b];
+            a++;
+        }
+
+        midiUtils.composeMIDI(result);
 
 
 //                String a = "outputs/encryptedBytes"  + j + ".bin";
@@ -127,16 +148,16 @@ public class SemanticUtils {
     }
 
     public void decryptFromMIDIToFile(String encryptedPath, String password) throws Exception{
-//        File f1 = new File(encryptedPath);
-//        File f2 = new File(keyPath);
+
         byte[] cipheredBytesWithIV = midiUtils.decomposeMIDI(encryptedPath);
         Byte b = cipheredBytesWithIV[0];
         int i = b.intValue();
         byte[] fExtension = Arrays.copyOfRange(cipheredBytesWithIV,1,1+i);
         String stringFileExtension = new String(fExtension, StandardCharsets.UTF_8);
         byte[] iVBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i,1+i+16);
-        byte[] cypheredBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i+16,cipheredBytesWithIV.length);
-
+        byte[] saltBytes = Arrays.copyOfRange(cipheredBytesWithIV, 1+i+16, 1+i+32);
+        byte[] cypheredBytes = Arrays.copyOfRange(cipheredBytesWithIV,1+i+32,cipheredBytesWithIV.length);
+        streamCipher.setSalt(saltBytes);
         byte[] decryptedBytes = streamCipher.decrypt(iVBytes, password,cypheredBytes);
         FileOutputStream fos = new FileOutputStream(new File("decryptedFile."+stringFileExtension));
         fos.write(decryptedBytes);

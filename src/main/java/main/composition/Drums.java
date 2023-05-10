@@ -86,7 +86,7 @@ public class Drums {
         Rhythm rhythm = new Rhythm();
 
         for(String s : finalLayers){
-            System.out.println("adapted "+s );
+            // System.out.println("adapted "+s );
             rhythm.addLayer(s);
         }
 //        rhythm.addLayer(this.kicks());
@@ -101,7 +101,7 @@ public class Drums {
         String kickLayer = drumsBasedOnInput("O","o",layerStrength);
         //oO
 
-        System.out.println(kickLayer);
+        // System.out.println(kickLayer);
         return kickLayer;
     }
 
@@ -109,14 +109,14 @@ public class Drums {
         //sS
         String snaresLayer = drumsBasedOnInput("S","s",layerStrength);
 
-        System.out.println(snaresLayer);
+        // System.out.println(snaresLayer);
         return snaresLayer;
     }
 
     public String hiHat(int layerStrength) {
         //`^
         String hiHatLayer = drumsBasedOnInput("^","`",layerStrength);
-        System.out.println(hiHatLayer);
+        // System.out.println(hiHatLayer);
         return hiHatLayer;
 
     }
@@ -124,7 +124,7 @@ public class Drums {
     public String crash(int layerStrength) {
         //*+
         String crashLayer = drumsBasedOnInput("+","*",layerStrength/4);
-        System.out.println(crashLayer);
+        // System.out.println(crashLayer);
         return crashLayer;
 
     }
@@ -132,7 +132,7 @@ public class Drums {
     public String clap(int layerStrength) {
         //xX
         String clapLayer = drumsBasedOnInput("X","x",layerStrength/2);
-        System.out.println(clapLayer);
+        // System.out.println(clapLayer);
         return clapLayer;
 
     }
@@ -173,7 +173,7 @@ public class Drums {
         unparsedDrums = unparsedDrums.replaceAll("\\[CRASH_CYMBAL_1\\]s","+");
         unparsedDrums = unparsedDrums.replaceAll("\\[PEDAL_HI_HAT\\]i","^");
         unparsedDrums = unparsedDrums.replaceAll("\\[PEDAL_HI_HAT\\]s","`");
-        System.out.println(unparsedDrums);
+        // System.out.println(unparsedDrums);
 
         String[] parsedDrums = unparsedDrums.split(" ");
         for(int i = 0; i < parsedDrums.length; i++){
@@ -256,7 +256,7 @@ public class Drums {
 
         for (String s : correctlyConnectedDrums){
             if (!s.isEmpty()) {
-                System.out.println(s);
+                // System.out.println(s);
                 this.outputBasedOnDrums(s, s.substring(0, 1).toLowerCase(),s.length());
             }
         }

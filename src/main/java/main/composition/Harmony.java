@@ -259,7 +259,7 @@ public class Harmony {
          current++;
      }
      strOutput = stringBuilder.toString();
-        System.out.println(strOutput);
+//        System.out.println(strOutput);
     }
 
     public Integer[] findClosestInversion(Integer[] antedecentChord, int consequentChordIndex){

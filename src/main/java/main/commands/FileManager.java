@@ -55,11 +55,6 @@ public class FileManager {
         else
             System.out.println("encrypted file: "+ this.encryptionFile.getAbsolutePath());
 
-        if (keyFile==null)
-            System.out.println("key file: NOTHING AVAILABLE");
-        else
-            System.out.println("key file: "+ this.keyFile.getAbsolutePath());
-
         if (openFile==null)
             System.out.println("open file: NOTHING AVAILABLE");
         else

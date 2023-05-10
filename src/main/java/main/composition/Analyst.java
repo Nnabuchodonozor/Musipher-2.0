@@ -45,7 +45,7 @@ public class Analyst {
         strOutput += this.decodeMelody1(melody1);
 
 
-        System.out.println();
+//        System.out.println();
 
 
 
@@ -185,7 +185,7 @@ public class Analyst {
             int choice = Integer.parseInt(firstMelody.get(0) ,0,2,10)- 60;
             a = key.generateKeyTest( choice );
             strOutput+=getChoiceString(choice,5);
-            System.out.println(strOutput);
+//            System.out.println(strOutput);
         }else {
             int a = Integer.parseInt(firstMelody.get(0),0,2,10);
             int b = Integer.parseInt(firstMelody.get(1),0,2,10);
@@ -193,17 +193,17 @@ public class Analyst {
                 int choice = Integer.parseInt(firstMelody.get(0) ,0,2,10)- 60;
                 this.a = key.generateKeyTest( choice + 12 );
                 strOutput+=getChoiceString(choice+ 12,5);
-                System.out.println(strOutput);
+//                System.out.println(strOutput);
             }else if(a > b){
                 int choice = Integer.parseInt(firstMelody.get(0) ,0,2,10)- 60;
                 this.a = key.generateKeyTest( choice +24-1 );
                 strOutput+=getChoiceString(choice+24-1,5);
-                System.out.println(strOutput);
+//                System.out.println(strOutput);
             }else {
                 int choice = Integer.parseInt(firstMelody.get(0) ,0,2,10)- 60;
                 this.a = key.generateKeyTest( choice + 29 );
                 strOutput+=getChoiceString(choice+ 29,5);
-                System.out.println(strOutput);
+//                System.out.println(strOutput);
             }
         }
     }
@@ -257,7 +257,7 @@ public class Analyst {
     }
 
     private String decodeBass(Harmony harmony){
-        System.out.println();
+//        System.out.println();
         return harmony.decodeBassline(parsedSong.get(3),2);
     }
 
