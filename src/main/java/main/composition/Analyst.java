@@ -31,7 +31,7 @@ public class Analyst {
         decomposeDrums();
         decomposeKey();
         decomposeHarmony();
-//        decomposeMelody();
+        decomposeMelody();
         return strOutput;
     }
 
@@ -43,7 +43,11 @@ public class Analyst {
         ArrayList<String> melody5 = divideMelody(5);
         ArrayList<String> melody6 = divideMelody(6);
         strOutput += this.decodeMelody1(melody1);
-
+        strOutput += this.decodeMelody2(melody2);
+        strOutput += this.decodeMelody3(melody3);
+        strOutput += this.decodeMelody4(melody4);
+        strOutput += this.decodeMelody5(melody5);
+        strOutput += this.decodeMelody6(melody6);
 
 //        System.out.println();
 
@@ -52,13 +56,27 @@ public class Analyst {
     }
 
 
+    private String joinString(ArrayList<String> melody)
+    {
+        String result = "";
+        for (String s : melody){
+            result += s ;
+
+        }
+        return result;
+    }
+
 
     private String decodeMelody1(ArrayList<String> melody){
         String result = "";
         Rhytm rhytm = new Rhytm("",a);
         ArrayList<String> m1 = new ArrayList<>();
+        ArrayList<String> m2 = new ArrayList<>();
         int length= 0;
         int i = 0;
+
+        //first measure
+
         while(length < 16){
             m1.add(melody.get(i));
             i++;
@@ -66,32 +84,140 @@ public class Analyst {
             length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
         }
         result += rhytm.decodeRhytmicisedMelody(4,1,harmony.getChords().get(harmony.getChordProgression().get(2)),m1);
+        length= 0;
+        while(length < 16){
+//            m1.add(melody.get(i));
+            i++;
+
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        length= 0;
+
+        //second measure
+
+        while(length < 16){
+            m2.add(melody.get(i));
+            i++;
+
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        result += rhytm.decodeRhytmicisedMelody(4,1,harmony.getChords().get(harmony.getChordProgression().get(3)),m2);
+
+
 
         return result;
     }
-    private String decodeMelody2(ArrayList<String> melody){
+
+
+    private String decodeMelody2(ArrayList<String> melody){ //guitar
         String result = "";
+        Rhytm rhytm = new Rhytm("",a);
+        ArrayList<String> m1 = new ArrayList<>();
+//        ArrayList<String> m2 = new ArrayList<>();
+        int length= 0;
+        int i = 0;
+
+        //first measure
+
+        while(length < 16){
+            m1.add(melody.get(i));
+            i++;
+
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        result += rhytm.decodeRhytmicisedMelody(4,0,harmony.getChords().get(harmony.getChordProgression().get(4)),m1);
+
+        Motif motif = new Motif(this.joinString(m1),"",a,"");
+        result += motif.decodeDivide();
 
         return result;
     }
-    private String decodeMelody3(ArrayList<String> melody){
+    private String decodeMelody3(ArrayList<String> melody){ //sax
         String result = "";
+        Rhytm rhytm = new Rhytm("",a);
+        ArrayList<String> m1 = new ArrayList<>();
+//        ArrayList<String> m2 = new ArrayList<>();
+        int length= 0;
+        int i = 0;
+
+        //first measure
+        while(length < 16){
+            m1.add(melody.get(i));
+            i++;
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        result += rhytm.decodeRhytmicisedMelody(4,0,harmony.getChords().get(harmony.getChordProgression().get(7)),m1);
+
+        Motif motif = new Motif(this.joinString(m1),"",a,"");
+        result += motif.decodeSequence();
+        result += motif.decodeDimunation();
+
+
 
         return result;
     }
-    private String decodeMelody4(ArrayList<String> melody){
+    private String decodeMelody4(ArrayList<String> melody){ //guitar2
         String result = "";
+        Rhytm rhytm = new Rhytm("",a);
+        ArrayList<String> m1 = new ArrayList<>();
+//        ArrayList<String> m2 = new ArrayList<>();
+        int length= 0;
+        int i = 0;
+
+        //first measure
+        while(length < 16){
+            m1.add(melody.get(i));
+            i++;
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        result += rhytm.decodeRhytmicisedMelody(4,0,harmony.getChords().get(harmony.getChordProgression().get(9)),m1);
+
+        Motif motif = new Motif(this.joinString(m1),"",a,"");
+        result += motif.decodeSequence();
 
         return result;
     }
-    private String decodeMelody5(ArrayList<String> melody){
+    private String decodeMelody5(ArrayList<String> melody){ //violin2
         String result = "";
 
+        Rhytm rhytm = new Rhytm("",a);
+        ArrayList<String> m1 = new ArrayList<>();
+//        ArrayList<String> m2 = new ArrayList<>();
+        int length= 0;
+        int i = 0;
+
+        //first measure
+        while(length < 16){
+            m1.add(melody.get(i));
+            i++;
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        result += rhytm.decodeRhytmicisedMelody(4,0,harmony.getChords().get(harmony.getChordProgression().get(11)),m1);
+
+        Motif motif = new Motif(this.joinString(m1),"",a,"");
+        result += motif.decodeExpand();
         return result;
     }
-    private String decodeMelody6(ArrayList<String> melody){
+    private String decodeMelody6(ArrayList<String> melody){ //sax
         String result = "";
 
+        Rhytm rhytm = new Rhytm("",a);
+        ArrayList<String> m1 = new ArrayList<>();
+//        ArrayList<String> m2 = new ArrayList<>();
+        int length= 0;
+        int i = 0;
+
+        //first measure
+        while(length < 16){
+            m1.add(melody.get(i));
+            i++;
+            length = length + lenghthsMap.get(melody.get(i).substring(2,melody.get(i).length()-1));
+        }
+        result += rhytm.decodeRhytmicisedMelody(4,0,harmony.getChords().get(harmony.getChordProgression().get(13)),m1);
+
+        Motif motif = new Motif(this.joinString(m1),"",a,"");
+        result += motif.decodeSequence();
+        result += motif.decodeSequence();
         return result;
     }
 

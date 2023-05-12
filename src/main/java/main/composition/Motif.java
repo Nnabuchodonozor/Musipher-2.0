@@ -171,7 +171,7 @@ public class Motif {
     }
 
     public String decodeSequence(){
-        return null;
+        return "";
     }
 
     //augment = add longer lenghts
@@ -402,7 +402,7 @@ public class Motif {
     }
 
     public String decodeDimunation(){
-        return null;
+        return "";
     }
 
     // expand = add more notes
@@ -430,7 +430,7 @@ public class Motif {
     }
 
     public String decodeExpand(){
-        return null;
+        return "";
     }
 
 
@@ -514,7 +514,7 @@ public class Motif {
     }
 
     public String decodeDivide(){
-        return null;
+        return "";
     }
 
     //q = 4. i = 2. s = i.

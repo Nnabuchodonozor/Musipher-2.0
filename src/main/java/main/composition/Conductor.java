@@ -137,7 +137,7 @@ public class Conductor {
         //seventh melody
         this.voices[6] += " Rw Rw Rw Rw Rw Rw Rw Rw Rw ";
 
-        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),11,2);
+        rhytmisisedMelody = rhytm.createRhytmicisedMelody(4,0,harmony.getChords(),harmony.getChordProgression(),2,new Instrument("Violin"),13,2);
         mainPatern = String.join("",rhytmisisedMelody);
 
         this.voices[6] += mainPatern;
